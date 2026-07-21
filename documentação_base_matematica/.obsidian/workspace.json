@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "_templates/Spec_Tela.md",
+                "file": "Fluxo_de_Navegacao.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Spec_Tela"
+              "title": "Fluxo_de_Navegacao"
             }
           }
         ],
@@ -200,7 +200,20 @@
   },
   "active": "c473a5b91de9a745",
   "lastOpenFiles": [
+    "spec_telas/Spec_Filtro_e_Questoes_Logado.md",
+    "spec_telas/Spec_Home.md",
+    "spec_telas",
+    "Nova pasta",
     "Spec_Filtro_e_Questoes_Logado.md",
+    "_references/flter.pdf",
+    "_references/dashboard.pdf",
+    "_references/oboarding checklist.pdf",
+    "_references/oboarding welcome.pdf",
+    "_references/sign up page.pdf",
+    "_references/login page.pdf",
+    "_references/question.pdf",
+    "_references/home page.pdf",
+    "_templates/Spec_Tela.md",
     "Analise_do_Sistema.md",
     "Bem-vindo.md",
     "Pendencias.md",
@@ -208,12 +221,6 @@
     "Fluxo_de_Navegacao.md",
     "Convencoes.md",
     "Arquitetura.md",
-    "_templates/Spec_Tela.md",
-    "_templates",
-    "_archive/Analise_do_Sistema.docx",
-    "_archive/Identidade_Visual.docx",
-    "_archive/Pontos_de_Atualizacao_Documentacao.md",
-    "_archive/Arquitetura.docx",
-    "_archive"
+    "_archive/Pontos_de_Atualizacao_Documentacao.md"
   ]
 }
