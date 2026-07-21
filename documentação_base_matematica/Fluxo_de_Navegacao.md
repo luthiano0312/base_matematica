@@ -44,7 +44,6 @@ Apresentar o projeto, explicar seu propósito e incentivar o usuário a começar
 - Imagem de fundo
 - Botões:
   - Começar
-  - Conhecer o projeto
 
 #### Objetivo do projeto
 Explicar que o projeto busca:
