@@ -80,14 +80,43 @@ Explicar para quem o projeto foi desenvolvido.
 
 #### Rodapé
 
-> **Nota de escopo:** o rodapé ainda não foi prototipado no Figma — o time optou por definir a estrutura de conteúdo mínima aqui e resolver o design diretamente na implementação, sem necessidade de um protótipo visual elaborado (é apenas o rodapé).
+> **Nota de escopo:** o rodapé ainda não foi prototipado no Figma — o time optou por definir o conteúdo mínimo aqui e resolver o design diretamente na implementação, sem necessidade de um protótipo visual elaborado (é apenas o rodapé). O texto abaixo é conteúdo pronto para uso, não apenas estrutura — ajustar livremente o tom se necessário.
 
-Estrutura de conteúdo mínima:
-- **Quem somos:** breve descrição do projeto (1–2 frases, reaproveitando a missão descrita em [[Identidade_Visual#1.1 Missão do Projeto]])
-- **Informações da equipe:** menção ao caráter social do projeto e ao tamanho da equipe (ver [[Arquitetura#2. Equipe]]) — não precisa listar nomes individuais no MVP
-- **Links de navegação:** atalhos para as mesmas seções acessíveis pelo menu hambúrguer (Objetivo, Como funciona, etc.)
-- **Links legais:** Termos de Uso e Política de Privacidade (documento combinado, ver [[Pendencias#Termos-e-Privacidade]])
-- **Copyright/ano:** linha simples de rodapé (ex: "© 2026 Base Matemática")
+**Coluna 1 — Quem somos**
+
+> Título: "Quem somos"
+> 
+> Texto: "O Base Matemática é um projeto social de educação matemática, criado para tornar o aprendizado mais acessível para jovens do ensino médio. Acreditamos que matemática não precisa causar medo — e estamos construindo essa base junto com você."
+
+**Coluna 2 — A equipe**
+
+> Título: "Nossa equipe"
+> 
+> Texto: "Somos uma equipe de 9 pessoas — desenvolvedores e produtores de conteúdo — trabalhando de forma voluntária para levar educação matemática de qualidade a mais estudantes."
+> 
+> _(Referência: [[Arquitetura#2. Equipe]]. Não lista nomes individuais no MVP.)_
+
+**Coluna 3 — Navegação**
+
+> Título: "Navegue"
+> 
+> Links: Objetivo do projeto · Como funciona · Público-alvo · Experimente alguns exercícios (mesmo destino do menu hambúrguer, ver seção "Menu" acima)
+
+**Coluna 4 — Legal**
+
+> Título: "Legal"
+> 
+> Links: Termos de Uso e Política de Privacidade (ver [[Pendencias#Termos-e-Privacidade]])
+
+**Linha inferior — Copyright**
+
+> "© 2026 Base Matemática. Projeto social de educação matemática."
+
+**Convenções visuais para implementação:**
+
+- Fundo em azul escuro (`#061D44`), texto em lavanda/branco — reaproveitando o contraste já definido para fundos escuros em [[Identidade_Visual#2.1 Diretrizes de Uso]]
+- Layout em colunas no desktop, empilhado verticalmente no mobile (responsividade mobile-first, ver [[Analise_do_Sistema#^rnf01|RNF01]])
+- Sem necessidade de ícones de redes sociais no MVP (não solicitados em nenhum requisito)
 
 ---
 
