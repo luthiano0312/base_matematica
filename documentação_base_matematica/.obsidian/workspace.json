@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "Analise_do_Sistema.md",
+                "file": "Pendencias_Specs_de_Tela.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Analise_do_Sistema"
+              "title": "Pendencias_Specs_de_Tela"
             }
           }
         ]
@@ -185,10 +185,10 @@
   },
   "active": "22641cb2d977da83",
   "lastOpenFiles": [
+    "Analise_do_Sistema.md",
     "spec_telas/Spec_Dashboard.md",
     "Pendencias_Specs_de_Tela.md",
     "spec_telas/Spec_Home.md",
-    "Analise_do_Sistema.md",
     "Pendencias.md",
     "Fluxo_de_Navegacao.md",
     "spec_telas/Spec_Filtro_e_Questoes_Logado.md",
