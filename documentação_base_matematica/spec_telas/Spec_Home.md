@@ -1,7 +1,7 @@
 # Home — Especificação de Tela
 **Projeto:** Ceará Científico (Base Matemática)
 **Tipo de documento:** Spec de Tela
-**Última atualização:** 21/07/2026
+**Última atualização:** 22/07/2026
 
 > Identidade visual (cores, tipografia, tom) é definida em [[Identidade_Visual]] e não é repetida aqui. Este documento cobre apenas o que a tela deve conter e as regras de comportamento — funciona como contrato para geração de código (manual ou assistida por IA).
 
@@ -11,12 +11,15 @@
 [Entrada direta — URL raiz / primeiro acesso]
    ↓
 Home
-   ├── clique em "entrar" (header) ──────────────→ Login
-   ├── clique em "começe gratuitamente" (hero) ──→ Cadastro
-   └── clique em "Começar agora" (CTA final) ────→ Cadastro
+   ├── clique em "entrar" (header) ──────────────────→ Login
+   ├── clique no ícone de menu (header) ─────────────→ abre menu (ver "Menu" abaixo)
+   │        ├── links de navegação pelas seções da Home
+   │        └── link "Experimente alguns exercícios" ─→ Questões (sem login)
+   ├── clique em "começe gratuitamente" (hero) ──────→ Cadastro
+   └── clique em "Começar agora" (CTA final) ────────→ Cadastro
 ```
 
-A Home é a porta de entrada do sistema para visitantes não autenticados. Não há pré-requisito de navegação para chegar até ela. A saída se dá sempre para **Cadastro** ou **Login**, conforme o botão escolhido — não há acesso a Questões ou Materiais diretamente pela Home neste protótipo (diferente do índice em [[Fluxo_de_Navegacao]], que lista "Questões (sem login)" como filho da Home — ver Pendência 1 abaixo).
+A Home é a porta de entrada do sistema para visitantes não autenticados. Não há pré-requisito de navegação para chegar até ela. A saída se dá para **Cadastro**, **Login**, ou **Questões (sem login)** via o menu — decisão fechada, ver componente "Menu" abaixo.
 
 ---
 
@@ -27,16 +30,24 @@ A Home é a porta de entrada do sistema para visitantes não autenticados. Não 
 - **Conteúdo:** logo ("base matemática"), botão "entrar", ícone de menu (hambúrguer).
 - **Comportamento:**
   - Botão **entrar** → navega para Login.
-  - Ícone de **menu** → o protótipo não define o conteúdo do menu (não há tela de menu aberto). Assumir que é o menu mobile padrão, com no mínimo os mesmos destinos do header (Entrar) — **comportamento exato pendente de definição**.
+  - Ícone de **menu** → decisão fechada, ver componente "Menu" abaixo.
+
+### Menu (ícone hambúrguer) — decisão fechada
+- **Tipo:** menu/dropdown aberto pelo ícone hambúrguer do header
+- **Conteúdo:**
+  - Links de navegação por scroll até as seções da própria Home: Objetivo, Problema, Solução, Como funciona, Público-alvo
+  - Link **"Experimente alguns exercícios"**, que navega direto para a tela de Questões (sem login) — ver [[Fluxo_de_Navegacao#Questões (acesso sem login)]]
+- **Não inclui** link para Materiais de Estudos, já que essa funcionalidade ainda não foi implementada no MVP.
+- Resolve a antiga Pendência 1 (divergência entre [[Fluxo_de_Navegacao]] e o protótipo): o acesso a "Questões (sem login)" pela Home existe, mas vive dentro do menu, não como botão solto na tela.
 
 ### Hero
 - **Tipo:** seção de destaque, topo da página.
 - **Conteúdo:**
   - Título: "Construa sua base em matemática aprendendo na prática" (com destaque de cor no trecho "aprendendo na prática").
   - Subtítulo: "Uma plataforma de ensino gamificado que ajuda alunos do ensino médio a dominarem a matemática resolvendo exercícios."
-  - Botão: "começe gratuitamente"
+  - Botão único: "começe gratuitamente"
 - **Comportamento:** botão navega para Cadastro.
-- **Observação:** [[Fluxo_de_Navegacao]] descreve dois botões no Hero ("Começar" e "Conhecer o projeto"), mas o protótipo Figma mostra apenas **um** botão ("começe gratuitamente"). Ver Pendência 2.
+- **Decisão fechada (antiga Pendência 2):** o Hero tem **1 botão só**. A versão anterior da documentação, que previa 2 botões ("Começar" / "Conhecer o projeto"), estava desatualizada e foi corrigida — o protótipo Figma vigente é a referência.
 
 ### Seção "Objetivo do projeto"
 - **Tipo:** bloco de texto + lista de cards.
@@ -92,7 +103,7 @@ A Home é a porta de entrada do sistema para visitantes não autenticados. Não 
 ### Seção "Público-alvo"
 - **Tipo:** bloco de texto + ilustração decorativa (imagem de pessoa usando celular + círculos coloridos de fundo).
 - **Conteúdo:**
-  - Rótulo: "A SOLUÇÃO" (repetido — parece reaproveitamento do mesmo rótulo da seção anterior; **provável inconsistência de conteúdo no protótipo**, ver Pendência 3).
+  - Rótulo: **"PÚBLICO-ALVO"** — decisão fechada (antiga Pendência 3). O rótulo "A SOLUÇÃO", duplicado da seção anterior, já foi corrigido diretamente no protótipo Figma.
   - Título: "Feito para o aluno do ensino médio."
   - Texto de apoio direcionado a alunos do 1º ao 3º ano / preparação para o Enem.
 - **Comportamento:** estático, puramente ilustrativo.
@@ -105,12 +116,17 @@ A Home é a porta de entrada do sistema para visitantes não autenticados. Não 
   - Botão: "Começar agora"
 - **Comportamento:** botão navega para Cadastro.
 
+### Rodapé — decisão fechada (antiga Pendência 4)
+- **Tipo:** seção de encerramento da página, fora do fluxo de scroll principal
+- **Comportamento:** entra no MVP. Não foi prototipado visualmente no Figma — o time optou por definir o conteúdo mínimo em texto e resolver o design diretamente na implementação, sem necessidade de protótipo visual elaborado.
+- **Conteúdo completo (4 colunas + linha de copyright) já definido em** [[Fluxo_de_Navegacao#Rodapé]] — não duplicado aqui para evitar desalinhamento entre os dois documentos; consultar a spec de navegação para o texto pronto de cada coluna.
+
 ---
 
 ## Comportamento em casos especiais
 
-- **Visitante vs. aluno logado:** a Home é destinada a visitantes. Não há variação de conteúdo prevista no protótipo para usuário já autenticado — comportamento de um aluno logado que acessa a Home (ex: redirecionar direto para o Dashboard, ou manter a Home igual) **não está definido**. Recomenda-se redirecionar automaticamente para o Dashboard se houver sessão ativa, mas isso precisa ser validado com o time.
-- **Responsividade:** o protótipo foi desenhado em largura mobile (412px), conforme prioridade definida em [[Analise_do_Sistema#^rnf01|RNF01]]. O comportamento em telas maiores (desktop) não está desenhado no protótipo — deve seguir os princípios gerais de responsividade da [[Arquitetura]], sem quebrar a hierarquia de conteúdo.
+- **Visitante vs. aluno logado:** a Home é destinada a visitantes. Não há variação de conteúdo prevista no protótipo para usuário já autenticado — comportamento de um aluno logado que acessa a Home (ex: redirecionar direto para o Dashboard, ou manter a Home igual) **não está definido** e não bloqueia o MVP. Recomenda-se redirecionar automaticamente para o Dashboard se houver sessão ativa, mas isso precisa ser validado com o time em uma rodada futura.
+- **Responsividade:** o protótipo foi desenhado em largura mobile (412px), conforme prioridade definida em [[Analise_do_Sistema#^rnf01|RNF01]]. O comportamento em telas maiores (desktop) não está desenhado no protótipo — deve seguir os princípios gerais de responsividade da [[Arquitetura]], sem quebrar a hierarquia de conteúdo. O rodapé, especificamente, deve usar layout em colunas no desktop e empilhado verticalmente no mobile (ver [[Fluxo_de_Navegacao#Rodapé]]).
 - **Estados de erro/carregamento:** não se aplicam — a Home é uma página estática, sem dados dinâmicos vindos da API.
 
 ---
@@ -135,8 +151,4 @@ A Home é a porta de entrada do sistema para visitantes não autenticados. Não 
 
 ## Pendências identificadas nesta tela
 
-1. **Divergência de estrutura:** [[Fluxo_de_Navegacao]] lista "Questões (sem login)" e "Materiais de Estudos" como acessíveis diretamente pela Home. O protótipo Figma da Home não mostra links/botões para essas telas — os únicos destinos são Cadastro e Login. Confirmar se esses acessos devem ser adicionados à Home ou se ocorrem só a partir do Dashboard.
-2. **Divergência de botões do Hero:** documentação prévia menciona 2 botões ("Começar" e "Conhecer o projeto"); protótipo mostra apenas 1 ("começe gratuitamente"). Confirmar qual versão vale.
-3. **Rótulo duplicado:** a seção "Público-alvo" usa o rótulo "A SOLUÇÃO", igual à seção anterior. Provavelmente deveria ser algo como "PARA QUEM É" ou "PÚBLICO-ALVO". Confirmar o texto correto.
-4. **Rodapé ausente:** [[Fluxo_de_Navegacao]] prevê um rodapé com "Quem somos" e "Informações da equipe". Esse bloco não existe no protótipo Figma atual. Confirmar se deve ser incluído no MVP ou fica de fora.
-5. **Comportamento do ícone de menu:** não há tela/estado mostrando o que abre ao clicar no ícone de menu no header. Definir conteúdo (provavelmente os mesmos links do rodapé/header em formato mobile).
+Todas as pendências desta tela foram resolvidas em sessão de revisão de time (22/07/2026). Ver histórico de decisões em [[Pendencias_Specs_de_Tela]].
