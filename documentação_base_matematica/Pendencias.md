@@ -18,6 +18,13 @@ A correção de questões dissertativas é feita por autoavaliação do próprio
 ### Checklist de interesses sem limite pode esvaziar a priorização do RF12
 RN14 define que não há limite mínimo/máximo de conteúdos marcáveis como interesse. Se um aluno marcar muitos ou todos os conteúdos, o sorteio aleatório entre interesses (RF12) perde poder discriminativo — na prática, se aproxima do comportamento de "sem interesse marcado". **Decisão consciente:** aceito sem limite no MVP; sem ação necessária a menos que se observe esse padrão de uso na prática.
 
+### Sintaxe de marcação matemática no `statement` — migração futura para Markdown
+A documentação definia o uso do KaTeX (ver [[Analise_do_Sistema#^rnf04|RNF04]] e [[Identidade_Visual#4.1 Uso Funcional — KaTeX]]) mas não definia a sintaxe de marcação usada dentro do campo `statement` (tabela `questions`, tipo `text`, ver [[Analise_do_Sistema#5.4 questions (questões)]]).
+
+**Decisão para o MVP:** `statement` usa texto simples com delimitadores `$...$` (inline) e `$$...$$` (bloco), interpretados por um parser próprio e leve (sem `react-markdown`/`remark-math`/`rehype-katex`), mandando os trechos de fórmula para `katex.renderToString()`. Já o campo `content` de `study_materials` (resumos/artigos, texto mais longo) usa Markdown completo, por precisar de formatação mais rica (parágrafos, ênfase, listas).
+
+**Pendência registrada:** migração futura do `statement` para suportar Markdown completo, caso questões cadastradas passem a exigir formatação além de texto+fórmula (ex: listas de itens no enunciado, ênfase, imagens). O delimitador `$...$` usado no parser simples é compatível com `remark-math`, então o dado já cadastrado não precisa ser migrado — só o componente de renderização no frontend muda. **Risco identificado:** caracteres especiais do Markdown (`_`, `*`, `#`, `-`) eventualmente usados como texto comum em enunciados hoje (ex: `x_1`, `Passo 1 - resolva`) podem passar a ser interpretados como marcação ao migrar para Markdown, exigindo revisão manual das questões já cadastradas no momento da migração. **Decisão consciente:** aceito para o MVP/protótipo pelo baixo volume de questões cadastradas; responsável por essa decisão pretende continuar no projeto após julho e revisitar isso quando necessário.
+
 ---
 
 ## ✅ Resolvidas nesta migração
@@ -32,6 +39,7 @@ RN14 define que não há limite mínimo/máximo de conteúdos marcáveis como in
 - **Estados da Tela de Questão** — resolvido: feedback pós-resposta, layout certo/errado, layout dissertativa (com autoavaliação), modal de encerramento e gatilho de redirecionamento do visitante todos definidos. Ver [[Pendencias_Specs_de_Tela]].
 - **Login/cadastro via Google** — resolvido: fora do escopo do MVP. Botão removido do protótipo Figma. Ver [[Analise_do_Sistema#4.2 Fora do MVP (fases futuras)]].
 - **Recuperação de senha** — resolvido: entra no MVP, via sistema nativo do Laravel + Brevo, token de uso único, expiração de 1 hora. Ver [[Analise_do_Sistema#^rf15]].
+- **Inconsistência entre documentos sobre Resumos/Materiais de Estudo estar dentro ou fora do MVP** — resolvido: `Analise_do_Sistema.md` listava "Resumos e artigos de estudo" em "Dentro do MVP" (4.1), enquanto `Fluxo_de_Navegacao.md` já tratava a tela como "será implementado posteriormente" em 3 pontos diferentes. Confirmado: a intenção original era incluir no MVP, mas foi removido do escopo das férias de julho por causa do prazo. `Analise_do_Sistema.md` corrigido — item movido para "Fora do MVP" (4.2), com nota explicando o motivo. Ver [[Analise_do_Sistema#4.2 Fora do MVP (fases futuras)]].
 
 ---
 

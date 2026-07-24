@@ -1,7 +1,7 @@
 # Analise_do_Sistema
 **Projeto:** Ceará Científico
 **Tipo de documento:** Regras e Requisitos
-**Última atualização:** 22/07/2026
+**Última atualização:** 23/07/2026
 
 *Projeto Social de Educação Matemática*
 
@@ -96,7 +96,6 @@ Plataforma web educacional voltada ao ensino de matemática para jovens do ensin
 
 - Autenticação (visitante e aluno)
 - Questões: múltipla escolha, certo/errado, dissertativa
-- Resumos e artigos de estudo
 - Resolução em texto e resolução em vídeo (URL do YouTube), vinculadas a questão específica
 - Filtro de questões por Conteúdo/Tópico (incluindo modo Progressão — RN17)
 - Página pública de questões (limitada, RN04)
@@ -104,7 +103,7 @@ Plataforma web educacional voltada ao ensino de matemática para jovens do ensin
 - Pontuação simples, fixa por dificuldade, com regra de redenção
 - Onboarding com checklist opcional de interesses
 - Edição de interesses no perfil
-- Painel administrativo para cadastro de conteúdo (questões, resumos, resoluções)
+- Painel administrativo para cadastro de conteúdo (questões, resoluções)
 - Day Streak (RN18)
 - Recuperação de senha (RF15)
 
@@ -119,6 +118,7 @@ Plataforma web educacional voltada ao ensino de matemática para jovens do ensin
 - Card "sugestão de próximo conteúdo" no Dashboard — descartado do protótipo (a lógica de recomendação do RF12 continua existindo para uso em outras telas)
 - **Login/Cadastro via Google** — decisão de escopo: fora do MVP por custo de implementação (OAuth, tratamento de colisão de e-mail, mudança de schema) frente ao prazo apertado. Botão removido do protótipo Figma nas telas de Cadastro e Login.
 - **Mascote** — descrito na seção 5.2 de [[Identidade_Visual]] como parte da experiência (onboarding, conquistas, erros, telas vazias), mas foi **postergado para uma fase futura** e não faz parte do escopo atual do MVP.
+- **Resumos e artigos de estudo (Materiais de Estudo)** — a intenção original era que entrasse no MVP (redação anterior desta seção listava "Resumos e artigos de estudo" em 4.1), mas foi removido do escopo das férias de julho devido ao prazo apertado. Já refletido em [[Fluxo_de_Navegacao]] (tela "Materiais de Estudos" marcada como "será implementado posteriormente", sem link no menu da Home). Consequência técnica: como o campo `content` de `study_materials` (ver seção 5.8) não sai agora, a decisão de sintaxe de marcação (Markdown completo, ver [[Pendencias]]) para esse campo também fica postergada — sem efeito sobre o `statement`/`options`/`text_resolution` de `questions`, que usam parser simples e saem no MVP normalmente.
 
 ### 4.3 Pendências de pré-lançamento
 
