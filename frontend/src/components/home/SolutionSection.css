@@ -1,0 +1,168 @@
+.solution-section {
+  padding: 5rem 1.25rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.solution-grid-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+@media (min-width: 992px) {
+  .solution-grid-layout {
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+  }
+}
+
+.solution-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.solution-title {
+  font-size: 2rem;
+  color: var(--color-blue-dark);
+  margin-bottom: 1.25rem;
+  line-height: 1.25;
+}
+
+.solution-text {
+  color: var(--color-text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.solution-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.check-badge {
+  width: 32px;
+  height: 32px;
+  background-color: rgba(38, 232, 116, 0.18);
+  color: #12b353;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.feature-info h4 {
+  font-size: 1.1rem;
+  color: var(--color-blue-dark);
+  margin-bottom: 0.25rem;
+}
+
+.feature-info p {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+}
+
+/* Mockup da Questão Ilustrativa */
+.question-mockup-card {
+  background-color: var(--color-blue-dark);
+  color: var(--color-white);
+  border-radius: 20px;
+  padding: 1.75rem;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-card-border-dark);
+  position: relative;
+}
+
+.question-mockup-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.tag-difficulty {
+  background-color: rgba(37, 139, 252, 0.2);
+  color: var(--color-blue-primary);
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.tag-topic {
+  font-size: 0.85rem;
+  color: rgba(239, 238, 255, 0.7);
+}
+
+.question-statement {
+  font-family: var(--font-math);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.math-formula {
+  background-color: rgba(12, 38, 84, 0.8);
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  border-left: 3px solid var(--color-green-vibrant);
+  font-family: var(--font-math);
+  margin: 1rem 0;
+  text-align: center;
+  font-size: 1.2rem;
+  letter-spacing: 1px;
+}
+
+.options-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mockup-option {
+  background-color: var(--color-card-bg-dark);
+  border: 1px solid var(--color-card-border-dark);
+  padding: 0.875rem 1.25rem;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+}
+
+.mockup-option.selected {
+  border-color: var(--color-green-vibrant);
+  background-color: rgba(38, 232, 116, 0.1);
+}
+
+.option-letter {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.85rem;
+}
+
+.mockup-option.selected .option-letter {
+  background-color: var(--color-green-vibrant);
+  color: var(--color-blue-dark);
+}

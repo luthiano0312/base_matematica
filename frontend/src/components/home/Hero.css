@@ -1,0 +1,124 @@
+* {
+  box-sizing: border-box;
+}
+
+.hero-section {
+  height: 91vh;
+  padding: 3.5rem 1.25rem 4rem;
+  text-align: center;
+  position: relative;
+  background: radial-gradient(circle at 50% 20%, rgba(37, 139, 252, 0.12) 0%, rgba(239, 238, 255, 0) 70%);
+  overflow: hidden;
+}
+
+.hero-container {
+  height: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero-container :last-child {
+  margin-top: auto;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 1rem;
+  background-color: rgba(37, 139, 252, 0.1);
+  color: var(--color-blue-primary);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(37, 139, 252, 0.2);
+}
+
+.hero-title {
+  font-size: 2.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.75px;
+  margin-bottom: 1.25rem;
+  color: var(--color-blue-dark);
+}
+
+.hero-title-highlight {
+  color: var(--color-blue-primary);
+  background: linear-gradient(135deg, var(--color-blue-primary), #0d6adb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline;
+}
+
+.hero-subtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-muted);
+  max-width: 620px;
+  line-height: 1.6;
+  margin-bottom: 2.25rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 320px;
+  gap: 1rem;
+  margin-top: auto;
+}
+
+@media (min-width: 640px) {
+  .hero-section {
+    padding: 5rem 2rem 5.5rem;
+  }
+
+  .hero-title {
+    font-size: 3.25rem;
+  }
+
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+
+  .hero-actions {
+    flex-direction: row;
+    justify-content: center;
+    max-width: none;
+    width: auto;
+  }
+}
+
+/* Símbolos Matemáticos Decorativos Flutuantes */
+.hero-symbol {
+  position: absolute;
+  font-family: var(--font-math);
+  color: var(--color-blue-primary);
+  opacity: 0.08;
+  user-select: none;
+  pointer-events: none;
+  font-weight: 700;
+}
+
+.symbol-1 {
+  top: 15%;
+  left: 8%;
+  font-size: 4rem;
+  transform: rotate(-12deg);
+}
+
+.symbol-2 {
+  bottom: 20%;
+  right: 10%;
+  font-size: 5rem;
+  transform: rotate(15deg);
+}
+
+.symbol-3 {
+  top: 25%;
+  right: 12%;
+  font-size: 3.5rem;
+}
