@@ -60,6 +60,9 @@
 
 .cadastro-card {
   /* height: 80vh; */
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   width: 100%;
   max-width: 440px;
   background-color: var(--color-card-bg-dark);
@@ -69,7 +72,7 @@
 }
 
 .cadastro-header {
-  text-align: center;
+  text-align: left;
   margin-bottom: 1.75rem;
 }
 
@@ -86,6 +89,10 @@
   opacity: 0.75;
 }
 
+.cadastro-form-login-container {
+
+}
+
 /* Formulário */
 .cadastro-form {
   display: flex;
@@ -99,7 +106,7 @@
   gap: 0.4rem;
 }
 
-.form-label {
+.form-label-cadastro {
   font-size: 0.85rem;
   font-weight: 600;
   color: var(--color-text-light);
@@ -110,7 +117,7 @@
   position: relative;
 }
 
-.form-input {
+.form-input-cadastro {
   width: 100%;
   font-family: var(--font-ui);
   font-size: 1rem;
