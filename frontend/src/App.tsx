@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { CadastroPage } from './pages/CadastroPage';
+import { LoginPage } from './pages/LoginPage';
 
 // Páginas de marcador para navegação funcional durante desenvolvimento das demais telas
 const PlaceholderPage: React.FC<{ title: string }> = ({ title }) => (
@@ -17,8 +18,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<PlaceholderPage title="Tela de Login" />} />
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/cadastro" element={<CadastroPage />} />
+        <Route path="/esqueci-senha" element={<PlaceholderPage title="Recuperação de senha" />} />
         <Route path="/onboarding" element={<PlaceholderPage title="Onboarding (boas-vindas)" />} />
         <Route path="/questoes" element={<PlaceholderPage title="Questões (sem login)" />} />
         <Route path="/dashboard" element={<PlaceholderPage title="Dashboard do Aluno" />} />
