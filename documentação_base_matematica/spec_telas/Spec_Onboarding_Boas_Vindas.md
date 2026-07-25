@@ -1,7 +1,7 @@
 # Onboarding — Boas-vindas (etapa 1 de 2) — Especificação de Tela
 **Projeto:** Ceará Científico (Base Matemática)
 **Tipo de documento:** Spec de Tela
-**Última atualização:** 21/07/2026
+**Última atualização:** 22/07/2026
 
 > Identidade visual (cores, tipografia, tom) é definida em [[Identidade_Visual]] e não é repetida aqui. Este documento cobre apenas o que a tela deve conter e as regras de comportamento — funciona como contrato para geração de código (manual ou assistida por IA).
 
@@ -15,6 +15,8 @@ Onboarding — Boas-vindas (1 de 2)
 ```
 
 Esta é a primeira das duas etapas do Onboarding descrito em [[Fluxo_de_Navegacao]]. É puramente introdutória/institucional — não coleta nenhum dado do usuário (os dados de RN12 são coletados no Cadastro; o checklist de interesses é a segunda etapa).
+
+> **Decisão fechada (RN19):** esta tela **não possui botão "Voltar"** — a conta já foi criada na etapa de Cadastro anterior, e um botão de retorno duplicaria/reabriria esse formulário já submetido. O único caminho de navegação para frente é "Continuar".
 
 ---
 
@@ -49,7 +51,7 @@ Esta é a primeira das duas etapas do Onboarding descrito em [[Fluxo_de_Navegaca
 ## Comportamento em casos especiais
 
 - Não há estados de erro, carregamento ou vazio nesta tela — é 100% estática e não depende de dados da API.
-- **Acesso direto/URL:** se um usuário não autenticado (ou sem ter acabado de se cadastrar) acessar esta tela diretamente, o comportamento esperado não está definido no protótipo. Recomenda-se restringir o acesso a usuários recém-cadastrados ainda não onboardados (ver Pendência 2).
+- **Acesso direto/URL — decisão fechada (RN19):** ao acessar a URL desta etapa diretamente, sem sessão ativa (não passou pelo Cadastro/Login), o sistema redireciona para a Home. Um aluno com sessão ativa que já completou o Onboarding anteriormente é redirecionado direto para o Dashboard ao tentar acessar a URL novamente — não pode refazer o Onboarding. Ver [[Analise_do_Sistema#^rn19|RN19]].
 
 ---
 
@@ -60,7 +62,7 @@ Esta é a primeira das duas etapas do Onboarding descrito em [[Fluxo_de_Navegaca
 - Título e texto de boas-vindas
 - Card "Exercícios"
 - Card "Progresso"
-- Botão "Continuar"
+- Botão "Continuar" (sem botão "Voltar")
 
 ---
 
@@ -69,7 +71,8 @@ Esta é a primeira das duas etapas do Onboarding descrito em [[Fluxo_de_Navegaca
 | ID | Regra |
 |---|---|
 | [[Analise_do_Sistema#^rf10\|RF10]] | Sistema deve oferecer onboarding com checklist opcional de Conteúdos de interesse |
-| [[Analise_do_Sistema#^rn12\|RN12]] | Onboarding pede dados básicos (nome, e-mail, senha) obrigatórios e checklist de Conteúdos de interesse, opcional |
+| [[Analise_do_Sistema#^rn12\|RN12]] | Cadastro coleta dados obrigatórios (nome, e-mail, senha); Onboarding coleta apenas o checklist de interesses, opcional |
+| [[Analise_do_Sistema#^rn19\|RN19]] | Proteção de acesso ao Onboarding; ausência de botão "Voltar" |
 
 ---
 
