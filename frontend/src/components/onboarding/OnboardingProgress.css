@@ -1,0 +1,59 @@
+/* =========================================================================
+   OnboardingProgress — barra de progresso com gradiente
+   Trilho sutil sobre o card escuro; preenchimento em gradiente
+   rosa-magenta (#DE4EE1) → azul (#258BFC). Contador "1/2" no canto
+   superior direito do card.
+   ========================================================================= */
+
+.ob-progress {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ob-progress-page {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ob-progress-count {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--color-text-light);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.1rem;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.ob-progress-count-current {
+  color: var(--color-white);
+}
+
+.ob-progress-count-sep {
+  margin: 0 0.05rem;
+  color: var(--color-text-light);
+}
+
+.ob-progress-count-total {
+  color: var(--color-text-light);
+}
+
+.ob-progress-track {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  overflow: hidden;
+  position: relative;
+}
+
+.ob-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #de4ee1 0%, #258bfc 100%);
+  border-radius: 999px;
+  transition: width var(--transition-smooth);
+}
