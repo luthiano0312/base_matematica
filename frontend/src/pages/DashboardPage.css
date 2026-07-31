@@ -1,0 +1,526 @@
+/* =========================================================================
+   Dashboard — Tela inicial do aluno autenticado
+
+   Tema escuro com fundo navy. Cards em branco sobre fundo escuro.
+   Streak card é a assinatura visual com gradiente verde→azul.
+   ========================================================================= */
+
+.dash {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #0c2654;
+}
+
+/* ─── Header fixo ─── */
+.dash-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: var(--color-lavender);
+  border-bottom: 1px solid var(--color-border-light);
+}
+
+.dash-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 0.85rem 1.25rem;
+}
+
+.dash-logo {
+  height: 28px;
+}
+
+.dash-header-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.dash-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 50%;
+  background: rgba(6, 29, 68, 0.08);
+  color: var(--color-blue-dark);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.dash-icon-btn:hover {
+  background: rgba(6, 29, 68, 0.14);
+}
+
+.dash-icon-btn:focus-visible {
+  outline: 2px solid var(--color-blue-primary);
+  outline-offset: 2px;
+}
+
+/* ─── Conteúdo principal ─── */
+.dash-main {
+  flex: 1;
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 1.5rem 1.25rem 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+/* ─── Saudação ─── */
+.dash-greeting-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 0.2rem;
+  line-height: 1.2;
+}
+
+.dash-greeting-sub {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.5;
+}
+
+/* ─── Card Streak — assinatura visual (handoff spec) ─── */
+.dash-streak {
+  background: linear-gradient(120deg, #FE8842 8.65%, #DE4EE1 100%);
+  border-radius: 16px;
+  padding: 16px;
+  height: 200px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.dash-streak-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  flex: 1;
+  min-width: 0;
+}
+
+.dash-streak-top {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.dash-streak-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 49px;
+  height: 49px;
+  border-radius: 12px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.35);
+  color: var(--color-white);
+  flex-shrink: 0;
+}
+
+.dash-streak-label {
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: -0.16px;
+  color: var(--color-white);
+  line-height: 1.2;
+}
+
+.dash-streak-hint {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.14px;
+  color: var(--color-white);
+  line-height: 1.4;
+  margin: 0;
+  max-width: 180px;
+}
+
+.dash-streak-number {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-ui);
+  font-size: 10rem;
+  font-weight: 900;
+  color: var(--color-white);
+  line-height: 1;
+}
+
+/* ─── Card Pontos (handoff spec) ─── */
+.dash-points {
+  background: linear-gradient(120deg, #258BFC 8.65%, #26E874 100%);
+  border-radius: 16px;
+  padding: 16px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.dash-points-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.dash-points-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 49px;
+  height: 49px;
+  border-radius: 12px;
+  padding: 6px;
+  background: rgba(255, 255, 255, 0.35);
+  color: var(--color-white);
+  flex-shrink: 0;
+}
+
+.dash-points-label {
+  font-family: var(--font-ui);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: -0.16px;
+  color: var(--color-white);
+  line-height: 1.2;
+}
+
+.dash-points-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.dash-points-number {
+  font-family: var(--font-ui);
+  font-size: 6rem;
+  font-weight: 900;
+  letter-spacing: -0.96px;
+  color: var(--color-white);
+  line-height: 1;
+}
+
+.dash-points-hint {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.14px;
+  color: var(--color-white);
+  line-height: 1.4;
+  width: 99px;
+  text-align: right;
+  margin: 0;
+}
+
+/* ─── Seções ─── */
+.dash-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.dash-section-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 0.1rem;
+}
+
+/* ─── Atalhos (Questões / Materiais) ─── */
+.dash-shortcuts {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.dash-shortcut {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  background-color: var(--color-white);
+  border: none;
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+  text-align: left;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.dash-shortcut:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.dash-shortcut:focus-visible {
+  outline: 2px solid var(--color-green-vibrant);
+  outline-offset: 2px;
+}
+
+.dash-shortcut:active {
+  transform: translateY(0);
+}
+
+.dash-shortcut-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.dash-shortcut-icon--blue {
+  background: rgba(37, 139, 252, 0.12);
+  color: var(--color-blue-primary);
+}
+
+.dash-shortcut-icon--green {
+  background: rgba(38, 232, 116, 0.12);
+  color: #1aab5a;
+}
+
+.dash-shortcut-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.05rem;
+  min-width: 0;
+}
+
+.dash-shortcut-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-blue-dark);
+}
+
+.dash-shortcut-sub {
+  font-size: 0.78rem;
+  color: var(--color-text-muted);
+}
+
+.dash-shortcut-arrow {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast);
+}
+
+.dash-shortcut:hover .dash-shortcut-arrow {
+  transform: translateX(2px);
+  color: var(--color-blue-primary);
+}
+
+/* ─── Card Desempenho (handoff spec — unificado com donut) ─── */
+.dash-perf-card {
+  background-color: var(--color-lavender);
+  border-radius: 20px;
+  padding: 24px 16px 16px;
+}
+
+.dash-perf-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 12px;
+}
+
+/* Anel de progresso */
+.dash-donut-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.dash-donut {
+  position: relative;
+  width: 180px;
+  height: 180px;
+}
+
+.dash-donut-svg {
+  transform: rotate(-90deg);
+  width: 180px;
+  height: 180px;
+}
+
+.dash-donut-text {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.dash-donut-percent {
+  font-family: var(--font-ui);
+  font-size: 40px;
+  font-weight: 900;
+  color: #061D44;
+  line-height: 1;
+}
+
+.dash-donut-label {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: rgba(6, 29, 68, 0.6);
+  margin-top: 2px;
+}
+
+/* Grid de estatísticas */
+.dash-perf-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-bottom: 16px;
+}
+
+.dash-perf-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 8px 0;
+}
+
+.dash-perf-stat--middle {
+  border-left: 0.5px solid rgba(6, 29, 68, 0.15);
+  border-right: 0.5px solid rgba(6, 29, 68, 0.15);
+}
+
+.dash-perf-stat-number {
+  font-family: var(--font-ui);
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.dash-perf-stat-number--navy {
+  color: #061D44;
+}
+
+.dash-perf-stat-number--green {
+  color: #1D9E75;
+}
+
+.dash-perf-stat-number--red {
+  color: #F44336;
+}
+
+.dash-perf-stat-label {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: rgba(6, 29, 68, 0.6);
+  margin-top: 4px;
+}
+
+/* Linha final — tópico */
+.dash-perf-topic {
+  border-top: 0.5px solid rgba(6, 29, 68, 0.15);
+  padding-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dash-perf-topic-label {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 700;
+  color: #061D44;
+}
+
+.dash-perf-topic-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(37, 139, 252, 0.15);
+  border-radius: 16px;
+  padding: 6px 12px;
+  max-width: 200px;
+  min-width: 0;
+}
+
+.dash-perf-topic-name {
+  font-family: var(--font-ui);
+  font-size: 13px;
+  font-weight: 700;
+  color: #258BFC;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dash-perf-topic-count {
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 400;
+  color: #061D44;
+  white-space: nowrap;
+}
+
+/* Estado vazio */
+.dash-perf-empty {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(6, 29, 68, 0.6);
+}
+
+/* ─── Responsivo ─── */
+@media (min-width: 600px) {
+  .dash-main {
+    padding: 2rem 2rem 3rem;
+    gap: 1.25rem;
+  }
+
+  .dash-greeting-title {
+    font-size: 1.75rem;
+  }
+
+  .dash-streak-number {
+    font-size: 7rem;
+  }
+
+  .dash-points-number {
+    font-size: 7rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .dash-main {
+    padding: 2.5rem 2.5rem 4rem;
+  }
+}
+
+/* ─── Acessibilidade ─── */
+.dash :focus-visible {
+  outline: 2px solid var(--color-green-vibrant);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .dash * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

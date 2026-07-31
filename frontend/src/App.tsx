@@ -5,6 +5,9 @@ import { CadastroPage } from './pages/CadastroPage';
 import { LoginPage } from './pages/LoginPage';
 import { OnboardingWelcomePage } from './pages/OnboardingWelcomePage';
 import { OnboardingChecklistPage } from './pages/OnboardingChecklistPage';
+import { DashboardPage } from './pages/DashboardPage';
+import { FiltroQuestoesPage } from './pages/FiltroQuestoesPage';
+import { QuestaoPage } from './pages/QuestaoPage';
 
 // Páginas de marcador para navegação funcional durante desenvolvimento das demais telas
 const PlaceholderPage: React.FC<{ title: string }> = ({ title }) => (
@@ -26,8 +29,10 @@ function App() {
         <Route path="/onboarding" element={<PlaceholderPage title="Onboarding (boas-vindas)" />} />
         <Route path="/onboarding" element={<OnboardingWelcomePage />} />
         <Route path="/onboarding/checklist" element={<OnboardingChecklistPage />} />
-        <Route path="/questoes" element={<PlaceholderPage title="Questões (sem login)" />} />
-        <Route path="/dashboard" element={<PlaceholderPage title="Dashboard do Aluno" />} />
+        <Route path="/questoes" element={<FiltroQuestoesPage isVisitante />} />
+        <Route path="/filtro" element={<FiltroQuestoesPage />} />
+        <Route path="/questao/:id" element={<QuestaoPage />} />
+        <Route path="/dashboard" element={<DashboardPage />} />
       </Routes>
     </BrowserRouter>
   );
