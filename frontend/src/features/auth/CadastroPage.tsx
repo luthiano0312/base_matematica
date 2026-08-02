@@ -126,8 +126,8 @@ export function CadastroPage() {
                   onChange={(e) => setAceitouTermos(e.target.checked)}
                 />
                 <span className="termos-text">
-                  Li e aceito os <a href="/cadastro">Termos de Uso</a> e a{' '}
-                  <a href="/cadastro">Política de Privacidade</a>.
+                  Li e aceito os <a href="#">Termos de Uso</a> e a{' '}
+                  <a href="#">Política de Privacidade</a>.
                 </span>
               </label>
 
