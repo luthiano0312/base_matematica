@@ -1,6 +1,7 @@
 :root {
   /* Paleta de Cores - Identidade Visual Base Matemática */
   --color-blue-primary: #258bfc;
+  --color-blue-primary-dark: #1b7ae6;
   --color-blue-dark: #061d44;
   --color-green-vibrant: #26e874;
   --color-magenta: #de4ee1;
@@ -75,51 +76,6 @@ a {
   text-decoration: none;
 }
 
-/* Botões Globais Reutilizáveis */
-.btn-primary {
-  background-color: var(--color-blue-primary);
-  color: var(--color-white);
-  font-weight: 700;
-  font-size: 1rem;
-  padding: 0.875rem 1.75rem;
-  border-radius: 12px;
-  transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  box-shadow: 0 4px 14px rgba(37, 139, 252, 0.35);
-}
-
-.btn-primary:hover {
-  background-color: #1b7ae6;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(37, 139, 252, 0.45);
-}
-
-.btn-primary:active {
-  transform: translateY(0);
-}
-
-.btn-outline {
-  background-color: transparent;
-  border: 2px solid var(--color-blue-primary);
-  color: var(--color-blue-primary);
-  font-weight: 700;
-  font-size: 0.95rem;
-  padding: 0.6rem 1.25rem;
-  border-radius: 10px;
-  transition: all var(--transition-fast);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.btn-outline:hover {
-  background-color: rgba(37, 139, 252, 0.08);
-  transform: translateY(-1px);
-}
-
 /* Rótulos de Seção */
 .section-label {
   display: inline-block;
@@ -133,4 +89,25 @@ a {
 
 .section-label-light {
   color: var(--color-green-vibrant);
+}
+
+/* Página de marcador (placeholder) */
+.placeholder-page {
+  padding: 4rem 2rem;
+  text-align: center;
+  min-height: 60vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.placeholder-title {
+  color: var(--color-blue-dark);
+  margin-bottom: 1rem;
+}
+
+.placeholder-text {
+  color: var(--color-text-muted);
+  margin-bottom: 2rem;
 }

@@ -1,0 +1,192 @@
+/* =========================================================================
+   Onboarding — Checklist de Interesses (etapa 2 de 2)
+
+   Mesma estrutura visual da tela de welcome: fundo gradiente azul, card
+   navy centralizado. Lista de checkboxes para seleção de interesses.
+   ========================================================================= */
+
+.ob-background {
+  background: black;
+}
+
+.ob-check {
+  min-height: 100vh;
+  padding: 1rem;
+  background: linear-gradient(155deg, rgba(104, 174, 253, 0.5) 0%, rgba(39, 138, 252, 0.5) 100%);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Card principal — navy, mesmo vocabulário do Welcome */
+.ob-check-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 560px;
+  padding: 2.25rem 1.5rem 2.5rem;
+  background-color: var(--color-card-bg-dark);
+  border: 1px solid var(--color-card-border-dark);
+  border-radius: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  box-shadow: 0 -8px 32px rgba(6, 29, 68, 0.18);
+  margin: 0 auto;
+}
+
+/* Intro */
+.ob-check-intro {
+  text-align: left;
+}
+
+.ob-check-title {
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: 1.65rem;
+  line-height: 1.2;
+  letter-spacing: -0.4px;
+  color: var(--color-white);
+  margin-bottom: 0.5rem;
+}
+
+.ob-check-subtitle {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--color-text-light);
+  opacity: 0.85;
+  max-width: 38ch;
+  margin: 0 auto;
+}
+
+/* Lista de conteúdos */
+.ob-check-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin: 0;
+  padding: 0;
+}
+
+/* Ações */
+.ob-check-actions {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.ob-check-cta {
+  background-color: var(--color-blue-primary);
+  color: var(--color-blue-dark);
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 32px;
+  transition: transform var(--transition-fast), background-color var(--transition-fast), box-shadow var(--transition-fast), color var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 4px 14px rgba(37, 139, 252, 0.35);
+  width: 100%;
+  max-width: 320px;
+  padding: 1rem 1.75rem;
+  font-size: 1.05rem;
+}
+
+.ob-check-cta:hover {
+  background-color: var(--color-blue-dark);
+  color: var(--color-lavender);
+  box-shadow: 0 0px 14px rgba(37, 139, 252, 0.35);
+}
+
+/* Ações secundárias — Voltar + pular */
+.ob-check-secondary-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* gap: 1rem; */
+}
+
+.ob-check-back {
+  height: 55px;
+  width: calc(165px - 0.25rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  color: var(--color-white);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 32px;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.ob-check-back:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.ob-check-skip {
+  width: calc(165px - 0.25rem);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: transparent;
+  border: none;
+  color: var(--color-text-light);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.88rem;
+  padding: 0.5rem;
+  text-decoration: underline;
+  text-decoration-color: rgba(255, 255, 255, 0.3);
+  text-underline-offset: 3px;
+  transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+}
+
+.ob-check-skip:hover {
+  color: var(--color-white);
+  text-decoration-color: var(--color-white);
+}
+
+/* Responsivo */
+@media (min-width: 600px) {
+  .ob-check-card {
+    padding: 2.75rem 2.5rem 2.75rem;
+    max-width: 620px;
+  }
+
+  .ob-check-title {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .ob-check-card {
+    margin-top: 1.5rem;
+  }
+}
+
+/* Acessibilidade — foco visível em qualquer elemento interativo */
+.ob-check :focus-visible {
+  outline: 3px solid var(--color-green-vibrant);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ob-check * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

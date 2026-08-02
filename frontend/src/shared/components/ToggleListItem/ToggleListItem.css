@@ -1,0 +1,95 @@
+/* Item de lista selecionável — botão largura total com checkbox e estado
+   ativo. Variante green (Onboarding) ou blue (Filtro de Questões). */
+
+.toggle-list-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-radius: 14px;
+  text-align: left;
+  font-family: var(--font-ui);
+  color: var(--color-white);
+  cursor: pointer;
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.toggle-list-item:hover {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.toggle-list-item:active {
+  transform: scale(0.98);
+}
+
+.toggle-list-item--green:focus-visible {
+  outline: none;
+  border-color: var(--color-green-vibrant);
+  box-shadow: 0 0 0 3px rgba(38, 232, 116, 0.25);
+}
+
+.toggle-list-item--blue:focus-visible {
+  outline: none;
+  border-color: var(--color-blue-primary);
+  box-shadow: 0 0 0 3px rgba(37, 139, 252, 0.25);
+}
+
+/* Checkbox customizado */
+.toggle-list-item__box {
+  flex-shrink: 0;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 6px;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: transparent;
+  transition: all var(--transition-fast);
+}
+
+.toggle-list-item__text {
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+/* Estado selecionado — verde (Onboarding) */
+.toggle-list-item--green.is-selected {
+  border-color: var(--color-green-vibrant);
+  background: rgba(38, 232, 116, 0.1);
+}
+
+.toggle-list-item--green.is-selected:hover {
+  background: rgba(38, 232, 116, 0.15);
+}
+
+.toggle-list-item--green.is-selected .toggle-list-item__box {
+  background: var(--color-green-vibrant);
+  border-color: var(--color-green-vibrant);
+  color: var(--color-blue-dark);
+}
+
+/* Estado selecionado — azul (Filtro de Questões) */
+.toggle-list-item--blue.is-selected {
+  border-color: var(--color-blue-primary);
+  background: rgba(37, 139, 252, 0.15);
+}
+
+.toggle-list-item--blue.is-selected:hover {
+  background: rgba(37, 139, 252, 0.2);
+}
+
+.toggle-list-item--blue.is-selected .toggle-list-item__box {
+  background: var(--color-blue-primary);
+  border-color: var(--color-blue-primary);
+  color: var(--color-white);
+}

@@ -1,0 +1,58 @@
+/* Cartão de estatística — número + rótulo com tom de cor (Tela de Questão). */
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 6px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+}
+
+.stat-card__number {
+  font-family: var(--font-ui);
+  font-weight: 800;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.stat-card__label {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 13px;
+  line-height: 1.2;
+}
+
+/* Respondidas — azul */
+.stat-card--blue {
+  background: rgba(37, 139, 252, 0.12);
+  border-color: rgba(37, 139, 252, 0.3);
+}
+
+.stat-card--blue .stat-card__number,
+.stat-card--blue .stat-card__label {
+  color: #0B4A8F;
+}
+
+/* Acertos — verde */
+.stat-card--green {
+  background: rgba(38, 232, 116, 0.18);
+  border-color: rgba(38, 232, 116, 0.4);
+}
+
+.stat-card--green .stat-card__number,
+.stat-card--green .stat-card__label {
+  color: #146B3B;
+}
+
+/* Erros — vermelho */
+.stat-card--red {
+  background: rgba(244, 67, 54, 0.12);
+  border-color: rgba(244, 67, 54, 0.35);
+}
+
+.stat-card--red .stat-card__number,
+.stat-card--red .stat-card__label {
+  color: #A12B21;
+}

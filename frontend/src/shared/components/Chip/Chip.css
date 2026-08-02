@@ -1,0 +1,25 @@
+/* Chip / pill — rótulo compacto com cor de fundo translúcida e ícone opcional. */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.2;
+}
+
+.chip--green {
+  background: rgba(38, 232, 116, 0.18);
+  border: 1px solid rgba(38, 232, 116, 0.45);
+  color: var(--color-blue-dark);
+}
+
+.chip__icon {
+  display: inline-flex;
+  align-items: center;
+  color: #f97316;
+}

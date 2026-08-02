@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Topic;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
 
@@ -80,14 +81,14 @@ class StoreQuestionRequest extends FormRequest
             return;
         }
 
-        $invalidTopics = \App\Models\Topic::whereIn('id', $topicIds)
+        $invalidTopics = Topic::whereIn('id', $topicIds)
             ->whereNotIn('content_id', $contentIds)
             ->pluck('id');
 
         if ($invalidTopics->isNotEmpty()) {
             $validator->errors()->add(
                 'topic_ids',
-                'RN16: os tópicos ' . $invalidTopics->join(', ') .
+                'RN16: os tópicos '.$invalidTopics->join(', ').
                 ' pertencem a um conteúdo que não foi vinculado a esta questão.'
             );
         }

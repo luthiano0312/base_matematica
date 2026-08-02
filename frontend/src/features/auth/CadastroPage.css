@@ -1,0 +1,209 @@
+/* =========================================================================
+   Tela de Cadastro — segue o protótipo (sign up page.pdf):
+   fundo navy escuro, card escuro, textos claros, logo centralizado no topo,
+   botão primário em verde (feedback positivo da identidade visual).
+   Cores via variáveis globais (Identidade_Visual.md).
+   ========================================================================= */
+
+.cadastro-page {
+  /* height: 100vh; */
+  display: flex;
+  flex-direction: column;
+  background: #EFEEFF;
+  position: relative;
+}
+
+/* Botão "voltar" — canto superior esquerdo */
+.cadastro-topbar {
+  height: 5vh;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.cadastro-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-text-dark);
+  opacity: 0.8;
+  transition: opacity var(--transition-fast);
+}
+
+.cadastro-back:hover {
+  opacity: 1;
+}
+
+/* Logo — centralizado no topo, acima do card */
+.cadastro-logo-link {
+  height: 21.25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin: 1rem 0 1.5rem; */
+}
+
+.cadastro-logo {
+  height: 38px;
+}
+
+/* Conteúdo central */
+.cadastro-main {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  /* padding: 0 1.25rem 3rem; */
+}
+
+.cadastro-card {
+  /* height: 80vh; */
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--color-card-bg-dark);
+  border: 1px solid var(--color-card-border-dark);
+  border-radius: 20px 20px 0px 0px;
+  padding: 2rem 1.5rem;
+}
+
+.cadastro-header {
+  text-align: left;
+  margin-bottom: 1.75rem;
+}
+
+.cadastro-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-white);
+  margin-bottom: 0.4rem;
+}
+
+.cadastro-subtitle {
+  font-size: 0.92rem;
+  color: var(--color-text-light);
+  opacity: 0.75;
+}
+
+.cadastro-form-login-container {
+
+}
+
+/* Formulário */
+.cadastro-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem;
+}
+
+/* Checklist dinâmico de requisitos da senha (RNF08) */
+.senha-checklist {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  /* flex-wrap: wrap; */
+  gap: 1rem ;
+  margin-top: 0.5rem;
+}
+
+.checklist-item {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.78rem;
+  color: rgba(239, 238, 255, 0.55);
+  transition: color var(--transition-fast);
+}
+
+.checklist-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: transparent;
+  transition: all var(--transition-fast);
+}
+
+/* Estado "atendido" — verde de feedback positivo da identidade visual */
+.checklist-item.atendido {
+  color: var(--color-white);
+}
+
+.checklist-item.atendido .checklist-icon {
+  background-color: var(--color-green-vibrant);
+  border-color: var(--color-green-vibrant);
+  color: var(--color-blue-dark);
+}
+
+/* Aceite de termos */
+.termos-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  font-size: 0.83rem;
+  color: rgba(239, 238, 255, 0.7);
+  cursor: pointer;
+  line-height: 1.4;
+}
+
+.termos-checkbox input {
+  margin-top: 0.15rem;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-blue-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.termos-text a {
+  color: var(--color-blue-primary);
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.termos-text a:hover {
+  text-decoration: none;
+  opacity: 0.85;
+}
+
+/* Link para login */
+.cadastro-login-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.88rem;
+  color: rgba(239, 238, 255, 0.7);
+}
+
+.cadastro-login-link a {
+  color: var(--color-blue-primary);
+  font-weight: 700;
+}
+
+.cadastro-login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Responsivo */
+@media (min-width: 480px) {
+  .cadastro-card {
+    padding: 2.5rem 2.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .cadastro-main {
+    align-items: center;
+  }
+
+  .cadastro-title {
+    font-size: 1.85rem;
+  }
+}

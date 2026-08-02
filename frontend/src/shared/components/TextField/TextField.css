@@ -1,0 +1,93 @@
+/* Campo de texto compartilhado — variantes light (card branco, ex. Login)
+   e dark (card escuro, ex. Cadastro). Estado de erro conforme
+   Convencoes_UI.md: borda #F13A3A + mensagem inline abaixo do campo. */
+
+.text-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.text-field__label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+.text-field__control {
+  position: relative;
+}
+
+.text-field__input {
+  width: 100%;
+  font-family: var(--font-ui);
+  font-size: 1rem;
+  color: var(--color-text-main);
+  background-color: var(--color-white);
+  border: 1.5px solid var(--color-border-light);
+  border-radius: 12px;
+  padding: 0.8rem 1rem;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
+}
+
+.text-field__input::placeholder {
+  color: #9aa3bd;
+}
+
+.text-field__input:focus {
+  outline: none;
+  border-color: var(--color-blue-primary);
+  box-shadow: 0 0 0 3px rgba(37, 139, 252, 0.2);
+}
+
+.text-field__input--with-action {
+  padding-right: 2.75rem;
+}
+
+/* Variante dark — card escuro (Cadastro): fundo translúcido, texto claro */
+.text-field--dark .text-field__label {
+  color: var(--color-text-light);
+  opacity: 0.85;
+}
+
+.text-field--dark .text-field__input {
+  color: var(--color-white);
+  background-color: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.text-field--dark .text-field__input::placeholder {
+  color: rgba(239, 238, 255, 0.4);
+}
+
+.text-field--dark .text-field__input:focus {
+  border-color: var(--color-blue-primary);
+  background-color: rgba(37, 139, 252, 0.08);
+  box-shadow: 0 0 0 3px rgba(37, 139, 252, 0.2);
+}
+
+/* Estado de erro — Convencoes_UI.md (borda vermelha) */
+.text-field__input--error,
+.text-field__input--error:focus {
+  border-color: var(--color-error);
+}
+
+.text-field__input--error:focus {
+  box-shadow: 0 0 0 3px rgba(241, 58, 58, 0.18);
+}
+
+.text-field--dark .text-field__input--error,
+.text-field--dark .text-field__input--error:focus {
+  border-color: var(--color-error);
+}
+
+/* Mensagem de erro inline — Convencoes_UI.md (#F13A3A + ícone, abaixo do campo) */
+.text-field__error {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: var(--color-error);
+  margin-top: 0.1rem;
+}
