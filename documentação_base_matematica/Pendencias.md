@@ -18,8 +18,6 @@ A correção de questões dissertativas é feita por autoavaliação do próprio
 ### Checklist de interesses sem limite pode esvaziar a priorização do RF12
 RN14 define que não há limite mínimo/máximo de conteúdos marcáveis como interesse. Se um aluno marcar muitos ou todos os conteúdos, o sorteio aleatório entre interesses (RF12) perde poder discriminativo — na prática, se aproxima do comportamento de "sem interesse marcado". **Decisão consciente:** aceito sem limite no MVP; sem ação necessária a menos que se observe esse padrão de uso na prática.
 
-### inconsistencias nos 
-
 ### Sintaxe de marcação matemática no `statement` — migração futura para Markdown
 A documentação definia o uso do KaTeX (ver [[Analise_do_Sistema#^rnf04|RNF04]] e [[Identidade_Visual#4.1 Uso Funcional — KaTeX]]) mas não definia a sintaxe de marcação usada dentro do campo `statement` (tabela `questions`, tipo `text`, ver [[Analise_do_Sistema#5.4 questions (questões)]]).
 
