@@ -1,0 +1,28 @@
+.auth-loading {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  background-color: var(--color-lavender);
+}
+
+.auth-loading-spinner {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: 50%;
+  border: 2px solid rgba(37, 139, 252, 0.25);
+  border-top-color: var(--color-blue-primary);
+  animation: auth-loading-spin 0.7s linear infinite;
+}
+
+.auth-loading-text {
+  color: var(--color-text-muted);
+  font-weight: 600;
+}
+
+@keyframes auth-loading-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

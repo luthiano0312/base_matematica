@@ -39,6 +39,55 @@
   gap: 0.5rem;
 }
 
+/* ─── Menu do header ─── */
+.dash-menu {
+  position: relative;
+}
+
+.dash-menu-dropdown {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  z-index: 200;
+  min-width: 180px;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: 12px;
+  box-shadow: var(--shadow-md);
+  padding: 0.35rem;
+}
+
+.dash-menu-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--color-blue-dark);
+  text-align: left;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.dash-menu-item:hover {
+  background-color: rgba(37, 139, 252, 0.08);
+}
+
+.dash-menu-item:focus-visible {
+  outline: 2px solid var(--color-green-vibrant);
+  outline-offset: 1px;
+}
+
+.dash-menu-item:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
 /* ─── Conteúdo principal ─── */
 .dash-main {
   flex: 1;

@@ -71,6 +71,31 @@
   padding: 0;
 }
 
+/* Paginação "mostrar mais" */
+.ob-check-mostrar-mais {
+  background: transparent;
+  border: none;
+  color: var(--color-blue-primary);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  padding: 0.25rem 0;
+  cursor: pointer;
+  align-self: flex-start;
+  transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+
+.ob-check-mostrar-mais:hover {
+  color: var(--color-lavender);
+}
+
+.ob-check-mostrar-mais:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
 /* Ações */
 .ob-check-actions {
   margin-top: auto;
@@ -102,6 +127,12 @@
   background-color: var(--color-blue-dark);
   color: var(--color-lavender);
   box-shadow: 0 0px 14px rgba(37, 139, 252, 0.35);
+}
+
+.ob-check-cta:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
 }
 
 /* Ações secundárias — Voltar + pular */

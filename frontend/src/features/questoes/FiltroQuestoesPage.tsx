@@ -1,10 +1,18 @@
-import { useState, useMemo } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { ArrowLeft } from 'lucide-react';
 import { SelectField } from '@/shared/components/SelectField/SelectField';
 import { TextField } from '@/shared/components/TextField/TextField';
 import { ToggleListItem } from '@/shared/components/ToggleListItem/ToggleListItem';
-import { TIPOS_QUESTAO, DIFICULDADES } from '@/shared/constants/questao';
-import type { Conteudo, Topico, TipoQuestao } from '@/shared/types/questao';
+import { ErrorBanner } from '@/shared/components/ErrorBanner/ErrorBanner';
+import { TIPOS_QUESTAO, DIFICULDADES, DIFICULDADE_API, TIPO_API } from '@/shared/constants/questao';
+import type { TipoQuestao } from '@/shared/types/questao';
+import type { Content, Topic } from '@/services/types';
+import { getContents, getTopics } from '@/services/contentService';
+import { getFilteredQuestions, getPublicQuestions } from '@/services/questionService';
+import type { QuestionFilter } from '@/services/questionService';
+import { useQuestionSession } from './QuestionSessionContext';
+import { MENSAGEM_ERRO_GENERICA } from '@/services/http';
 import './FiltroQuestoesPage.css';
 
 type FiltroQuestoesProps = {
@@ -13,19 +21,39 @@ type FiltroQuestoesProps = {
 
 export function FiltroQuestoesPage({ isVisitante = false }: FiltroQuestoesProps) {
   const navigate = useNavigate();
+  const { startSession } = useQuestionSession();
 
-  const [conteudos] = useState<Conteudo[]>([]);
-  const [topicos] = useState<Topico[]>([]);
+  const [conteudos, setConteudos] = useState<Content[]>([]);
+  const [topicos, setTopicos] = useState<Topic[]>([]);
+  const [erroCatalog, setErroCatalog] = useState<string | null>(null);
 
-  const [conteudoSelecionado, setConteudoSelecionado] = useState<string>('');
-  const [topicoSelecionado, setTopicoSelecionado] = useState<string>('');
+  const [conteudoSelecionado, setConteudoSelecionado] = useState('');
+  const [topicoSelecionado, setTopicoSelecionado] = useState('');
   const [dificuldade, setDificuldade] = useState<string>('Qualquer');
-  const [quantidadeQuestoes, setQuantidadeQuestoes] = useState<string>('');
+  const [quantidadeQuestoes, setQuantidadeQuestoes] = useState('');
   const [tiposQuestao, setTiposQuestao] = useState<Set<TipoQuestao>>(new Set());
+
+  const [buscando, setBuscando] = useState(false);
+  const [erroGeral, setErroGeral] = useState<string | null>(null);
+  const [semResultados, setSemResultados] = useState(false);
+
+  const carregarCatalog = useCallback(() => {
+    setErroCatalog(null);
+    Promise.all([getContents(), getTopics()])
+      .then(([contents, topics]) => {
+        setConteudos(contents);
+        setTopicos(topics);
+      })
+      .catch(() => setErroCatalog(MENSAGEM_ERRO_GENERICA));
+  }, []);
+
+  useEffect(() => {
+    carregarCatalog();
+  }, [carregarCatalog]);
 
   const topicosFiltrados = useMemo(() => {
     if (!conteudoSelecionado) return [];
-    return topicos.filter((t) => t.content_id === conteudoSelecionado);
+    return topicos.filter((t) => t.content_id === Number(conteudoSelecionado));
   }, [topicos, conteudoSelecionado]);
 
   const topicoDesabilitado = !conteudoSelecionado;
@@ -49,18 +77,72 @@ export function FiltroQuestoesPage({ isVisitante = false }: FiltroQuestoesProps)
     setDificuldade('Qualquer');
     setQuantidadeQuestoes('');
     setTiposQuestao(new Set());
+    setSemResultados(false);
+    setErroGeral(null);
   };
 
-  const handleContinuar = () => {
+  const montarParams = (): QuestionFilter => {
+    const params: QuestionFilter = {};
+
+    if (conteudoSelecionado) params.content_id = Number(conteudoSelecionado);
+    if (topicoSelecionado) params.topic_id = Number(topicoSelecionado);
+    if (tiposQuestao.size > 0) {
+      params.types = [...tiposQuestao].map((tipo) => TIPO_API[tipo]);
+    }
+
+    if (!isVisitante) {
+      if (progressaoAtiva) {
+        params.mode = 'progression';
+        params.quantidade = Number(quantidadeQuestoes);
+      } else {
+        const dificuldadeApi = DIFICULDADE_API[dificuldade as keyof typeof DIFICULDADE_API];
+        if (dificuldadeApi) params.difficulty = dificuldadeApi;
+      }
+    }
+
+    return params;
+  };
+
+  const handleContinuar = async () => {
     if (continuarDesabilitado) return;
-    navigate('/questoes');
+
+    setBuscando(true);
+    setErroGeral(null);
+    setSemResultados(false);
+
+    try {
+      const params = montarParams();
+      const questions = isVisitante
+        ? await getPublicQuestions(params)
+        : await getFilteredQuestions(params);
+
+      if (questions.length === 0) {
+        setSemResultados(true);
+        return;
+      }
+
+      startSession(questions, isVisitante);
+      navigate(`/questao/${questions[0].id}`);
+    } catch {
+      setErroGeral(MENSAGEM_ERRO_GENERICA);
+    } finally {
+      setBuscando(false);
+    }
   };
 
   return (
     <div className="filtro-page">
       <div className="filtro-bg">
+      <div className="filtro-topbar">
+        <Link to={isVisitante ? '/' : '/dashboard'} className="filtro-back" aria-label="Voltar">
+          <ArrowLeft size={20} /> voltar
+        </Link>
+      </div>
         <main className="filtro-card">
           <h1 className="filtro-title">Filtrar questões</h1>
+
+          {erroGeral && <ErrorBanner message={erroGeral} />}
+          {erroCatalog && <ErrorBanner message={erroCatalog} onRetry={carregarCatalog} />}
 
           {/* Conteúdo */}
           <SelectField
@@ -74,7 +156,7 @@ export function FiltroQuestoesPage({ isVisitante = false }: FiltroQuestoesProps)
           >
             <option value="">Selecione um conteúdo</option>
             {conteudos.map((c) => (
-              <option key={c.id} value={c.id}>{c.nome}</option>
+              <option key={c.id} value={c.id}>{c.name}</option>
             ))}
           </SelectField>
 
@@ -91,7 +173,7 @@ export function FiltroQuestoesPage({ isVisitante = false }: FiltroQuestoesProps)
               {topicoDesabilitado ? 'Escolha um conteúdo primeiro' : 'Selecione um tópico'}
             </option>
             {topicosFiltrados.map((t) => (
-              <option key={t.id} value={t.id}>{t.nome}</option>
+              <option key={t.id} value={t.id}>{t.name}</option>
             ))}
           </SelectField>
 
@@ -150,9 +232,9 @@ export function FiltroQuestoesPage({ isVisitante = false }: FiltroQuestoesProps)
               type="button"
               className="filtro-btn-continuar"
               onClick={handleContinuar}
-              disabled={continuarDesabilitado}
+              disabled={continuarDesabilitado || buscando}
             >
-              Continuar
+              {buscando ? 'Buscando questões…' : 'Continuar'}
             </button>
             <button
               type="button"
@@ -161,6 +243,11 @@ export function FiltroQuestoesPage({ isVisitante = false }: FiltroQuestoesProps)
             >
               Limpar filtro
             </button>
+            {semResultados && (
+              <span className="filtro-sem-resultados" role="status">
+                Nenhuma questão encontrada com esses filtros.
+              </span>
+            )}
           </div>
         </main>
       </div>

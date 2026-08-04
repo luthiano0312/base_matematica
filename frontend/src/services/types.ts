@@ -3,6 +3,7 @@ export type User = {
   name: string;
   email: string;
   created_at: string;
+  onboarding_completed_at: string | null;
 };
 
 export type Content = {
@@ -13,6 +14,7 @@ export type Content = {
 export type Topic = {
   id: number;
   name: string;
+  content_id: number;
 };
 
 export type QuestionOption = {
@@ -26,7 +28,7 @@ export type Question = {
   id: number;
   statement: string;
   type: 'multiple_choice' | 'true_false' | 'essay';
-  correct_answer: string;
+  correct_answer: string | null;
   difficulty: string;
   text_resolution: string | null;
   video_resolution_url: string | null;
@@ -35,6 +37,13 @@ export type Question = {
   topics: Topic[] | null;
   created_at: string;
   updated_at: string;
+};
+
+export type AnswerResult = {
+  is_correct: boolean;
+  points_earned: number;
+  correct_answer: string | null;
+  text_resolution: string | null;
 };
 
 export type Dashboard = {

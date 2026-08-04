@@ -149,6 +149,25 @@ class PublicQuestionsTest extends TestCase
         $this->assertFalse(collect($response->json('data'))->pluck('id')->contains($essay->id));
     }
 
+    public function test_filtro_por_multiplos_tipos_retorna_apenas_esses_tipos(): void
+    {
+        foreach (['easy', 'medium', 'hard'] as $difficulty) {
+            foreach (range(1, 2) as $i) {
+                Question::factory()->trueFalse()->create(['difficulty' => $difficulty]);
+            }
+        }
+        $essay = Question::factory()->essay()->create(['difficulty' => 'easy']);
+
+        $response = $this->getJson('/api/public/questions?types[]=multiple_choice&types[]=essay');
+
+        $response->assertStatus(200);
+        $this->assertSame(1, count($response->json('data')));
+
+        $types = collect($response->json('data'))->pluck('type')->unique();
+        $this->assertSame(['essay'], $types->all());
+        $this->assertTrue(collect($response->json('data'))->pluck('id')->contains($essay->id));
+    }
+
     public function test_filtro_por_topic_retorna_apenas_questoes_do_topic(): void
     {
         $content = Content::factory()->create();

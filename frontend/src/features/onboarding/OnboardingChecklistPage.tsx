@@ -1,29 +1,38 @@
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { OnboardingProgress } from './components/OnboardingProgress';
 import { ToggleListItem } from '@/shared/components/ToggleListItem/ToggleListItem';
-import type { Conteudo } from '@/shared/types/questao';
+import { ErrorBanner } from '@/shared/components/ErrorBanner/ErrorBanner';
+import { getContents } from '@/services/contentService';
+import { saveOnboardingInterests } from '@/services/dashboardService';
+import type { Content } from '@/services/types';
+import { MENSAGEM_ERRO_GENERICA } from '@/services/http';
 import './OnboardingChecklistPage.css';
 
-const CONTEUDOS: Conteudo[] = [
-  { id: 'fracoes', nome: 'Frações' },
-  { id: 'porcentagem', nome: 'Porcentagem' },
-  { id: 'equacoes-1-grau', nome: 'Equações de 1º grau' },
-  { id: 'equacoes-2-grau', nome: 'Equações de 2º grau' },
-  { id: 'funcoes', nome: 'Funções' },
-  { id: 'geometria-plana', nome: 'Geometria plana' },
-  { id: 'trigonometria', nome: 'Trigonometria' },
-  { id: 'estatistica', nome: 'Estatística' },
-  { id: 'probabilidade', nome: 'Probabilidade' },
-  { id: 'razao-proporcao', nome: 'Razão e proporção' },
-];
+const ITENS_POR_PAGINA = 6;
 
 export function OnboardingChecklistPage() {
   const navigate = useNavigate();
-  const [selecionados, setSelecionados] = useState<Set<string>>(new Set());
+  const [conteudos, setConteudos] = useState<Content[]>([]);
+  const [visiveis, setVisiveis] = useState(ITENS_POR_PAGINA);
+  const [selecionados, setSelecionados] = useState<Set<number>>(new Set());
+  const [erroCatalog, setErroCatalog] = useState<string | null>(null);
+  const [erroSalvar, setErroSalvar] = useState<string | null>(null);
+  const [salvando, setSalvando] = useState(false);
 
-  const toggle = (id: string) => {
+  const carregar = useCallback(() => {
+    setErroCatalog(null);
+    getContents()
+      .then((contents) => setConteudos(contents))
+      .catch(() => setErroCatalog(MENSAGEM_ERRO_GENERICA));
+  }, []);
+
+  useEffect(() => {
+    carregar();
+  }, [carregar]);
+
+  const toggle = (id: number) => {
     setSelecionados((prev) => {
       const next = new Set(prev);
       if (next.has(id)) next.delete(id);
@@ -32,9 +41,20 @@ export function OnboardingChecklistPage() {
     });
   };
 
-  const concluir = () => {
-    navigate('/dashboard');
+  const concluir = async (contentIds: number[]) => {
+    setSalvando(true);
+    setErroSalvar(null);
+    try {
+      await saveOnboardingInterests(contentIds);
+      navigate('/dashboard');
+    } catch {
+      setErroSalvar(MENSAGEM_ERRO_GENERICA);
+    } finally {
+      setSalvando(false);
+    }
   };
+
+  const itensVisiveis = conteudos.slice(0, visiveis);
 
   return (
     <div className="ob-background">
@@ -51,27 +71,41 @@ export function OnboardingChecklistPage() {
             </p>
           </section>
 
+          {erroCatalog && <ErrorBanner message={erroCatalog} onRetry={carregar} />}
+          {erroSalvar && <ErrorBanner message={erroSalvar} onRetry={() => concluir([...selecionados])} />}
+
           <ul className="ob-check-list" role="group" aria-label="Seleção de conteúdos de interesse">
-            {CONTEUDOS.map((c) => (
+            {itensVisiveis.map((c) => (
               <li key={c.id}>
                 <ToggleListItem
-                  variant="green"
+                  variant="blue"
                   selected={selecionados.has(c.id)}
                   onToggle={() => toggle(c.id)}
                 >
-                  {c.nome}
+                  {c.name}
                 </ToggleListItem>
               </li>
             ))}
           </ul>
 
+          {visiveis < conteudos.length && (
+            <button
+              type="button"
+              className="ob-check-mostrar-mais"
+              onClick={() => setVisiveis((v) => v + ITENS_POR_PAGINA)}
+            >
+              mostrar mais
+            </button>
+          )}
+
           <div className="ob-check-actions">
             <button
               type="button"
               className="ob-check-cta"
-              onClick={concluir}
+              onClick={() => concluir([...selecionados])}
+              disabled={salvando}
             >
-              continuar <ArrowRight size={18} />
+              {salvando ? 'Salvando…' : 'continuar'} <ArrowRight size={18} />
             </button>
           </div>
 
@@ -80,13 +114,15 @@ export function OnboardingChecklistPage() {
               type="button"
               className="ob-check-back"
               onClick={() => navigate('/onboarding')}
+              disabled={salvando}
             >
               <ArrowLeft size={16} /> Voltar
             </button>
             <button
               type="button"
               className="ob-check-skip"
-              onClick={concluir}
+              onClick={() => concluir([])}
+              disabled={salvando}
             >
               pular por enquanto <ArrowRight size={14} />
             </button>

@@ -2,16 +2,25 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Api\Concerns\FiltersQuestions;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\IndexQuestionsRequest;
 use App\Http\Resources\QuestionResource;
-use App\Models\Question;
+use App\Services\RecommendationService;
 use Illuminate\Http\Request;
 
 class QuestionFilterController extends Controller
 {
+    use FiltersQuestions;
+
+    public function __construct(private readonly RecommendationService $recommendationService) {}
+
     public function index(IndexQuestionsRequest $request)
     {
+        if ($this->hasNoFilters($request)) {
+            return QuestionResource::collection($this->defaultLot($request));
+        }
+
         $questions = $request->input('mode') === 'progression'
             ? $this->inProgressionMode($request)
             : $this->inNormalMode($request);
@@ -21,7 +30,7 @@ class QuestionFilterController extends Controller
 
     protected function inNormalMode(Request $request)
     {
-        $query = $this->baseQuery($request);
+        $query = $this->questionQuery($request);
 
         if ($request->filled('difficulty')) {
             $query->where('difficulty', $request->string('difficulty'));
@@ -49,7 +58,7 @@ class QuestionFilterController extends Controller
         $questions = collect();
 
         foreach (['easy', 'medium', 'hard'] as $difficulty) {
-            $query = $this->baseQuery($request)
+            $query = $this->questionQuery($request)
                 ->where('difficulty', $difficulty)
                 ->limit($quotas[$difficulty]);
 
@@ -59,22 +68,42 @@ class QuestionFilterController extends Controller
         return $questions->values();
     }
 
-    protected function baseQuery(Request $request)
+    protected function hasNoFilters(Request $request): bool
     {
-        $query = Question::query()->with(['options', 'contents', 'topics']);
-
-        if ($request->filled('content_id')) {
-            $query->whereHas('contents', fn ($q) => $q->where('contents.id', $request->integer('content_id')));
+        foreach (['content_id', 'topic_id', 'difficulty', 'type', 'types', 'mode', 'quantidade'] as $key) {
+            if ($request->filled($key)) {
+                return false;
+            }
         }
 
-        if ($request->filled('topic_id')) {
-            $query->whereHas('topics', fn ($q) => $q->where('topics.id', $request->integer('topic_id')));
+        return true;
+    }
+
+    /**
+     * Lote padrão para filtros vazios (RF12): conteúdo recomendado em cascata,
+     * 3 fáceis + 3 médias + 3 difíceis (fallback por insuficiência não completa a diferença).
+     */
+    protected function defaultLot(Request $request)
+    {
+        $content = $this->recommendationService->pickContent($request->user());
+
+        if (! $content) {
+            return collect();
         }
 
-        if ($request->filled('type')) {
-            $query->where('type', $request->string('type'));
+        $questions = collect();
+
+        foreach (['easy', 'medium', 'hard'] as $difficulty) {
+            $questions = $questions->merge(
+                $content->questions()
+                    ->with(['options', 'contents', 'topics'])
+                    ->where('difficulty', $difficulty)
+                    ->limit(3)
+                    ->orderBy('id')
+                    ->get()
+            );
         }
 
-        return $query;
+        return $questions->values();
     }
 }

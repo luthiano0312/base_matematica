@@ -12,7 +12,15 @@ class InterestController extends Controller
 {
     public function onboarding(UpdateInterestsRequest $request): JsonResponse
     {
-        return $this->save($request->user(), $request->input('content_ids', []));
+        // dd("asd");
+        $user = $request->user();
+        $response = $this->save($user, $request->input('content_ids', []));
+
+        if (! $user->onboarding_completed_at) {
+            $user->forceFill(['onboarding_completed_at' => now()])->save();
+        }
+
+        return $response;
     }
 
     public function index(Request $request): JsonResponse

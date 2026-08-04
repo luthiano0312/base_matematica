@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AnswerController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CatalogController;
 use App\Http\Controllers\Api\ContentController;
 use App\Http\Controllers\Api\DashboardController;
 use App\Http\Controllers\Api\InterestController;
@@ -18,6 +19,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('/password/email', [PasswordController::class, 'sendResetLink']);
 Route::post('/password/reset', [PasswordController::class, 'reset']);
 Route::get('/public/questions', [PublicQuestionController::class, 'index']);
+Route::get('/contents', [CatalogController::class, 'contents']);
+Route::get('/topics', [CatalogController::class, 'topics']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);

@@ -20,6 +20,8 @@ class PublicIndexQuestionsRequest extends FormRequest
             'content_id' => ['nullable', 'integer', 'exists:contents,id'],
             'topic_id' => ['nullable', 'integer', 'exists:topics,id'],
             'type' => ['nullable', Rule::in(['multiple_choice', 'true_false', 'essay'])],
+            'types' => ['nullable', 'array'],
+            'types.*' => ['required', Rule::in(['multiple_choice', 'true_false', 'essay'])],
         ];
     }
 

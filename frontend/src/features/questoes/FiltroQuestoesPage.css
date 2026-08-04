@@ -17,11 +17,37 @@
 
 .filtro-bg {
   flex: 1;
+  flex-direction: column;
+  gap: 0.75rem;
   display: flex;
   align-items: flex-start;
   justify-content: center;
   padding: 1rem;
   background: linear-gradient(155deg, rgba(104, 174, 253, 0.5) 0%, rgba(39, 138, 252, 0.5) 100%);
+}
+
+/* Botão "voltar" — canto superior esquerdo (legível sobre o gradiente) */
+.filtro-topbar {
+  height: 5vh;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1rem 1rem 0;
+}
+
+.filtro-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-white);
+  opacity: 0.85;
+  transition: opacity var(--transition-fast);
+}
+
+.filtro-back:hover {
+  opacity: 1;
 }
 
 /* ─── Card principal ─── */
@@ -58,10 +84,32 @@
 }
 
 /* ─── Tipo de questão — botões toggle ─── */
+.filtro-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.filtro-label {
+  font-family: var(--font-ui);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--color-white);
+}
+
 .filtro-tipos {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+}
+
+/* Sem resultados para o filtro aplicado */
+.filtro-sem-resultados {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-error);
+  text-align: center;
+  margin-top: 0.25rem;
 }
 
 /* ─── Ações ─── */

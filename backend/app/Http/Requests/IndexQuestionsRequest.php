@@ -20,6 +20,8 @@ class IndexQuestionsRequest extends FormRequest
             'content_id' => ['nullable', 'integer', 'exists:contents,id'],
             'topic_id' => ['nullable', 'integer', 'exists:topics,id'],
             'type' => ['nullable', Rule::in(['multiple_choice', 'true_false', 'essay'])],
+            'types' => ['nullable', 'array'],
+            'types.*' => ['required', Rule::in(['multiple_choice', 'true_false', 'essay'])],
             'difficulty' => ['nullable', Rule::in(['easy', 'medium', 'hard'])],
             'mode' => ['nullable', Rule::in(['normal', 'progression'])],
             'quantidade' => ['required_if:mode,progression', 'nullable', 'integer', 'min:1'],

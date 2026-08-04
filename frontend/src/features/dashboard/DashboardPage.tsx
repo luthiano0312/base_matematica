@@ -1,3 +1,4 @@
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Flame,
@@ -7,32 +8,55 @@ import {
   FileText,
   Menu,
   User,
+  LogOut,
 } from 'lucide-react';
 import logoDark from '@/assets/logos/logo_dark.svg';
 import { IconButton } from '@/shared/components/IconButton/IconButton';
+import { ErrorBanner } from '@/shared/components/ErrorBanner/ErrorBanner';
+import { getDashboard } from '@/services/dashboardService';
+import { useAuth } from '@/app/AuthContext';
+import { MENSAGEM_ERRO_GENERICA } from '@/services/http';
+import type { Dashboard } from '@/services/types';
 import './DashboardPage.css';
-
-// Mock data — será substituído por dados reais da API
-const MOCK_USER = {
-  nome: 'user',
-  streak: 7,
-  pontos: 1240,
-  questoesRespondidas: 48,
-  acertos: 36,
-  erros: 12,
-  topTopic: 'Frações',
-  topTopicAcertos: 14,
-};
 
 export function DashboardPage() {
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
+  const [dashboard, setDashboard] = useState<Dashboard | null>(null);
+  const [erro, setErro] = useState<string | null>(null);
+  const [menuAberto, setMenuAberto] = useState(false);
+  const [saindo, setSaindo] = useState(false);
+
+  const carregar = useCallback(() => {
+    setErro(null);
+    setDashboard(null);
+    getDashboard()
+      .then(setDashboard)
+      .catch(() => setErro(MENSAGEM_ERRO_GENERICA));
+  }, []);
+
+  useEffect(() => {
+    carregar();
+  }, [carregar]);
+
+  const handleLogout = async () => {
+    setSaindo(true);
+    await logout();
+    navigate('/');
+  };
+
+  const nome = user?.name ?? 'aluno';
+  const pontos = dashboard?.points ?? 0;
+  const streak = dashboard?.streak ?? 0;
+  const respondidas = dashboard?.total_answered ?? 0;
+  const acertos = dashboard?.correct ?? 0;
+  const erros = dashboard?.incorrect ?? 0;
 
   const percentual =
-    MOCK_USER.questoesRespondidas > 0
-      ? Math.round((MOCK_USER.acertos / MOCK_USER.questoesRespondidas) * 100)
-      : null;
+    respondidas > 0 ? Math.round((acertos / respondidas) * 100) : null;
 
-  const temDados = MOCK_USER.questoesRespondidas > 0;
+  const temDados = respondidas > 0;
+  const topTopic = dashboard?.best_topic ?? null;
 
   return (
     <div className="dash">
@@ -43,16 +67,37 @@ export function DashboardPage() {
             <IconButton label="Abrir perfil">
               <User size={18} />
             </IconButton>
-            <IconButton label="Abrir menu">
-              <Menu size={18} />
-            </IconButton>
+            <div className="dash-menu">
+              <IconButton
+                label="Abrir menu"
+                onClick={() => setMenuAberto((v) => !v)}
+                aria-expanded={menuAberto}
+              >
+                <Menu size={18} />
+              </IconButton>
+              {menuAberto && (
+                <div className="dash-menu-dropdown">
+                  <button
+                    type="button"
+                    className="dash-menu-item"
+                    onClick={handleLogout}
+                    disabled={saindo}
+                  >
+                    <LogOut size={16} />
+                    {saindo ? 'Saindo…' : 'Sair da conta'}
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </header>
 
       <main className="dash-main">
+        {erro && <ErrorBanner message={erro} onRetry={carregar} />}
+
         <section className="dash-greeting">
-          <h1 className="dash-greeting-title">olá, {MOCK_USER.nome}!</h1>
+          <h1 className="dash-greeting-title">olá, {nome}!</h1>
           <p className="dash-greeting-sub">
             Bom te ver de novo. Continue construindo sua base.
           </p>
@@ -70,8 +115,8 @@ export function DashboardPage() {
               Continue amanhã para não perder o seu streak
             </p>
           </div>
-          <div className="dash-streak-number" aria-label={`${MOCK_USER.streak} dias consecutivos de estudo`}>
-            {MOCK_USER.streak}
+          <div className="dash-streak-number" aria-label={`${streak} dias consecutivos de estudo`}>
+            {streak}
           </div>
         </section>
 
@@ -83,8 +128,8 @@ export function DashboardPage() {
             <span className="dash-points-label">Pontos acumulados</span>
           </div>
           <div className="dash-points-bottom">
-            <span className="dash-points-number" aria-label={`${MOCK_USER.pontos} pontos acumulados`}>
-              {MOCK_USER.pontos}
+            <span className="dash-points-number" aria-label={`${pontos} pontos acumulados`}>
+              {pontos}
             </span>
             <p className="dash-points-hint">
               Responda questões para ganhar mais pontos.
@@ -139,7 +184,7 @@ export function DashboardPage() {
                       className="dash-donut-svg"
                       viewBox="0 0 180 180"
                       role="img"
-                      aria-label={`${percentual}% de acerto: ${MOCK_USER.acertos} acertos e ${MOCK_USER.erros} erros de ${MOCK_USER.questoesRespondidas} questões respondidas`}
+                      aria-label={`${percentual}% de acerto: ${acertos} acertos e ${erros} erros de ${respondidas} questões respondidas`}
                     >
                       {/* Trilho */}
                       <circle
@@ -159,7 +204,7 @@ export function DashboardPage() {
                         stroke="#26E874"
                         strokeWidth="16"
                         strokeLinecap="round"
-                        strokeDasharray={`${2 * Math.PI * 70 * (MOCK_USER.acertos / MOCK_USER.questoesRespondidas)} ${2 * Math.PI * 70}`}
+                        strokeDasharray={`${2 * Math.PI * 70 * (acertos / respondidas)} ${2 * Math.PI * 70}`}
                         strokeDashoffset="0"
                       />
                       {/* Arco de erros (vermelho) */}
@@ -171,8 +216,8 @@ export function DashboardPage() {
                         stroke="#F44336"
                         strokeWidth="16"
                         strokeLinecap="round"
-                        strokeDasharray={`${2 * Math.PI * 70 * (MOCK_USER.erros / MOCK_USER.questoesRespondidas)} ${2 * Math.PI * 70}`}
-                        strokeDashoffset={`${-(2 * Math.PI * 70 * (MOCK_USER.acertos / MOCK_USER.questoesRespondidas))}`}
+                        strokeDasharray={`${2 * Math.PI * 70 * (erros / respondidas)} ${2 * Math.PI * 70}`}
+                        strokeDashoffset={`${-(2 * Math.PI * 70 * (acertos / respondidas))}`}
                       />
                     </svg>
                     <div className="dash-donut-text">
@@ -186,19 +231,19 @@ export function DashboardPage() {
                 <div className="dash-perf-stats">
                   <div className="dash-perf-stat">
                     <span className="dash-perf-stat-number dash-perf-stat-number--navy">
-                      {MOCK_USER.questoesRespondidas}
+                      {respondidas}
                     </span>
                     <span className="dash-perf-stat-label">RESPONDIDAS</span>
                   </div>
                   <div className="dash-perf-stat dash-perf-stat--middle">
                     <span className="dash-perf-stat-number dash-perf-stat-number--green">
-                      {MOCK_USER.acertos}
+                      {acertos}
                     </span>
                     <span className="dash-perf-stat-label">ACERTOS</span>
                   </div>
                   <div className="dash-perf-stat">
                     <span className="dash-perf-stat-number dash-perf-stat-number--red">
-                      {MOCK_USER.erros}
+                      {erros}
                     </span>
                     <span className="dash-perf-stat-label">ERROS</span>
                   </div>
@@ -207,10 +252,10 @@ export function DashboardPage() {
                 {/* Tópico com mais acertos */}
                 <div className="dash-perf-topic">
                   <span className="dash-perf-topic-label">Tópico com mais acertos</span>
-                  {MOCK_USER.acertos > 0 ? (
+                  {topTopic ? (
                     <div className="dash-perf-topic-pill">
-                      <span className="dash-perf-topic-name">{MOCK_USER.topTopic}</span>
-                      <span className="dash-perf-topic-count">{MOCK_USER.topTopicAcertos} acertos</span>
+                      <span className="dash-perf-topic-name">{topTopic.name}</span>
+                      <span className="dash-perf-topic-count">{topTopic.correct_count} acertos</span>
                     </div>
                   ) : (
                     <span className="dash-perf-empty">Sem dados ainda</span>

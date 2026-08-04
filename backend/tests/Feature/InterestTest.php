@@ -128,6 +128,47 @@ class InterestTest extends TestCase
         $this->putJson('/api/me/interests', [])->assertStatus(401);
     }
 
+    public function test_onboarding_com_corpo_preenchido_marca_onboarding_completo(): void
+    {
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+        $contents = Content::factory()->count(2)->create();
+
+        $this->postJson('/api/onboarding/interests', [
+            'content_ids' => $contents->pluck('id')->all(),
+        ])->assertStatus(200);
+
+        $this->assertNotNull($user->fresh()->onboarding_completed_at);
+    }
+
+    public function test_onboarding_equivalente_a_pular_tambem_marca_onboarding_completo(): void
+    {
+        $user = User::factory()->create();
+        Sanctum::actingAs($user);
+
+        $this->postJson('/api/onboarding/interests', [])->assertStatus(200);
+
+        $this->assertNotNull($user->fresh()->onboarding_completed_at);
+    }
+
+    public function test_put_de_interesses_nao_altera_onboarding_completo(): void
+    {
+        $user = User::factory()->create([
+            'onboarding_completed_at' => now()->subDay(),
+        ]);
+        Sanctum::actingAs($user);
+        $content = Content::factory()->create();
+
+        $this->putJson('/api/me/interests', [
+            'content_ids' => [$content->id],
+        ])->assertStatus(200);
+
+        $this->assertEquals(
+            $user->onboarding_completed_at->toDateTimeString(),
+            $user->fresh()->onboarding_completed_at->toDateTimeString()
+        );
+    }
+
     public function test_content_id_inexistente_e_rejeitado(): void
     {
         Sanctum::actingAs(User::factory()->create());

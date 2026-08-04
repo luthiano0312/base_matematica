@@ -1,0 +1,35 @@
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
+  background-color: rgba(241, 58, 58, 0.1);
+  border: 1px solid rgba(241, 58, 58, 0.35);
+  color: #b32727;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.error-banner-icon {
+  flex-shrink: 0;
+}
+
+.error-banner-message {
+  flex: 1;
+}
+
+.error-banner-retry {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  color: var(--color-blue-primary);
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: underline;
+}
+
+.error-banner-retry:hover {
+  color: var(--color-blue-primary-dark);
+}

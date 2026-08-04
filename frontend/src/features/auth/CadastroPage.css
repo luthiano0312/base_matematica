@@ -144,6 +144,18 @@
 }
 
 /* Aceite de termos */
+.termos-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.termos-error {
+  font-size: 0.8rem;
+  color: var(--color-error);
+  margin-left: 1.7rem;
+}
+
 .termos-checkbox {
   display: flex;
   align-items: flex-start;
