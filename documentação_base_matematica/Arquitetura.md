@@ -1,7 +1,7 @@
 # Arquitetura
 **Projeto:** Ceará Científico
 **Tipo de documento:** Arquitetura
-**Última atualização:** 20/07/2026
+**Última atualização:** 12/08/2026
 
 *Projeto Social de Educação Matemática*
 
@@ -57,9 +57,23 @@ Conteúdo em vídeo dividido em duas categorias:
 | Backend | Laravel | API REST consumida pelo frontend |
 | Frontend | React | Interface do usuário |
 | HTTP Client | Axios | Comunicação entre frontend e API |
-| Renderização de fórmulas | KaTeX | |
+| Banco de dados | Supabase (PostgreSQL) | Também usado como storage de imagens (Supabase Storage) |
+| Renderização de fórmulas (aluno) | KaTeX | Via extensão `auto-render`, processando o HTML sanitizado do enunciado |
+| Editor de texto rico (admin) | Tiptap | CRUD de questões, resoluções em texto e resumos/artigos no painel administrativo |
+| Editor visual de fórmulas (admin) | MathLive | Ferramenta separada do Tiptap; gera LaTeX a partir de edição visual, sem exigir que o produtor de conteúdo conheça a sintaxe |
+| Storage de imagens | Supabase Storage | Upload sempre intermediado pelo backend Laravel — nunca direto do browser (ver [[Analise_do_Sistema#^rn23\|RN23]]) |
+| Sanitização de HTML | DOMPurify | Aplicada no client antes de renderizar conteúdo HTML vindo do banco (ver [[Analise_do_Sistema#^rn22\|RN22]]) |
 
 A responsividade deve ser considerada desde o início do desenvolvimento — não como ajuste final. O público-alvo (jovens do ensino médio) acessa majoritariamente pelo celular.
+
+### 4.1 Autenticação
+
+O sistema possui dois tipos de usuário autenticado, com autenticação separada dentro do próprio Laravel (dois guards, ex. via Sanctum) — não há uso de Supabase Auth:
+
+- **Aluno** — tabela `users`, autenticação padrão já prevista em RF01/RF15.
+- **Administrador (produtor de conteúdo)** — tabela `admins` dedicada, guard próprio (ver [[Analise_do_Sistema#^rn20\|RN20]] e tabela em [[Analise_do_Sistema#5.11 admins (administradores)|5.11]]).
+
+Essa separação evita que queries voltadas ao aluno (pontuação, streak, recomendação) precisem filtrar por papel dentro de uma tabela mista, e mantém uma única fonte de verdade de autenticação (o próprio Laravel) para os dois perfis.
 
 ## 5. Cronograma de Desenvolvimento
 

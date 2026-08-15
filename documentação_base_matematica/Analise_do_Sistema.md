@@ -1,7 +1,7 @@
 # Analise_do_Sistema
 **Projeto:** Ceará Científico
 **Tipo de documento:** Regras e Requisitos
-**Última atualização:** 23/07/2026
+**Última atualização:** 12/08/2026
 
 *Projeto Social de Educação Matemática*
 
@@ -13,7 +13,7 @@ Plataforma web educacional voltada ao ensino de matemática para jovens do ensin
 
 - **Aluno** — público-alvo principal, acessa majoritariamente pelo celular
 - **Visitante** — acesso sem login, experiência limitada
-- **Produtor de conteúdo** — equipe de 7 pessoas, cadastra conteúdo via painel admin
+- **Produtor de conteúdo (admin)** — equipe de 7 pessoas, cadastra conteúdo via painel admin. Autenticação própria, separada da tabela de alunos (ver [[#^rn20|RN20]] e tabela `admins` em [[#5.11 admins (administradores)|5.11]])
 - **Professora orientadora** — validação pedagógica (processo manual, externo ao sistema)
 
 ### 1.2 Conteúdo Oferecido
@@ -47,6 +47,10 @@ Plataforma web educacional voltada ao ensino de matemática para jovens do ensin
 | RN17   | No modo "Progressão" do filtro de dificuldade, as questões retornadas são divididas por: base = quantidade ÷ 3 (arredondado para baixo) em cada nível; o resto é distribuído na ordem fácil → médio → difícil. Exemplos: N=4 → 2 fácil, 1 médio, 1 difícil. N=5 → 2 fácil, 2 médio, 1 difícil. O campo "Quantidade de questões" é obrigatório nesse modo.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   | ^rn17 |
 | RN18   | **Day Streak:** calculado on-the-fly a partir do histórico em `answered_questions` (sem campo dedicado em `users`), contando dias distintos com pelo menos 1 questão respondida (independente de acerto ou erro). Corte de dia à meia-noite, horário de Brasília — uma resposta às 23h50 e outra às 00h10 conta como 2 dias consecutivos de streak. O streak zera para 0 caso o aluno fique um dia inteiro sem nenhuma atividade registrada. Não há tolerância/perdão de dias no MVP.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | ^rn18 |
 | RN19   | **Proteção de acesso ao Onboarding:** ao acessar a URL do Onboarding diretamente, sem sessão ativa (não passou pelo Cadastro/Login), o sistema redireciona para a Home. Um aluno com sessão ativa que já completou o Onboarding anteriormente é redirecionado para o Dashboard ao tentar acessar a URL novamente (não pode refazer). A tela de Onboarding não possui botão "Voltar" (ver RN12 — a conta já foi criada na etapa anterior, evitando duplicação/reabertura do Cadastro).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | ^rn19 |
+| RN20   | **Autenticação de administradores:** produtores de conteúdo autenticam-se via guard separado do Laravel (não a mesma tabela/guard usado pelo aluno, e sem uso de Supabase Auth), usando a tabela `admins` dedicada (ver 5.11). Motivo: a tabela `users` é modelada em torno do aluno (streak, pontuação, interesses) — misturar os dois num único guard/tabela com coluna `role` exigiria filtro manual em toda query voltada a aluno, com risco de vazamento de admin em listagens/estatísticas. RN15 permanece válido — não há distinção de papéis entre os admins autenticados. | ^rn20 |
+| RN21   | **Formato de enunciados e textos ricos:** os campos `statement` e `text_resolution` (questions) e `content` (study_materials) são armazenados como **HTML**, produzido pelo editor de texto rico do painel admin (Tiptap — ver RF16). Fórmulas matemáticas são inseridas por um editor visual separado (MathLive — ver RF17) e embutidas no HTML em formato reconhecível para renderização via KaTeX; imagens são embutidas como tags `<img>` apontando para URLs do Supabase Storage (ver RN23). Decisão tomada em favor de HTML (não Markdown) por exigir menos dependências e nenhum parser customizado de ida e volta, já que o Tiptap serializa/desserializa HTML nativamente, inclusive para nodes customizados. | ^rn21 |
+| RN22   | **Sanitização obrigatória de HTML:** todo conteúdo HTML proveniente do painel admin (enunciados, resoluções, resumos) deve ser sanitizado (ex: DOMPurify) no client antes de ser renderizado para o aluno, restringindo a lista de tags e atributos permitidos, para prevenir XSS. Esse é o principal ponto de atenção introduzido pela decisão de armazenar HTML (ver RN21). | ^rn22 |
+| RN23   | **Upload de imagens via backend:** o upload de imagens no painel admin é sempre intermediado pelo backend (Laravel) — o arquivo nunca é enviado diretamente do browser para o Supabase Storage. O Laravel valida a autenticação do admin (RN20) e realiza o upload usando a service role key do Supabase (chave de servidor, nunca exposta ao client), retornando a URL pública para inserção no editor. | ^rn23 |
 
 *RN16 é uma regra de consistência de dados que não é garantida automaticamente pelo banco — deve ser validada na camada de backend (Laravel) no momento do cadastro/edição da questão.*
 
@@ -73,6 +77,9 @@ Plataforma web educacional voltada ao ensino de matemática para jovens do ensin
 | RF13   | Sistema deve oferecer painel administrativo para cadastro de Questões, Resumos/Artigos e vínculos com Tópico/Conteúdo                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                | ^rf13 |
 | RF14   | Painel administrativo deve oferecer template de cadastro de questão por tipo (múltipla escolha / certo-errado / dissertativa)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | ^rf14 |
 | RF15   | Sistema deve oferecer fluxo de recuperação de senha ("esqueci minha senha"): aluno solicita reset informando e-mail, recebe link com token de uso único válido por 1 hora, e define nova senha respeitando os requisitos de RNF08. Implementado via sistema de reset de senha nativo do Laravel (`Illuminate\Auth\Passwords`), com envio de e-mail via Brevo (ver RNF09).                                                                                                                                                                                                                                                                            | ^rf15 |
+| RF16   | Sistema deve oferecer editor de texto rico (Tiptap) no painel administrativo para cadastro de enunciados, resoluções em texto e resumos/artigos, com suporte a formatação básica, inserção de fórmulas matemáticas e imagens (ver RN21). | ^rf16 |
+| RF17   | Sistema deve oferecer editor visual de fórmulas matemáticas (MathLive), integrado ao editor de texto rico, permitindo a inserção de expressões matemáticas sem que o produtor de conteúdo precise conhecer a sintaxe LaTeX (ver RN21). | ^rf17 |
+| RF18   | Sistema deve permitir upload de imagens no cadastro de conteúdo (questões, resumos), armazenando-as no Supabase Storage via upload intermediado pelo backend (ver RN23). | ^rf18 |
 
 ### 3.2 Requisitos Não Funcionais
 
@@ -87,6 +94,8 @@ Plataforma web educacional voltada ao ensino de matemática para jovens do ensin
 | RNF07  | Vídeos de resolução são hospedados externamente (YouTube); sistema armazena apenas a URL                                                              | ^rnf07 |
 | RNF08  | A senha do aluno deve ter mínimo 8 caracteres, ao menos 1 número e ao menos 1 letra maiúscula. Tela de Cadastro inclui campo de confirmação de senha. | ^rnf08 |
 | RNF09  | Envio de e-mails transacionais (recuperação de senha) via Brevo.                                                                                       | ^rnf09 |
+| RNF10  | Todo conteúdo HTML gerado pelo editor de texto rico (Tiptap) deve ser sanitizado (ex: DOMPurify) antes da renderização no client do aluno, prevenindo XSS (ver RN22). | ^rnf10 |
+| RNF11  | Fórmulas matemáticas embutidas no HTML dos enunciados devem ser renderizadas no client via KaTeX, usando a extensão `auto-render` para localizar e processar as fórmulas dentro do HTML já sanitizado. | ^rnf11 |
 
 ---
 
@@ -106,6 +115,8 @@ Plataforma web educacional voltada ao ensino de matemática para jovens do ensin
 - Painel administrativo para cadastro de conteúdo (questões, resoluções)
 - Day Streak (RN18)
 - Recuperação de senha (RF15)
+- Editor de texto rico (Tiptap) com suporte a fórmulas matemáticas via editor visual (MathLive) e upload de imagens (Supabase Storage) no cadastro de questões, resoluções e resumos (RF16–RF18)
+- Autenticação separada para administradores (produtores de conteúdo), via tabela `admins` dedicada e guard próprio do Laravel (RN20)
 
 ### 4.2 Fora do MVP (fases futuras)
 
@@ -141,6 +152,8 @@ Plataforma web educacional voltada ao ensino de matemática para jovens do ensin
 | created_at (criado em) | datetime | Data de criação |
 
 *Streak (RN18) não possui coluna dedicada — é calculado on-the-fly a partir de `answered_questions.answered_at` sempre que solicitado (ex: ao carregar o Dashboard).*
+
+*Esta tabela é exclusiva do aluno. Administradores (produtores de conteúdo) autenticam-se por uma tabela e guard separados — ver [[#5.11 admins (administradores)|5.11 admins]] e RN20.*
 
 ### 5.2 contents (conteúdos — nível amplo)
 
@@ -230,3 +243,15 @@ Tabela padrão do Laravel (`Illuminate\Auth\Passwords`), usada pelo fluxo de RF1
 | email | string | E-mail do aluno solicitante |
 | token | string | Token de reset (hash), uso único |
 | created_at | datetime | Usado para calcular expiração (1 hora, ver RF15) |
+
+### 5.11 admins (administradores)
+
+Tabela dedicada aos produtores de conteúdo, separada de `users` (ver RN20). Autenticados via guard próprio do Laravel — não compartilham sessão/tabela com o aluno, nem usam Supabase Auth. Sem coluna de papel/role — RN15 mantém o painel sem distinção de permissões entre admins no MVP.
+
+| **Coluna** | **Tipo** | **Descrição** |
+| --- | --- | --- |
+| id | PK | Identificador |
+| name (nome) | string | Nome do produtor de conteúdo |
+| email (e-mail) | string | E-mail, único |
+| password (senha) | string | Senha (hash) |
+| created_at (criado em) | datetime | Data de criação |
