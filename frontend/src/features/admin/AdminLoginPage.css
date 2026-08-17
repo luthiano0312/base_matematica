@@ -1,0 +1,101 @@
+/* Login do painel admin — mesmos tokens visuais da tela de login do aluno,
+   sem os links de cadastro/recuperação (RN20: fluxo próprio do admin). */
+
+.admin-login-page {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(160deg, #258bfc 0%, #061d44 100%);
+}
+
+.admin-login-topbar {
+  height: 5vh;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+  padding: 1.25rem 1.25rem 0;
+}
+
+.admin-login-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-white);
+  opacity: 0.85;
+  transition: opacity var(--transition-fast);
+}
+
+.admin-login-back:hover {
+  opacity: 1;
+}
+
+.admin-login-logo-link {
+  height: 21.25vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.admin-login-logo {
+  height: 38px;
+}
+
+.admin-login-main {
+  height: 73.75vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.admin-login-card {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  height: 100%;
+  width: 100%;
+  max-width: 440px;
+  background-color: var(--color-white);
+  border-radius: 20px 20px 0px 0px;
+  box-shadow: var(--shadow-lg);
+  padding: 2rem 1.5rem;
+}
+
+.admin-login-header {
+  text-align: left;
+}
+
+.admin-login-title {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-blue-dark);
+  margin-bottom: 0.4rem;
+}
+
+.admin-login-subtitle {
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+}
+
+.admin-login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.admin-login-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 1.05rem;
+}
+
+@media (min-width: 768px) {
+  .admin-login-main {
+    align-items: center;
+  }
+
+  .admin-login-title {
+    font-size: 1.85rem;
+  }
+}

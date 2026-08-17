@@ -19,7 +19,8 @@ class StoreQuestionRequest extends FormRequest
             'statement' => ['required', 'string'],
             'type' => ['required', 'in:multiple_choice,true_false,essay'],
             'difficulty' => ['required', 'in:easy,medium,hard'],
-            'text_resolution' => ['required', 'string'],
+            // RF05: obrigatória só para dissertativa (gabarito da autoavaliação).
+            'text_resolution' => ['nullable', 'string', 'required_if:type,essay'],
             'video_resolution_url' => ['nullable', 'url'],
 
             // Obrigatório só para 'true_false' (valores 'certo'/'errado').

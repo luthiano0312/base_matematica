@@ -1,0 +1,377 @@
+/* =========================================================================
+   Cadastro de Questões (painel admin) — transcrição do mockup
+   cadastro-questoes.html conforme Spec_Cadastro_Questoes.md.
+   Prefixo `cq-` (cadastro de questões). Erros usam --color-error (#F13A3A)
+   já formalizado no frontend (a spec registra a divergencia vs #F44336).
+   ========================================================================= */
+
+.cq-page-head {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.cq-decor {
+  position: absolute;
+  right: -8px;
+  top: -38px;
+  font-size: 130px;
+  font-weight: 800;
+  color: var(--color-blue-primary);
+  opacity: 0.1;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  font-family: 'STIX Two Text', Georgia, serif;
+}
+
+.cq-title {
+  color: var(--color-white);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.32px;
+  margin: 0 0 8px;
+}
+
+.cq-subtitle {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  max-width: 560px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.cq-req {
+  color: var(--color-magenta);
+  font-weight: 800;
+}
+
+.cq-optional {
+  color: rgba(6, 29, 68, 0.55);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+/* ---------- banner de sucesso ---------- */
+.cq-success-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: var(--color-green-vibrant);
+  color: var(--color-blue-dark);
+  border-radius: 16px;
+  padding: 16px 20px;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(38, 232, 116, 0.25);
+}
+
+.cq-success-action {
+  border: none;
+  background: rgba(6, 29, 68, 0.12);
+  color: var(--color-blue-dark);
+  font-weight: 800;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.cq-loading {
+  color: rgba(6, 29, 68, 0.55);
+  margin: 0;
+}
+
+/* ---------- card / campos ---------- */
+.cq-card {
+  background: var(--color-lavender);
+  border-radius: 32px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.cq-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.cq-label {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: var(--color-blue-dark);
+}
+
+.cq-hint {
+  font-size: 14px;
+  color: rgba(6, 29, 68, 0.55);
+  margin: 6px 0 0;
+  line-height: 1.45;
+}
+
+.cq-error {
+  font-size: 13px;
+  color: var(--color-error);
+  font-weight: 700;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ---------- segmented ---------- */
+.cq-segmented {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.cq-seg-btn {
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 15px;
+  padding: 12px 18px;
+  border-radius: 999px;
+  border: 2.5px solid rgba(37, 139, 252, 0.25);
+  background: var(--color-white);
+  color: rgba(6, 29, 68, 0.7);
+  transition: all 150ms ease-out;
+}
+
+.cq-seg-btn--active {
+  background: var(--color-blue-primary);
+  border-color: var(--color-blue-primary);
+  color: var(--color-white);
+}
+
+.cq-field--error .cq-seg-btn,
+.cq-field--error .cq-tf-btn {
+  border-color: var(--color-error);
+}
+
+/* ---------- alternativas ---------- */
+.cq-alt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.cq-alt-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.cq-alt-check {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  border: 2.5px solid rgba(37, 139, 252, 0.25);
+  background: var(--color-white);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: transparent;
+  font-size: 15px;
+}
+
+.cq-alt-check--correct {
+  background: var(--color-green-vibrant);
+  border-color: var(--color-green-vibrant);
+  color: var(--color-blue-dark);
+}
+
+.cq-alt-row input[type='text'] {
+  flex: 1;
+  border: 2.5px solid rgba(37, 139, 252, 0.25);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--color-blue-dark);
+  min-width: 0;
+}
+
+.cq-alt-row input[type='text']:focus {
+  outline: none;
+  border-color: var(--color-blue-primary);
+}
+
+.cq-alt-remove {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  color: rgba(6, 29, 68, 0.55);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.cq-alt-remove:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+.cq-ghost-btn {
+  margin-top: 14px;
+  font-family: inherit;
+  font-weight: 700;
+  font-size: 15px;
+  cursor: pointer;
+  background: transparent;
+  border: 2px dashed rgba(37, 139, 252, 0.5);
+  color: var(--color-blue-primary);
+  border-radius: 12px;
+  padding: 10px 16px;
+}
+
+/* ---------- certo/errado ---------- */
+.cq-tf-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.cq-tf-btn {
+  flex: 1;
+  padding: 22px;
+  border-radius: 16px;
+  border: 2.5px solid rgba(37, 139, 252, 0.25);
+  background: var(--color-white);
+  font-family: inherit;
+  font-weight: 800;
+  font-size: 18px;
+  color: rgba(6, 29, 68, 0.7);
+  cursor: pointer;
+}
+
+.cq-tf-btn--selected {
+  background: var(--color-green-vibrant);
+  border-color: var(--color-green-vibrant);
+  color: var(--color-blue-dark);
+}
+
+/* ---------- box informativo ---------- */
+.cq-info-box {
+  background: rgba(37, 139, 252, 0.08);
+  border: 2px solid rgba(37, 139, 252, 0.25);
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 15px;
+  color: rgba(6, 29, 68, 0.7);
+  line-height: 1.5;
+  margin-top: 10px;
+}
+
+/* ---------- chips ---------- */
+.cq-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.cq-chip {
+  font-family: inherit;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 14px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 2px solid rgba(37, 139, 252, 0.25);
+  background: var(--color-white);
+  color: rgba(6, 29, 68, 0.7);
+  transition: all 150ms ease-out;
+}
+
+.cq-chip--selected {
+  background: var(--color-blue-primary);
+  border-color: var(--color-blue-primary);
+  color: var(--color-white);
+}
+
+/* ---------- vídeo ---------- */
+.cq-field input[type='url'] {
+  width: 100%;
+  margin-top: 10px;
+  border: 2.5px solid rgba(37, 139, 252, 0.25);
+  border-radius: 16px;
+  padding: 16px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--color-blue-dark);
+}
+
+.cq-field input[type='url']:focus {
+  outline: none;
+  border-color: var(--color-blue-primary);
+}
+
+/* ---------- ações ---------- */
+.cq-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.cq-btn-primary {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  background: var(--color-green-vibrant);
+  color: var(--color-blue-dark);
+  font-weight: 800;
+  font-size: 18px;
+  padding: 16px;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(38, 232, 116, 0.4);
+}
+
+.cq-btn-primary:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+.cq-btn-secondary {
+  font-family: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: 2px solid rgba(37, 139, 252, 0.25);
+  color: var(--color-blue-dark);
+  font-weight: 700;
+  font-size: 15px;
+  padding: 14px;
+  border-radius: 999px;
+}
+
+/* ---------- responsivo (spec) ---------- */
+@media (max-width: 520px) {
+  .cq-card {
+    padding: 22px 18px;
+    border-radius: 24px;
+  }
+
+  .cq-title {
+    font-size: 26px;
+  }
+
+  .cq-decor {
+    font-size: 90px;
+    top: -24px;
+  }
+
+  .cq-tf-buttons {
+    flex-direction: column;
+  }
+}

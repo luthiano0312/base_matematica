@@ -6,6 +6,35 @@ export type User = {
   onboarding_completed_at: string | null;
 };
 
+export type Admin = {
+  id: number;
+  name: string;
+  email: string;
+  created_at: string;
+};
+
+export type QuestionType = 'multiple_choice' | 'true_false' | 'essay';
+
+export type QuestionDifficulty = 'easy' | 'medium' | 'hard';
+
+export type QuestionOptionPayload = {
+  text: string;
+  is_correct: boolean;
+};
+
+/** Corpo completo exigido por POST/PUT /admin/questions (update é full-replace). */
+export type QuestionPayload = {
+  statement: string;
+  type: QuestionType;
+  difficulty: QuestionDifficulty;
+  correct_answer?: string | null;
+  text_resolution?: string | null;
+  video_resolution_url?: string | null;
+  options?: QuestionOptionPayload[];
+  content_ids: number[];
+  topic_ids?: number[];
+};
+
 export type Content = {
   id: number;
   name: string;

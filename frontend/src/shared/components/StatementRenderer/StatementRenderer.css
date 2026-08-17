@@ -1,0 +1,46 @@
+/* Renderização do HTML sanitizado vindo do editor do painel admin.
+   A tipografia segue o território "matemático" (serifada) da identidade. */
+
+.statement-renderer {
+  font-family: 'STIX Two Text', var(--font-math, Georgia, serif);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--color-blue-dark);
+  overflow-wrap: break-word;
+}
+
+.statement-renderer p {
+  margin: 0 0 0.75em;
+}
+
+.statement-renderer p:last-child {
+  margin-bottom: 0;
+}
+
+.statement-renderer img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 8px 0;
+}
+
+.statement-renderer ul,
+.statement-renderer ol {
+  margin: 0 0 0.75em;
+  padding-left: 1.4em;
+}
+
+.statement-renderer blockquote {
+  margin: 0 0 0.75em;
+  padding-left: 1em;
+  border-left: 3px solid var(--color-blue-primary);
+}
+
+.statement-renderer a {
+  color: var(--color-blue-primary);
+}
+
+/* KaTeX herda o tamanho do texto ao redor (RNF06: base 18–20px no aluno) */
+.statement-renderer .katex {
+  font-size: 1.08em;
+}

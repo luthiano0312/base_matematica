@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import { useAdminAuth } from './AdminAuthContext';
 import './routes.css';
 
 export function AuthLoading() {
@@ -34,6 +35,19 @@ export function OnboardingRoute({ children }: { children: ReactNode }) {
   if (status === 'loading') return <AuthLoading />;
   if (status === 'anonymous') return <Navigate to="/" replace />;
   if (user?.onboarding_completed_at) return <Navigate to="/dashboard" replace />;
+
+  return children;
+}
+
+/**
+ * RN20 — rotas do painel administrativo: exigem sessão de admin
+ * (guard próprio, isolado da sessão do aluno).
+ */
+export function AdminRoute({ children }: { children: ReactNode }) {
+  const { status } = useAdminAuth();
+
+  if (status === 'loading') return <AuthLoading />;
+  if (status === 'anonymous') return <Navigate to="/admin/login" replace />;
 
   return children;
 }

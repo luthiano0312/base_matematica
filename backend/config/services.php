@@ -35,4 +35,12 @@ return [
         ],
     ],
 
+    // RN23 — Supabase Storage. Upload sempre intermediado pelo backend; a
+    // service role key nunca deve ser exposta ao frontend.
+    'supabase' => [
+        'url' => env('SUPABASE_URL'),
+        'service_role_key' => env('SUPABASE_SERVICE_ROLE_KEY'),
+        'bucket' => env('SUPABASE_STORAGE_BUCKET', 'question-images'),
+    ],
+
 ];

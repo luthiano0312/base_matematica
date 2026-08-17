@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AdminAuthController;
 use App\Http\Controllers\Api\AnswerController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CatalogController;
@@ -12,6 +13,7 @@ use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\QuestionFilterController;
 use App\Http\Controllers\Api\RecommendationController;
 use App\Http\Controllers\Api\TopicController;
+use App\Http\Controllers\Api\UploadImageController;
 use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'register']);
@@ -21,6 +23,9 @@ Route::post('/password/reset', [PasswordController::class, 'reset']);
 Route::get('/public/questions', [PublicQuestionController::class, 'index']);
 Route::get('/contents', [CatalogController::class, 'contents']);
 Route::get('/topics', [CatalogController::class, 'topics']);
+
+// RN20 — auth de admin separada (guard `admin`, tabela `admins`).
+Route::post('/admin/login', [AdminAuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -33,10 +38,17 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/onboarding/interests', [InterestController::class, 'onboarding']);
     Route::get('/questions', [QuestionFilterController::class, 'index']);
     Route::post('/questions/{question}/answers', [AnswerController::class, 'store']);
+});
 
-    Route::middleware('admin')->group(function () {
-        Route::apiResource('admin/questions', QuestionController::class);
-        Route::apiResource('admin/contents', ContentController::class);
-        Route::apiResource('admin/topics', TopicController::class);
-    });
+// RN20 — painel admin: guard `admin` (token bearer Sanctum via tabela `admins`).
+Route::middleware('auth:admin')->prefix('admin')->group(function () {
+    Route::post('/logout', [AdminAuthController::class, 'logout']);
+    Route::get('/me', [AdminAuthController::class, 'me']);
+
+    // RN23 — upload intermediado pelo backend.
+    Route::post('/upload-image', [UploadImageController::class, '__invoke']);
+
+    Route::apiResource('questions', QuestionController::class);
+    Route::apiResource('contents', ContentController::class);
+    Route::apiResource('topics', TopicController::class);
 });

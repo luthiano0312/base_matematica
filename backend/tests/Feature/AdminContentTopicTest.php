@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\Admin;
 use App\Models\Content;
 use App\Models\Topic;
 use App\Models\User;
@@ -13,26 +14,30 @@ class AdminContentTopicTest extends TestCase
 {
     use RefreshDatabase;
 
-    private function admin(): User
+    /**
+     * RN20 — rotas do painel autenticadas pelo guard `admin` (tabela `admins`).
+     */
+    private function admin(): Admin
     {
-        $user = User::factory()->create(['is_admin' => true]);
-        Sanctum::actingAs($user);
+        $admin = Admin::factory()->create();
+        Sanctum::actingAs($admin, ['*'], 'admin');
 
-        return $user;
-    }
-
-    public function test_nao_admin_recebe_403(): void
-    {
-        Sanctum::actingAs(User::factory()->create());
-
-        $this->getJson('/api/admin/contents')->assertStatus(403);
-        $this->postJson('/api/admin/contents', ['name' => 'Frações'])->assertStatus(403);
-        $this->postJson('/api/admin/topics', ['name' => 'Soma', 'content_id' => 1])->assertStatus(403);
+        return $admin;
     }
 
     public function test_sem_autenticacao_recebe_401(): void
     {
         $this->getJson('/api/admin/contents')->assertStatus(401);
+    }
+
+    public function test_token_de_aluno_e_rejeitado_no_guard_admin(): void
+    {
+        // O guard `admin` valida o provider: token emitido para User não autentica.
+        Sanctum::actingAs(User::factory()->create());
+
+        $this->getJson('/api/admin/contents')->assertStatus(401);
+        $this->postJson('/api/admin/contents', ['name' => 'Frações'])->assertStatus(401);
+        $this->postJson('/api/admin/topics', ['name' => 'Soma', 'content_id' => 1])->assertStatus(401);
     }
 
     public function test_admin_pode_criar_e_listar_content(): void

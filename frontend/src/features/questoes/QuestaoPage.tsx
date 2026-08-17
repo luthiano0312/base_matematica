@@ -5,6 +5,7 @@ import { Chip } from '@/shared/components/Chip/Chip';
 import { ProgressBar } from '@/shared/components/ProgressBar/ProgressBar';
 import { StatCard } from '@/shared/components/StatCard/StatCard';
 import { ErrorBanner } from '@/shared/components/ErrorBanner/ErrorBanner';
+import { StatementRenderer } from '@/shared/components/StatementRenderer/StatementRenderer';
 import { useQuestionSession } from './QuestionSessionContext';
 import { useAuth } from '@/app/AuthContext';
 import {
@@ -205,10 +206,10 @@ export function QuestaoPage() {
 
       {erroGeral && <ErrorBanner message={erroGeral} />}
 
-      {/* ─── Bloco 2: Enunciado ─── */}
+      {/* ─── Bloco 2: Enunciado (HTML sanitizado + KaTeX, RN21/RN22) ─── */}
       <section className="q-enunciado-block">
         <div className="q-enunciado-decor" aria-hidden="true">∑</div>
-        <p className="q-enunciado-texto">{question.statement}</p>
+        <StatementRenderer html={question.statement} className="q-enunciado-texto" />
       </section>
 
       {/* ─── Bloco 3: Área de resposta ─── */}
@@ -352,9 +353,11 @@ export function QuestaoPage() {
         {!feedback && verResolucao && question.type === 'essay' && (
           <div className="q-resolucao">
             <h3 className="q-resolucao-title">Resolução</h3>
-            <p className="q-resolucao-texto">
-              {question.text_resolution || 'Sem resolução cadastrada para esta questão.'}
-            </p>
+            {question.text_resolution ? (
+              <StatementRenderer html={question.text_resolution} className="q-resolucao-texto" />
+            ) : (
+              <p className="q-resolucao-texto">Sem resolução cadastrada para esta questão.</p>
+            )}
             <div className="q-essay-autoavaliacao">
               <button
                 type="button"
@@ -426,9 +429,14 @@ export function QuestaoPage() {
                   </div>
                 )}
                 <h3 className="q-resolucao-title">Resolução</h3>
-                <p className="q-resolucao-texto">
-                  {feedback.text_resolution || question.text_resolution || 'Sem resolução cadastrada para esta questão.'}
-                </p>
+                {feedback.text_resolution || question.text_resolution ? (
+                  <StatementRenderer
+                    html={feedback.text_resolution || question.text_resolution}
+                    className="q-resolucao-texto"
+                  />
+                ) : (
+                  <p className="q-resolucao-texto">Sem resolução cadastrada para esta questão.</p>
+                )}
               </div>
             )}
           </div>
