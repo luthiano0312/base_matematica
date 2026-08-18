@@ -1,0 +1,139 @@
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+<div style="font-family:'Nunito',sans-serif;display:flex;min-height:600px;border-radius:12px;overflow:hidden;border:0.5px solid var(--border);">
+  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;">Mockup da tela de listagem de questões do admin, com filtros, tabela e paginação.</h2>
+
+  <nav style="width:220px;background:#061d44;display:flex;flex-direction:column;padding:20px 0;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:8px;padding:0 20px 24px;">
+      <i class="ti ti-triangle" style="color:#258bfc;font-size:20px;" aria-hidden="true"></i>
+      <span style="font-weight:700;font-size:15px;color:#ffffff;">base matemática</span>
+    </div>
+    <div style="padding:0 12px;display:flex;flex-direction:column;gap:2px;">
+      <a href="#" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;color:#c9d3e6;text-decoration:none;font-size:14px;font-weight:600;">
+        <i class="ti ti-layout-dashboard" style="font-size:18px;" aria-hidden="true"></i>Visão geral
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:#258bfc;color:#ffffff;text-decoration:none;font-size:14px;font-weight:600;">
+        <i class="ti ti-file-text" style="font-size:18px;" aria-hidden="true"></i>Questões
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;color:#c9d3e6;text-decoration:none;font-size:14px;font-weight:600;">
+        <i class="ti ti-folder" style="font-size:18px;" aria-hidden="true"></i>Conteúdos e tópicos
+      </a>
+    </div>
+    <div style="margin-top:auto;padding:16px 20px 0;border-top:0.5px solid rgba(255,255,255,0.12);">
+      <div style="display:flex;align-items:center;gap:10px;padding-top:16px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:rgba(37,139,252,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#ffffff;flex-shrink:0;">JS</div>
+        <div style="min-width:0;">
+          <p style="margin:0;font-size:13px;font-weight:700;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">João Silva</p>
+          <a href="#" style="font-size:12px;color:#c9d3e6;text-decoration:none;display:flex;align-items:center;gap:4px;">Sair <i class="ti ti-logout-2" style="font-size:13px;" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main style="flex:1;background:#f4f3fb;padding:32px 36px;min-width:0;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:16px;">
+      <div>
+        <p style="margin:0 0 4px;font-size:22px;font-weight:700;color:#061d44;">Questões</p>
+        <p style="margin:0;font-size:14px;color:#5a6478;">128 questões cadastradas.</p>
+      </div>
+      <a href="#" style="display:flex;align-items:center;gap:6px;background:#258bfc;color:#ffffff;padding:10px 16px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:700;white-space:nowrap;">
+        <i class="ti ti-plus" style="font-size:16px;" aria-hidden="true"></i>Nova questão
+      </a>
+    </div>
+
+    <div style="background:#ffffff;border:0.5px solid #dcdbe8;border-radius:16px;padding:16px 18px;margin-bottom:20px;">
+      <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:12px;">
+        <select style="height:36px;border-radius:8px;border:0.5px solid #dcdbe8;padding:0 10px;font-size:13px;font-family:inherit;color:#061d44;background:#fff;">
+          <option>Conteúdo: todos</option>
+          <option>Frações</option>
+          <option>Equações do 2º grau</option>
+        </select>
+        <select style="height:36px;border-radius:8px;border:0.5px solid #dcdbe8;padding:0 10px;font-size:13px;font-family:inherit;color:#061d44;background:#fff;">
+          <option>Tópico: todos</option>
+          <option>Fórmula de Bhaskara</option>
+        </select>
+        <select style="height:36px;border-radius:8px;border:0.5px solid #dcdbe8;padding:0 10px;font-size:13px;font-family:inherit;color:#061d44;background:#fff;">
+          <option>Dificuldade: todas</option>
+          <option>Fácil</option>
+          <option>Média</option>
+          <option>Difícil</option>
+        </select>
+        <select style="height:36px;border-radius:8px;border:0.5px solid #dcdbe8;padding:0 10px;font-size:13px;font-family:inherit;color:#061d44;background:#fff;">
+          <option>Tipo: todos</option>
+          <option>Múltipla escolha</option>
+          <option>Certo ou errado</option>
+          <option>Dissertativa</option>
+        </select>
+      </div>
+      <div style="position:relative;">
+        <i class="ti ti-search" style="position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:16px;color:#8a90a3;" aria-hidden="true"></i>
+        <input type="text" placeholder="Buscar por enunciado" style="width:100%;height:38px;border-radius:8px;border:0.5px solid #dcdbe8;padding:0 12px 0 36px;font-size:13px;font-family:inherit;box-sizing:border-box;">
+      </div>
+    </div>
+
+    <div style="background:#ffffff;border:0.5px solid #dcdbe8;border-radius:16px;overflow:hidden;">
+      <table style="width:100%;border-collapse:collapse;table-layout:fixed;">
+        <colgroup>
+          <col style="width:34%;"><col style="width:15%;"><col style="width:12%;"><col style="width:20%;"><col style="width:19%;">
+        </colgroup>
+        <thead>
+          <tr style="background:#f4f3fb;">
+            <th style="text-align:left;padding:10px 16px;font-size:12px;font-weight:700;color:#5a6478;text-transform:uppercase;letter-spacing:0.03em;">Enunciado</th>
+            <th style="text-align:left;padding:10px 16px;font-size:12px;font-weight:700;color:#5a6478;text-transform:uppercase;letter-spacing:0.03em;">Tipo</th>
+            <th style="text-align:left;padding:10px 16px;font-size:12px;font-weight:700;color:#5a6478;text-transform:uppercase;letter-spacing:0.03em;">Dificuldade</th>
+            <th style="text-align:left;padding:10px 16px;font-size:12px;font-weight:700;color:#5a6478;text-transform:uppercase;letter-spacing:0.03em;">Conteúdo</th>
+            <th style="text-align:right;padding:10px 16px;font-size:12px;font-weight:700;color:#5a6478;text-transform:uppercase;letter-spacing:0.03em;">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-top:0.5px solid #eceafa;">
+            <td style="padding:12px 16px;font-size:13px;color:#061d44;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Um professor escreveu uma progressão aritmética...</td>
+            <td style="padding:12px 16px;font-size:13px;color:#5a6478;">Múltipla escolha</td>
+            <td style="padding:12px 16px;"><span style="font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;background:#faeeda;color:#854f0b;">Média</span></td>
+            <td style="padding:12px 16px;font-size:13px;color:#5a6478;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Progressões</td>
+            <td style="padding:12px 16px;text-align:right;">
+              <button style="background:none;border:none;cursor:pointer;color:#5a6478;padding:4px;" aria-label="Editar"><i class="ti ti-edit" style="font-size:17px;" aria-hidden="true"></i></button>
+              <button style="background:none;border:none;cursor:pointer;color:#a32d2d;padding:4px;" aria-label="Excluir"><i class="ti ti-trash" style="font-size:17px;" aria-hidden="true"></i></button>
+            </td>
+          </tr>
+          <tr style="border-top:0.5px solid #eceafa;">
+            <td style="padding:12px 16px;font-size:13px;color:#061d44;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">A soma das raízes de uma equação do 2º grau é...</td>
+            <td style="padding:12px 16px;font-size:13px;color:#5a6478;">Certo ou errado</td>
+            <td style="padding:12px 16px;"><span style="font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;background:#eaf3de;color:#27500a;">Fácil</span></td>
+            <td style="padding:12px 16px;font-size:13px;color:#5a6478;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Equações do 2º grau</td>
+            <td style="padding:12px 16px;text-align:right;">
+              <button style="background:none;border:none;cursor:pointer;color:#5a6478;padding:4px;" aria-label="Editar"><i class="ti ti-edit" style="font-size:17px;" aria-hidden="true"></i></button>
+              <button style="background:none;border:none;cursor:pointer;color:#a32d2d;padding:4px;" aria-label="Excluir"><i class="ti ti-trash" style="font-size:17px;" aria-hidden="true"></i></button>
+            </td>
+          </tr>
+          <tr style="border-top:0.5px solid #eceafa;">
+            <td style="padding:12px 16px;font-size:13px;color:#061d44;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Explique, com suas palavras, o Teorema de Pitágoras.</td>
+            <td style="padding:12px 16px;font-size:13px;color:#5a6478;">Dissertativa</td>
+            <td style="padding:12px 16px;"><span style="font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;background:#fcebeb;color:#791f1f;">Difícil</span></td>
+            <td style="padding:12px 16px;font-size:13px;color:#5a6478;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Geometria plana</td>
+            <td style="padding:12px 16px;text-align:right;">
+              <button style="background:none;border:none;cursor:pointer;color:#5a6478;padding:4px;" aria-label="Editar"><i class="ti ti-edit" style="font-size:17px;" aria-hidden="true"></i></button>
+              <button style="background:none;border:none;cursor:pointer;color:#a32d2d;padding:4px;" aria-label="Excluir"><i class="ti ti-trash" style="font-size:17px;" aria-hidden="true"></i></button>
+            </td>
+          </tr>
+          <tr style="border-top:0.5px solid #eceafa;">
+            <td style="padding:12px 16px;font-size:13px;color:#061d44;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Qual das alternativas representa a fórmula de Bhaskara?</td>
+            <td style="padding:12px 16px;font-size:13px;color:#5a6478;">Múltipla escolha</td>
+            <td style="padding:12px 16px;"><span style="font-size:12px;font-weight:700;padding:3px 10px;border-radius:20px;background:#faeeda;color:#854f0b;">Média</span></td>
+            <td style="padding:12px 16px;font-size:13px;color:#5a6478;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">Equações do 2º grau</td>
+            <td style="padding:12px 16px;text-align:right;">
+              <button style="background:none;border:none;cursor:pointer;color:#5a6478;padding:4px;" aria-label="Editar"><i class="ti ti-edit" style="font-size:17px;" aria-hidden="true"></i></button>
+              <button style="background:none;border:none;cursor:pointer;color:#a32d2d;padding:4px;" aria-label="Excluir"><i class="ti ti-trash" style="font-size:17px;" aria-hidden="true"></i></button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px;border-top:0.5px solid #eceafa;">
+        <span style="font-size:12px;color:#8a90a3;">Página 1 de 7</span>
+        <div style="display:flex;gap:6px;">
+          <button style="height:30px;padding:0 12px;border-radius:8px;border:0.5px solid #dcdbe8;background:#fff;font-size:12px;color:#8a90a3;cursor:not-allowed;">Anterior</button>
+          <button style="height:30px;padding:0 12px;border-radius:8px;border:0.5px solid #dcdbe8;background:#fff;font-size:12px;color:#061d44;cursor:pointer;font-weight:600;">Próxima</button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

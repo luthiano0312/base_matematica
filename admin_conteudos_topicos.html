@@ -1,0 +1,126 @@
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;900&display=swap" rel="stylesheet">
+<div style="font-family:'Nunito',sans-serif;display:flex;min-height:600px;border-radius:12px;overflow:hidden;border:0.5px solid var(--border);">
+  <h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;">Mockup da tela de conteúdos e tópicos do admin, com cards por conteúdo contendo tópicos aninhados.</h2>
+
+  <nav style="width:220px;background:#061d44;display:flex;flex-direction:column;padding:20px 0;flex-shrink:0;">
+    <div style="display:flex;align-items:center;gap:8px;padding:0 20px 24px;">
+      <i class="ti ti-triangle" style="color:#258bfc;font-size:20px;" aria-hidden="true"></i>
+      <span style="font-weight:700;font-size:15px;color:#ffffff;">base matemática</span>
+    </div>
+    <div style="padding:0 12px;display:flex;flex-direction:column;gap:2px;">
+      <a href="#" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;color:#c9d3e6;text-decoration:none;font-size:14px;font-weight:600;">
+        <i class="ti ti-layout-dashboard" style="font-size:18px;" aria-hidden="true"></i>Visão geral
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;color:#c9d3e6;text-decoration:none;font-size:14px;font-weight:600;">
+        <i class="ti ti-file-text" style="font-size:18px;" aria-hidden="true"></i>Questões
+      </a>
+      <a href="#" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;background:#258bfc;color:#ffffff;text-decoration:none;font-size:14px;font-weight:600;">
+        <i class="ti ti-folder" style="font-size:18px;" aria-hidden="true"></i>Conteúdos e tópicos
+      </a>
+    </div>
+    <div style="margin-top:auto;padding:16px 20px 0;border-top:0.5px solid rgba(255,255,255,0.12);">
+      <div style="display:flex;align-items:center;gap:10px;padding-top:16px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:rgba(37,139,252,0.25);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:#ffffff;flex-shrink:0;">JS</div>
+        <div style="min-width:0;">
+          <p style="margin:0;font-size:13px;font-weight:700;color:#ffffff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">João Silva</p>
+          <a href="#" style="font-size:12px;color:#c9d3e6;text-decoration:none;display:flex;align-items:center;gap:4px;">Sair <i class="ti ti-logout-2" style="font-size:13px;" aria-hidden="true"></i></a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main style="flex:1;background:#f4f3fb;padding:32px 36px;min-width:0;">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;gap:16px;">
+      <div>
+        <p style="margin:0 0 4px;font-size:22px;font-weight:700;color:#061d44;">Conteúdos e tópicos</p>
+        <p style="margin:0;font-size:14px;color:#5a6478;">9 conteúdos, 31 tópicos.</p>
+      </div>
+      <a href="#" style="display:flex;align-items:center;gap:6px;background:#258bfc;color:#ffffff;padding:10px 16px;border-radius:10px;text-decoration:none;font-size:14px;font-weight:700;white-space:nowrap;">
+        <i class="ti ti-plus" style="font-size:16px;" aria-hidden="true"></i>Novo conteúdo
+      </a>
+    </div>
+
+    <div style="display:flex;flex-direction:column;gap:16px;">
+
+      <div style="background:#ffffff;border:0.5px solid #dcdbe8;border-radius:16px;overflow:hidden;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:#f4f3fb;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <p style="margin:0;font-size:15px;font-weight:700;color:#061d44;">Frações</p>
+            <span style="font-size:12px;color:#5a6478;">2 tópicos · 8 questões</span>
+          </div>
+          <div>
+            <button style="background:none;border:none;cursor:pointer;color:#5a6478;padding:4px;" aria-label="Editar conteúdo"><i class="ti ti-edit" style="font-size:17px;" aria-hidden="true"></i></button>
+            <button style="background:none;border:none;cursor:pointer;color:#a32d2d;padding:4px;" aria-label="Excluir conteúdo"><i class="ti ti-trash" style="font-size:17px;" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px 12px 30px;border-top:0.5px solid #eceafa;">
+            <span style="font-size:13px;color:#061d44;">Frações equivalentes</span>
+            <div style="display:flex;align-items:center;gap:14px;">
+              <span style="font-size:12px;color:#8a90a3;">5 questões</span>
+              <button style="background:none;border:none;cursor:pointer;color:#5a6478;padding:4px;" aria-label="Editar tópico"><i class="ti ti-edit" style="font-size:16px;" aria-hidden="true"></i></button>
+              <button style="background:none;border:none;cursor:pointer;color:#a32d2d;padding:4px;" aria-label="Excluir tópico"><i class="ti ti-trash" style="font-size:16px;" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px 12px 30px;border-top:0.5px solid #eceafa;">
+            <span style="font-size:13px;color:#061d44;">Operações com frações</span>
+            <div style="display:flex;align-items:center;gap:14px;">
+              <span style="font-size:12px;color:#8a90a3;">3 questões</span>
+              <button style="background:none;border:none;cursor:pointer;color:#5a6478;padding:4px;" aria-label="Editar tópico"><i class="ti ti-edit" style="font-size:16px;" aria-hidden="true"></i></button>
+              <button style="background:none;border:none;cursor:pointer;color:#a32d2d;padding:4px;" aria-label="Excluir tópico"><i class="ti ti-trash" style="font-size:16px;" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div style="padding:10px 18px 12px 30px;border-top:0.5px solid #eceafa;">
+            <a href="#" style="font-size:13px;color:#258bfc;text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:6px;"><i class="ti ti-plus" style="font-size:14px;" aria-hidden="true"></i>Novo tópico</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#ffffff;border:0.5px solid #dcdbe8;border-radius:16px;overflow:hidden;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:#f4f3fb;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <p style="margin:0;font-size:15px;font-weight:700;color:#061d44;">Geometria plana</p>
+            <span style="font-size:12px;color:#5a6478;">0 tópicos · 0 questões</span>
+          </div>
+          <div>
+            <button style="background:none;border:none;cursor:pointer;color:#5a6478;padding:4px;" aria-label="Editar conteúdo"><i class="ti ti-edit" style="font-size:17px;" aria-hidden="true"></i></button>
+            <button style="background:none;border:none;cursor:pointer;color:#a32d2d;padding:4px;" aria-label="Excluir conteúdo"><i class="ti ti-trash" style="font-size:17px;" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div>
+          <p style="margin:0;padding:12px 18px 4px 30px;font-size:13px;color:#8a90a3;border-top:0.5px solid #eceafa;">Nenhum tópico ainda.</p>
+          <div style="padding:6px 18px 12px 30px;">
+            <a href="#" style="font-size:13px;color:#258bfc;text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:6px;"><i class="ti ti-plus" style="font-size:14px;" aria-hidden="true"></i>Novo tópico</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="background:#ffffff;border:0.5px solid #dcdbe8;border-radius:16px;overflow:hidden;">
+        <div style="display:flex;align-items:center;justify-content:space-between;padding:14px 18px;background:#f4f3fb;">
+          <div style="display:flex;align-items:center;gap:10px;">
+            <p style="margin:0;font-size:15px;font-weight:700;color:#061d44;">Equações do 2º grau</p>
+            <span style="font-size:12px;color:#5a6478;">1 tópico · 14 questões</span>
+          </div>
+          <div>
+            <button style="background:none;border:none;cursor:pointer;color:#5a6478;padding:4px;" aria-label="Editar conteúdo"><i class="ti ti-edit" style="font-size:17px;" aria-hidden="true"></i></button>
+            <button style="background:none;border:none;cursor:pointer;color:#a32d2d;padding:4px;" aria-label="Excluir conteúdo"><i class="ti ti-trash" style="font-size:17px;" aria-hidden="true"></i></button>
+          </div>
+        </div>
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 18px 12px 30px;border-top:0.5px solid #eceafa;">
+            <span style="font-size:13px;color:#061d44;">Fórmula de Bhaskara</span>
+            <div style="display:flex;align-items:center;gap:14px;">
+              <span style="font-size:12px;color:#8a90a3;">14 questões</span>
+              <button style="background:none;border:none;cursor:pointer;color:#5a6478;padding:4px;" aria-label="Editar tópico"><i class="ti ti-edit" style="font-size:16px;" aria-hidden="true"></i></button>
+              <button style="background:none;border:none;cursor:pointer;color:#a32d2d;padding:4px;" aria-label="Excluir tópico"><i class="ti ti-trash" style="font-size:16px;" aria-hidden="true"></i></button>
+            </div>
+          </div>
+          <div style="padding:10px 18px 12px 30px;border-top:0.5px solid #eceafa;">
+            <a href="#" style="font-size:13px;color:#258bfc;text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:6px;"><i class="ti ti-plus" style="font-size:14px;" aria-hidden="true"></i>Novo tópico</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
