@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AdminAuthController;
+use App\Http\Controllers\Api\AdminOverviewController;
 use App\Http\Controllers\Api\AnswerController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CatalogController;
@@ -47,6 +48,15 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
 
     // RN23 — upload intermediado pelo backend.
     Route::post('/upload-image', [UploadImageController::class, '__invoke']);
+
+    // Verificação síncrona de dependências antes do modal de exclusão
+    // (Spec_Modal_Confirmacao_Exclusao#3 — Regras de bloqueio por entidade).
+    Route::get('/contents/{content}/can-delete', [ContentController::class, 'canDelete']);
+    Route::get('/topics/{topic}/can-delete', [TopicController::class, 'canDelete']);
+    Route::get('/questions/{question}/can-delete', [QuestionController::class, 'canDelete']);
+
+    // Visão Geral do painel (Spec_Admin_Visao_Geral).
+    Route::get('/overview', [AdminOverviewController::class, 'index']);
 
     Route::apiResource('questions', QuestionController::class);
     Route::apiResource('contents', ContentController::class);

@@ -12,6 +12,8 @@ class QuestionResource extends JsonResource
         return [
             'id' => $this->id,
             'statement' => $this->statement,
+            // Texto puro do enunciado para a coluna "Enunciado" da listagem admin.
+            'statement_plain' => self::extractPlainText($this->statement),
             'type' => $this->type,
             'correct_answer' => $this->correct_answer,
             'difficulty' => $this->difficulty,
@@ -34,5 +36,28 @@ class QuestionResource extends JsonResource
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
+    }
+
+    /**
+     * Extrai texto puro do enunciado em HTML: spans `data-latex` gerados pelo
+     * editor (MathInlineNode) viram o LaTeX puro; depois strip_tags, decode de
+     * entidades e whitespace colapsado. Null quando não sobra texto.
+     */
+    public static function extractPlainText(?string $html): ?string
+    {
+        if ($html === null) {
+            return null;
+        }
+
+        $text = preg_replace(
+            '/<span\b[^>]*\bdata-latex="([^"]*)"[^>]*>.*?<\/span>/is',
+            '$1',
+            $html,
+        );
+
+        $text = html_entity_decode(strip_tags($text ?? ''), ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        $text = trim(preg_replace('/\s+/u', ' ', $text) ?? '');
+
+        return $text === '' ? null : $text;
     }
 }

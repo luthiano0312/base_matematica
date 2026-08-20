@@ -13,8 +13,9 @@ class StoreContentRequest extends FormRequest
 
     public function rules(): array
     {
+        // Limite de 100 caracteres definido na Spec_Modal_Conteudo_Topico (campo Nome).
         return [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'string', 'max:100'],
         ];
     }
 }
