@@ -1,0 +1,153 @@
+/* Lista de cards de Conteúdo */
+.ct-cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--admin-gap-grid);
+}
+
+.ct-card {
+  background: #ffffff;
+  border: 0.5px solid var(--admin-border);
+  border-radius: var(--admin-radius-card);
+  overflow: hidden;
+}
+
+.ct-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 18px;
+  background: var(--admin-lavanda);
+}
+
+.ct-card-title {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  min-width: 0;
+}
+
+.ct-card-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--admin-blue-escuro);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ct-card-count {
+  font-size: 12px;
+  color: var(--admin-text-secundario);
+  white-space: nowrap;
+}
+
+.ct-card-actions {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Linhas de Tópico (indentação reforça a hierarquia "filho de") */
+.ct-topic-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 18px 12px 30px;
+  border-top: 0.5px solid var(--admin-border-suave);
+}
+
+.ct-topic-name {
+  font-size: 13px;
+  color: var(--admin-blue-escuro);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.ct-topic-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.ct-topic-count {
+  font-size: 12px;
+  color: var(--admin-text-muted);
+  white-space: nowrap;
+}
+
+.ct-no-topics {
+  padding: 12px 18px 4px 30px;
+  border-top: 0.5px solid var(--admin-border-suave);
+  font-size: 13px;
+  color: var(--admin-text-muted);
+}
+
+/* Rodapé do card — ação "+ Novo tópico" */
+.ct-card-footer {
+  padding: 10px 18px 12px 30px;
+  border-top: 0.5px solid var(--admin-border-suave);
+}
+
+.ct-card-footer--empty {
+  border-top: none;
+  padding: 6px 18px 12px 30px;
+}
+
+.ct-new-topic {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  padding: 2px 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--admin-blue-primario);
+}
+
+.ct-new-topic:hover {
+  text-decoration: underline;
+}
+
+.ct-new-topic:focus-visible {
+  outline: 2px solid var(--admin-blue-primario);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Ícones de ação (editar/excluir) — sem fundo, alvo de clique compacto */
+.ct-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  color: var(--admin-text-secundario);
+  border-radius: 6px;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.ct-icon-btn:hover {
+  color: var(--admin-blue-escuro);
+  background: rgba(6, 29, 68, 0.06);
+}
+
+.ct-icon-btn--danger {
+  color: var(--admin-danger);
+}
+
+.ct-icon-btn--danger:hover {
+  color: #7c1f1f;
+  background: var(--admin-danger-bg);
+}
+
+.ct-icon-btn:focus-visible {
+  outline: 2px solid var(--admin-blue-primario);
+  outline-offset: 1px;
+}

@@ -1,0 +1,196 @@
+.admin-panel {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* ————— Sidebar ————— */
+
+.admin-panel-sidebar {
+  width: var(--admin-sidebar-largura);
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+  background: var(--admin-blue-escuro);
+}
+
+.admin-panel-logo {
+  display: flex;
+  align-items: center;
+  padding: 0 20px 24px;
+}
+
+.admin-panel-logo-img {
+  height: 22px;
+  width: auto;
+  max-width: 100%;
+}
+
+/* Ícone da pirâmide: só aparece na sidebar colapsada (ver media query). */
+.admin-panel-logo-icon {
+  display: none;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+}
+
+.admin-panel-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 12px;
+}
+
+.admin-panel-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--admin-sidebar-text-inativo);
+  transition: background-color var(--transition-fast), color var(--transition-fast);
+}
+
+.admin-panel-nav-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+}
+
+.admin-panel-nav-item:focus-visible {
+  outline: 2px solid var(--admin-blue-primario);
+  outline-offset: 2px;
+}
+
+.admin-panel-nav-item.is-active {
+  background: var(--admin-blue-primario);
+  color: #ffffff;
+}
+
+/* Bloco de usuário logado (rodapé da sidebar) */
+
+.admin-panel-user {
+  margin-top: auto;
+  padding: 16px 20px 0;
+  border-top: 0.5px solid var(--admin-sidebar-divisor);
+}
+
+.admin-panel-user-meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-panel-avatar {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(37, 139, 252, 0.25);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 12px;
+}
+
+.admin-panel-user-name {
+  flex: 1;
+  min-width: 0;
+  font-weight: 700;
+  font-size: 13px;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.admin-panel-logout {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--admin-sidebar-text-inativo);
+  font-weight: 600;
+  font-size: 12px;
+  padding: 4px 2px;
+  transition: color var(--transition-fast);
+}
+
+.admin-panel-logout:hover {
+  color: #ffffff;
+}
+
+.admin-panel-logout:focus-visible {
+  outline: 2px solid var(--admin-blue-primario);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ————— Área de conteúdo ————— */
+
+.admin-panel-content {
+  flex: 1;
+  min-width: 0;
+  background: var(--admin-lavanda);
+  padding: 32px 36px;
+}
+
+/* ————— Responsividade ————— */
+
+/* Tablet: sidebar colapsa para 72px, apenas ícones (tooltip nativo via title). */
+@media (max-width: 1024px) {
+  .admin-panel-sidebar {
+    width: var(--admin-sidebar-largura-colapsada);
+    padding: 20px 8px;
+  }
+
+  .admin-panel-logo {
+    justify-content: center;
+    padding: 0 0 20px;
+  }
+
+  .admin-panel-logo-img {
+    display: none;
+  }
+
+  .admin-panel-logo-icon {
+    display: block;
+  }
+
+  .admin-panel-nav {
+    padding: 0;
+    align-items: stretch;
+  }
+
+  .admin-panel-nav-item {
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .admin-panel-nav-label {
+    display: none;
+  }
+
+  .admin-panel-user {
+    padding: 16px 0 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .admin-panel-user-meta {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .admin-panel-logout {
+    padding: 4px;
+  }
+
+  .admin-panel-content {
+    padding: 24px 20px;
+  }
+}

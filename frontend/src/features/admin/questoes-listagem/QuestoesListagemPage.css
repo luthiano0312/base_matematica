@@ -1,0 +1,231 @@
+/* Questões — Listagem (Spec_Admin_Questoes_Listagem). Prefixo `ql-`. */
+
+/* ————— Bloco de filtros ————— */
+.ql-filters {
+  background: #ffffff;
+  border: 0.5px solid var(--admin-border);
+  border-radius: var(--admin-radius-card);
+  padding: 16px 18px;
+  margin-bottom: 20px;
+}
+
+.ql-filters-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.ql-select {
+  height: var(--admin-control-height);
+  border-radius: var(--admin-radius-control);
+  border: 0.5px solid var(--admin-border);
+  padding: 0 10px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--admin-blue-escuro);
+  background: #ffffff;
+  min-width: 0;
+}
+
+.ql-select:disabled {
+  color: var(--admin-text-muted);
+  background: var(--admin-border-suave);
+  cursor: not-allowed;
+}
+
+.ql-search {
+  position: relative;
+}
+
+.ql-search svg {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--admin-text-muted);
+  pointer-events: none;
+}
+
+.ql-search input {
+  width: 100%;
+  height: 38px;
+  box-sizing: border-box;
+  border-radius: var(--admin-radius-control);
+  border: 0.5px solid var(--admin-border);
+  padding: 0 12px 0 36px;
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--admin-blue-escuro);
+  background: #ffffff;
+}
+
+.ql-search input:focus-visible {
+  outline: 2px solid var(--admin-blue-primario);
+  outline-offset: 1px;
+}
+
+/* ————— Tabela ————— */
+.ql-table-card {
+  background: #ffffff;
+  border: 0.5px solid var(--admin-border);
+  border-radius: var(--admin-radius-card);
+  overflow: hidden;
+}
+
+.ql-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.ql-table thead tr {
+  background: var(--admin-lavanda);
+}
+
+.ql-table th {
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--admin-text-secundario);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ql-th-actions {
+  text-align: right;
+}
+
+.ql-table tbody tr {
+  border-top: 0.5px solid var(--admin-border-suave);
+}
+
+.ql-table td {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--admin-blue-escuro);
+}
+
+.ql-cell-statement {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ql-sem-texto {
+  font-style: italic;
+  color: var(--admin-text-muted);
+}
+
+.ql-cell-muted {
+  color: var(--admin-text-secundario);
+}
+
+.ql-cell-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ql-cell-actions {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Ícones de ação (mesmo padrão da tela de Conteúdos e tópicos) */
+.ql-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  color: var(--admin-text-secundario);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.ql-icon-btn:hover {
+  color: var(--admin-blue-escuro);
+  background: rgba(6, 29, 68, 0.06);
+}
+
+.ql-icon-btn--danger {
+  color: var(--admin-danger);
+}
+
+.ql-icon-btn--danger:hover {
+  color: #7c1f1f;
+  background: var(--admin-danger-bg);
+}
+
+.ql-icon-btn:focus-visible {
+  outline: 2px solid var(--admin-blue-primario);
+  outline-offset: 1px;
+}
+
+/* ————— Paginação ————— */
+.ql-pagination {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 18px;
+  border-top: 0.5px solid var(--admin-border-suave);
+}
+
+.ql-pagination > span {
+  font-size: 12px;
+  color: var(--admin-text-muted);
+}
+
+.ql-pagination-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.ql-page-btn {
+  height: 30px;
+  padding: 0 12px;
+  border-radius: var(--admin-radius-control);
+  border: 0.5px solid var(--admin-border);
+  background: #ffffff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--admin-blue-escuro);
+  cursor: pointer;
+}
+
+.ql-page-btn:hover:not(:disabled) {
+  background: var(--admin-lavanda);
+}
+
+.ql-page-btn:disabled {
+  color: var(--admin-text-muted);
+  cursor: not-allowed;
+}
+
+/* ————— Skeleton (6 linhas) ————— */
+.ql-skeleton-row {
+  display: grid;
+  grid-template-columns: 34% 15% 12% 20% 19%;
+  align-items: center;
+  padding: 14px 16px;
+  border-top: 0.5px solid var(--admin-border-suave);
+}
+
+.ql-skeleton-row:first-child {
+  border-top: none;
+}
+
+.ql-skeleton-row > *:last-child {
+  justify-self: end;
+}
+
+@media (max-width: 768px) {
+  .ql-filters-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

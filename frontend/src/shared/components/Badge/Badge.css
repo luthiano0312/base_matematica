@@ -1,0 +1,24 @@
+.badge {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--admin-radius-badge, 20px);
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.badge--easy {
+  background: var(--admin-diff-facil-bg, #eaf3de);
+  color: var(--admin-diff-facil-text, #27500a);
+}
+
+.badge--medium {
+  background: var(--admin-diff-media-bg, #faeeda);
+  color: var(--admin-diff-media-text, #854f0b);
+}
+
+.badge--hard {
+  background: var(--admin-diff-dificil-bg, #fcebeb);
+  color: var(--admin-diff-dificil-text, #791f1f);
+}

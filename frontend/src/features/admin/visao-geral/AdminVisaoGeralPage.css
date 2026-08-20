@@ -1,0 +1,255 @@
+/* Visão Geral (Spec_Admin_Visao_Geral). Prefixo `vg-`.
+   Os cards de métrica usam markup próprio: o StatCard compartilhado não cobre
+   o tom magenta nem o ícone em badge exigidos pela spec. */
+
+.admin-page-header--vg {
+  margin-bottom: 28px;
+}
+
+/* ————— Cards de métrica ————— */
+.vg-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--admin-gap-grid);
+  margin-bottom: 28px;
+}
+
+.vg-card {
+  border-radius: var(--admin-radius-card);
+  padding: 20px;
+}
+
+.vg-card-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+}
+
+.vg-card-number {
+  font-size: 36px;
+  font-weight: 900;
+  line-height: 1;
+  margin: 0;
+}
+
+.vg-card-label {
+  font-size: 13px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  margin: 6px 0 0;
+}
+
+.vg-card--blue {
+  background: var(--admin-blue-primario);
+}
+
+.vg-card--blue .vg-card-icon {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+}
+
+.vg-card--blue .vg-card-number {
+  color: #ffffff;
+}
+
+.vg-card--blue .vg-card-label {
+  color: #dbeafd;
+}
+
+.vg-card--green {
+  background: var(--admin-verde);
+}
+
+.vg-card--green .vg-card-icon {
+  background: rgba(4, 52, 27, 0.15);
+  color: #04341b;
+}
+
+.vg-card--green .vg-card-number {
+  color: #04341b;
+}
+
+.vg-card--green .vg-card-label {
+  color: #0a4a26;
+}
+
+.vg-card--magenta {
+  background: var(--admin-magenta);
+}
+
+.vg-card--magenta .vg-card-icon {
+  background: rgba(255, 255, 255, 0.22);
+  color: #ffffff;
+}
+
+.vg-card--magenta .vg-card-number {
+  color: #ffffff;
+}
+
+.vg-card--magenta .vg-card-label {
+  color: #f8dcf9;
+}
+
+/* ————— Banner de alerta (condicional) ————— */
+.vg-banner {
+  background: #ffffff;
+  border: 0.5px solid var(--admin-border);
+  border-radius: var(--admin-radius-card);
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.vg-banner-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(250, 199, 117, 0.35);
+  color: var(--admin-diff-media-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.vg-banner-link {
+  min-width: 0;
+}
+
+.vg-banner-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--admin-blue-escuro);
+}
+
+.vg-banner-subtitle {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--admin-text-secundario);
+}
+
+.vg-banner-link:hover .vg-banner-subtitle {
+  text-decoration: underline;
+}
+
+.vg-banner-link:focus-visible {
+  outline: 2px solid var(--admin-blue-primario);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ————— Lista "Cadastrado recentemente" ————— */
+.vg-recent-title {
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--admin-blue-escuro);
+}
+
+.vg-recent {
+  background: #ffffff;
+  border: 0.5px solid var(--admin-border);
+  border-radius: var(--admin-radius-card);
+  overflow: hidden;
+}
+
+.vg-recent-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  border-top: 0.5px solid var(--admin-border-suave);
+}
+
+.vg-recent-row:first-child {
+  border-top: none;
+}
+
+.vg-recent-row--link {
+  transition: background-color var(--transition-fast);
+}
+
+.vg-recent-row--link:hover {
+  background: var(--admin-lavanda);
+}
+
+.vg-recent-row--link:focus-visible {
+  outline: 2px solid var(--admin-blue-primario);
+  outline-offset: -2px;
+}
+
+.vg-recent-texts {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.vg-recent-item-title {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--admin-blue-escuro);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vg-recent-item-subtitle {
+  margin: 0;
+  font-size: 12px;
+  color: var(--admin-text-muted);
+}
+
+.vg-recent-time {
+  font-size: 12px;
+  color: var(--admin-text-muted);
+  flex-shrink: 0;
+}
+
+.vg-recent-empty {
+  margin: 0;
+  padding: 32px;
+  text-align: center;
+  font-size: 13px;
+  color: var(--admin-text-muted);
+}
+
+/* ————— Skeletons ————— */
+.vg-card--skeleton {
+  background: #ffffff;
+  border: 0.5px solid var(--admin-border);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.vg-card--skeleton .skeleton:first-child {
+  margin-bottom: 16px;
+}
+
+.vg-recent-title-skeleton {
+  margin-bottom: 12px;
+}
+
+/* ————— Responsivo ————— */
+@media (max-width: 1024px) {
+  .vg-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .vg-cards {
+    grid-template-columns: 1fr;
+  }
+}

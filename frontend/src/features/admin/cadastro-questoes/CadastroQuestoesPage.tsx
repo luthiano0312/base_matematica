@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import { useParams } from 'react-router-dom';
-import { AdminLayout } from '@/features/admin/AdminLayout';
 import { RichTextEditor } from './RichTextEditor';
 import { ErrorBanner } from '@/shared/components/ErrorBanner/ErrorBanner';
 import * as adminService from '@/services/adminService';
@@ -286,7 +285,12 @@ export function CadastroQuestoesPage() {
   );
 
   return (
-    <AdminLayout breadcrumb={breadcrumb}>
+    <div className="cq-container">
+      {/* Breadcrumb como cabeçalho interno da área de conteúdo (Etapa 5 —
+          a página passou a viver dentro do AdminPanelLayout). */}
+      <nav className="admin-breadcrumb" aria-label="Você está aqui">
+        {breadcrumb}
+      </nav>
       <div className="cq-page-head">
         <div className="cq-decor" aria-hidden="true">∑</div>
         <h1 className="cq-title">{editando ? 'Editar questão' : 'Cadastrar nova questão'}</h1>
@@ -594,6 +598,6 @@ export function CadastroQuestoesPage() {
           )}
         </form>
       )}
-    </AdminLayout>
+    </div>
   );
 }

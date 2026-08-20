@@ -57,7 +57,7 @@ export function AdminLoginPage() {
     setEnviando(true);
     try {
       await login({ email, password: senha });
-      navigate('/admin/questoes/nova');
+      navigate('/admin/visao-geral');
     } catch (err) {
       if (axios.isAxiosError(err) && err.response?.status === 401) {
         setErroGeral('E-mail ou senha incorretos.');

@@ -1,0 +1,42 @@
+/*
+ * Tokens do painel administrativo — Spec_Admin_Design_Tokens_e_Sidebar.
+ * A Identidade Visual define a marca; estas variáveis cobrem os neutros e
+ * semânticos que só existem na UI densa de dados do admin.
+ */
+:root {
+  /* Marca (reaproveitada da Identidade Visual) */
+  --admin-blue-escuro: #061d44;
+  --admin-blue-primario: #258bfc;
+  --admin-verde: #26e874;
+  --admin-magenta: #de4ee1;
+  --admin-lavanda: #efeeff;
+
+  /* Extensão neutra */
+  --admin-border: #dcdbe8;
+  --admin-border-suave: #eceafa;
+  --admin-text-secundario: #5a6478;
+  --admin-text-muted: #8a90a3;
+  --admin-sidebar-text-inativo: #c9d3e6;
+  --admin-sidebar-divisor: rgba(255, 255, 255, 0.12);
+
+  /* Dificuldade */
+  --admin-diff-facil-bg: #eaf3de;
+  --admin-diff-facil-text: #27500a;
+  --admin-diff-media-bg: #faeeda;
+  --admin-diff-media-text: #854f0b;
+  --admin-diff-dificil-bg: #fcebeb;
+  --admin-diff-dificil-text: #791f1f;
+
+  /* Perigo / ação destrutiva */
+  --admin-danger: #a32d2d;
+  --admin-danger-bg: #fcebeb;
+
+  /* Espaçamento e forma */
+  --admin-sidebar-largura: 220px;
+  --admin-sidebar-largura-colapsada: 72px;
+  --admin-radius-card: 16px;
+  --admin-radius-control: 8px;
+  --admin-radius-badge: 20px;
+  --admin-control-height: 36px;
+  --admin-gap-grid: 16px;
+}

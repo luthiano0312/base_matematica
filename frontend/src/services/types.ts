@@ -75,6 +75,63 @@ export type AnswerResult = {
   text_resolution: string | null;
 };
 
+/* ————— Painel admin (Spec_Admin_*) ————— */
+
+/** Tópico com contagem de questões (GET /admin/topics, GET /admin/contents). */
+export type AdminTopic = Topic & {
+  questions_count: number;
+};
+
+/** Conteúdo com tópicos aninhados e contagens (GET /admin/contents). */
+export type AdminContent = {
+  id: number;
+  name: string;
+  topics_count: number;
+  questions_count: number;
+  topics: AdminTopic[];
+};
+
+/** Resposta de GET /admin/{entidade}/:id/can-delete (Spec_Modal_Confirmacao_Exclusao#3). */
+export type CanDeleteResponse = {
+  can_delete: boolean;
+  reason: string | null;
+  counts: Record<string, number>;
+};
+
+/** Item da lista "Cadastrado recentemente" (GET /admin/overview). */
+export type OverviewRecentItem = {
+  type: 'question' | 'topic' | 'content';
+  id: number;
+  title: string;
+  subtitle: string;
+  created_at: string;
+};
+
+export type Overview = {
+  counts: {
+    questions: number;
+    topics: number;
+    contents: number;
+  };
+  topics_without_questions: number;
+  recent: OverviewRecentItem[];
+};
+
+/** Questão da listagem admin (coluna Enunciado usa texto puro extraído no backend). */
+export type AdminQuestion = Question & {
+  statement_plain: string | null;
+};
+
+export type Paginated<T> = {
+  data: T[];
+  meta: {
+    current_page: number;
+    last_page: number;
+    per_page: number;
+    total: number;
+  };
+};
+
 export type Dashboard = {
   points: number;
   streak: number;
