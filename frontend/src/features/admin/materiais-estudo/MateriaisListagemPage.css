@@ -1,0 +1,128 @@
+/* Materiais de estudo — Listagem admin. Prefixo `ml-`.
+   Mesmo padrão visual da listagem de questões (ql-): card branco,
+   cabeçalho lavanda, ações com icon-buttons. Sem paginação/busca. */
+
+/* ————— Tabela ————— */
+.ml-table-card {
+  background: #ffffff;
+  border: 0.5px solid var(--admin-border);
+  border-radius: var(--admin-radius-card);
+  overflow: hidden;
+}
+
+.ml-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.ml-table thead tr {
+  background: var(--admin-lavanda);
+}
+
+.ml-table th {
+  text-align: left;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--admin-text-secundario);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ml-th-actions {
+  text-align: right;
+}
+
+.ml-table tbody tr {
+  border-top: 0.5px solid var(--admin-border-suave);
+}
+
+.ml-table td {
+  padding: 12px 16px;
+  font-size: 13px;
+  color: var(--admin-blue-escuro);
+}
+
+.ml-cell-titulo {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ml-subtitulo {
+  display: block;
+  margin-top: 2px;
+  font-weight: 400;
+  font-size: 12px;
+  color: var(--admin-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ml-cell-muted {
+  color: var(--admin-text-secundario);
+}
+
+.ml-cell-truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ml-cell-actions {
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Ícones de ação (mesmo padrão das demais listagens do painel) */
+.ml-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  background: transparent;
+  border: none;
+  color: var(--admin-text-secundario);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.ml-icon-btn:hover {
+  color: var(--admin-blue-escuro);
+  background: rgba(6, 29, 68, 0.06);
+}
+
+.ml-icon-btn--danger {
+  color: var(--admin-danger);
+}
+
+.ml-icon-btn--danger:hover {
+  color: #7c1f1f;
+  background: var(--admin-danger-bg);
+}
+
+.ml-icon-btn:focus-visible {
+  outline: 2px solid var(--admin-blue-primario);
+  outline-offset: 1px;
+}
+
+/* ————— Skeleton (5 linhas) ————— */
+.ml-skeleton-row {
+  display: grid;
+  grid-template-columns: 42% 24% 12% 22%;
+  align-items: center;
+  padding: 14px 16px;
+  border-top: 0.5px solid var(--admin-border-suave);
+}
+
+.ml-skeleton-row:first-child {
+  border-top: none;
+}
+
+.ml-skeleton-row > *:last-child {
+  justify-self: end;
+}

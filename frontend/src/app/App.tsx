@@ -14,6 +14,11 @@ import { CadastroQuestoesPage } from '@/features/admin/cadastro-questoes/Cadastr
 import { AdminVisaoGeralPage } from '@/features/admin/visao-geral/AdminVisaoGeralPage';
 import { QuestoesListagemPage } from '@/features/admin/questoes-listagem/QuestoesListagemPage';
 import { ConteudosTopicosPage } from '@/features/admin/conteudos-topicos/ConteudosTopicosPage';
+import { CadastroMaterialPage } from '@/features/admin/materiais-estudo/CadastroMaterialPage';
+import { MateriaisListagemPage } from '@/features/admin/materiais-estudo/MateriaisListagemPage';
+import { MateriaisFiltroPage } from '@/features/materiais-estudo/MateriaisFiltroPage';
+import { MateriaisListaPage } from '@/features/materiais-estudo/MateriaisListaPage';
+import { MateriaisDetalhePage } from '@/features/materiais-estudo/MateriaisDetalhePage';
 import { OnboardingWelcomePage } from '@/features/onboarding/OnboardingWelcomePage';
 import { OnboardingChecklistPage } from '@/features/onboarding/OnboardingChecklistPage';
 import { DashboardPage } from '@/features/dashboard/DashboardPage';
@@ -69,6 +74,11 @@ function App() {
                   }
                 />
                 <Route path="/questao/:id" element={<QuestaoPage />} />
+                {/* Materiais de estudo — leitura pública (RN01/RF02).
+                    Fluxo em três telas: filtro → listagem → detalhe. */}
+                <Route path="/materiais-de-estudo" element={<MateriaisFiltroPage />} />
+                <Route path="/materiais-de-estudo/lista" element={<MateriaisListaPage />} />
+                <Route path="/materiais-de-estudo/:id" element={<MateriaisDetalhePage />} />
                 <Route
                   path="/dashboard"
                   element={
@@ -94,6 +104,9 @@ function App() {
                   <Route path="questoes/nova" element={<CadastroQuestoesPage />} />
                   <Route path="questoes/:id/editar" element={<CadastroQuestoesPage />} />
                   <Route path="conteudos" element={<ConteudosTopicosPage />} />
+                  <Route path="materiais" element={<MateriaisListagemPage />} />
+                  <Route path="materiais/novo" element={<CadastroMaterialPage />} />
+                  <Route path="materiais/:id/editar" element={<CadastroMaterialPage />} />
                 </Route>
               </Routes>
             </BrowserRouter>

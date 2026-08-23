@@ -158,7 +158,7 @@ export function DashboardPage() {
             <button
               type="button"
               className="dash-shortcut"
-              onClick={() => {/* materiais — tela ainda não definida */}}
+              onClick={() => navigate('/materiais-de-estudo')}
             >
               <div className="dash-shortcut-icon dash-shortcut-icon--green">
                 <FileText size={20} />

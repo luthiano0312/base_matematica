@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\PublicQuestionController;
 use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\QuestionFilterController;
 use App\Http\Controllers\Api\RecommendationController;
+use App\Http\Controllers\Api\StudyMaterialController;
 use App\Http\Controllers\Api\TopicController;
 use App\Http\Controllers\Api\UploadImageController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,13 @@ Route::post('/password/reset', [PasswordController::class, 'reset']);
 Route::get('/public/questions', [PublicQuestionController::class, 'index']);
 Route::get('/contents', [CatalogController::class, 'contents']);
 Route::get('/topics', [CatalogController::class, 'topics']);
+// Materiais de estudo — leitura pública (RN01/RF02); escrita só no painel.
+Route::get('/study-materials', [StudyMaterialController::class, 'index']);
+// Detalhe público do material (mesmo método show exposto ao admin via
+// apiResource — o resource não carrega dado sensível). whereNumber evita
+// que id não numérico chegue ao Postgres como comparação inválida.
+Route::get('/study-materials/{study_material}', [StudyMaterialController::class, 'show'])
+    ->whereNumber('study_material');
 
 // RN20 — auth de admin separada (guard `admin`, tabela `admins`).
 Route::post('/admin/login', [AdminAuthController::class, 'login']);
@@ -61,4 +69,6 @@ Route::middleware('auth:admin')->prefix('admin')->group(function () {
     Route::apiResource('questions', QuestionController::class);
     Route::apiResource('contents', ContentController::class);
     Route::apiResource('topics', TopicController::class);
+    // Delete direto, sem can-delete: nenhuma FK aponta para study_materials.
+    Route::apiResource('study-materials', StudyMaterialController::class)->except(['create', 'edit']);
 });

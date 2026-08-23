@@ -1,6 +1,6 @@
 import type { ReactNode } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
-import { LayoutDashboard, FileText, Folder, LogOut } from 'lucide-react';
+import { LayoutDashboard, FileText, Folder, BookOpen, LogOut } from 'lucide-react';
 import { useAdminAuth } from '@/app/AdminAuthContext';
 import logoLight from '@/assets/logos/logo_light.svg';
 import { cx } from '@/shared/utils/cx';
@@ -15,6 +15,7 @@ type NavItem = {
 const NAV_ITEMS: NavItem[] = [
   { to: '/admin/visao-geral', label: 'Visão geral', icon: <LayoutDashboard size={18} aria-hidden="true" /> },
   { to: '/admin/questoes', label: 'Questões', icon: <FileText size={18} aria-hidden="true" /> },
+  { to: '/admin/materiais', label: 'Materiais de estudo', icon: <BookOpen size={18} aria-hidden="true" /> },
   { to: '/admin/conteudos', label: 'Conteúdos e tópicos', icon: <Folder size={18} aria-hidden="true" /> },
 ];
 

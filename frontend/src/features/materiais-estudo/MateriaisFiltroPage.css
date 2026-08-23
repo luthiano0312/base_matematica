@@ -1,0 +1,184 @@
+/* =========================================================================
+   Tela de Filtro de Materiais de Estudo
+
+   Espelha a FiltroQuestoesPage (fundo preto com gradiente azul
+   semitransparente, card navy centralizado, botão "Continuar" verde).
+   Classes `mat-filtro-*` — cópia do padrão `filtro-*` com os campos de
+   questão removidos (só Conteúdo e Tópico) e subtítulo adicionado.
+   ========================================================================= */
+
+.mat-filtro-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: black;
+}
+
+.mat-filtro-bg {
+  flex: 1;
+  flex-direction: column;
+  gap: 0.75rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 1rem;
+  background: linear-gradient(155deg, rgba(104, 174, 253, 0.5) 0%, rgba(39, 138, 252, 0.5) 100%);
+}
+
+/* Botão "voltar" — canto superior esquerdo (legível sobre o gradiente) */
+.mat-filtro-topbar {
+  height: 5vh;
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 1rem 1rem 0;
+}
+
+.mat-filtro-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-white);
+  opacity: 0.85;
+  transition: opacity var(--transition-fast);
+}
+
+.mat-filtro-back:hover {
+  opacity: 1;
+}
+
+/* ─── Card principal ─── */
+.mat-filtro-card {
+  width: 100%;
+  max-width: 480px;
+  background-color: var(--color-card-bg-dark);
+  border: 1px solid var(--color-card-border-dark);
+  border-radius: 20px;
+  padding: 2rem 1.5rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.35rem;
+  box-shadow: 0 -8px 32px rgba(6, 29, 68, 0.18);
+}
+
+/* ─── Título ─── */
+.mat-filtro-title {
+  font-family: var(--font-ui);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--color-white);
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* ─── Subtítulo ─── */
+.mat-filtro-subtitle {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  line-height: 1.45;
+  margin: -0.75rem 0 0;
+}
+
+/* ─── Ações ─── */
+.mat-filtro-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 0.5rem;
+}
+
+/* Botão Continuar — verde vibrante (ação primária), igual ao filtro de questões */
+.mat-filtro-btn-continuar {
+  height: 55px;
+  width: 100%;
+  padding: 0.95rem 1.75rem;
+  background-color: var(--color-green-vibrant);
+  color: var(--color-blue-dark);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1.05rem;
+  border: none;
+  border-radius: 32px;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(38, 232, 116, 0.35);
+  transition:
+    transform var(--transition-fast),
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+.mat-filtro-btn-continuar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(38, 232, 116, 0.45);
+}
+
+.mat-filtro-btn-continuar:active {
+  transform: translateY(0);
+}
+
+.mat-filtro-btn-continuar:focus-visible {
+  outline: 3px solid var(--color-green-vibrant);
+  outline-offset: 2px;
+}
+
+/* Botão Limpar filtro — outline */
+.mat-filtro-btn-limpar {
+  height: 55px;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
+  background: transparent;
+  border: 1.5px solid var(--color-card-border-dark);
+  border-radius: 32px;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-white);
+  cursor: pointer;
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+}
+
+.mat-filtro-btn-limpar:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.mat-filtro-btn-limpar:active {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mat-filtro-btn-limpar:focus-visible {
+  outline: 2px solid var(--color-blue-primary);
+  outline-offset: 2px;
+}
+
+/* ─── Responsivo ─── */
+@media (min-width: 480px) {
+  .mat-filtro-card {
+    padding: 2.5rem 2rem 2.75rem;
+  }
+
+  .mat-filtro-title {
+    font-size: 1.85rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .mat-filtro-bg {
+    align-items: center;
+    padding: 2rem;
+  }
+}
+
+/* ─── Acessibilidade — Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .mat-filtro-btn-continuar,
+  .mat-filtro-btn-limpar {
+    transition: none;
+  }
+}

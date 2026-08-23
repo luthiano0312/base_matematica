@@ -1,0 +1,89 @@
+/* =========================================================================
+   Base compartilhada das telas CLARAS de Materiais de Estudo (aluno):
+   Listagem e Detalhe — Spec_Materiais_de_Estudo.md.
+   Fundo lavanda, breadcrumb, tags de Conteúdo/Tópico e badges Artigo/
+   "Vídeo aula" são idênticos nas duas telas (precedente: admin-page.css).
+   A tela de filtro é escura e autocontida (MateriaisFiltroPage.css).
+   ========================================================================= */
+
+.mat-base {
+  min-height: 100vh;
+  background-color: var(--color-lavender);
+}
+
+.mat-container {
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1rem 3rem;
+}
+
+/* Detalhe: coluna de leitura confortável (spec: ~600–680px no desktop). */
+.mat-container--detalhe {
+  max-width: 640px;
+}
+
+/* ─── Breadcrumb (padrão admin-breadcrumb adaptado ao aluno) ─── */
+.mat-breadcrumb {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-bottom: 20px;
+}
+
+.mat-breadcrumb strong {
+  color: var(--color-blue-dark);
+  font-weight: 700;
+}
+
+.mat-breadcrumb a {
+  color: var(--color-blue-primary);
+  font-weight: 600;
+}
+
+.mat-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.mat-breadcrumb-sep {
+  margin: 0 6px;
+  opacity: 0.6;
+}
+
+/* ─── Tags de Conteúdo/Tópico (rodapé do card e topo do detalhe) ─── */
+.mat-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.mat-tag {
+  font-family: var(--font-ui);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--color-blue-primary);
+}
+
+/* ─── Badges "Artigo" / "Vídeo aula" ──────────────────────────────────────
+   Cores da spec, sem token na paleta oficial:
+   artigo = Azul stop-800 sobre fundo claro; vídeo = Coral idem. */
+.mat-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.8rem;
+  border-radius: 20px;
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.mat-badge--artigo {
+  background: #e6f1fb;
+  color: #0c447c;
+}
+
+.mat-badge--video {
+  background: #faece7;
+  color: #712b13;
+}

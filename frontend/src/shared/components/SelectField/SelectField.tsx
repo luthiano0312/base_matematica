@@ -12,6 +12,8 @@ export type SelectFieldProps = Omit<
   onChange?: (e: ChangeEvent<HTMLSelectElement>) => void;
   error?: string;
   hint?: string;
+  /** `dark` (padrão) para cards navy; `light` para superfícies claras. */
+  variant?: 'dark' | 'light';
   children: ReactNode;
 };
 
@@ -21,6 +23,7 @@ export function SelectField({
   onChange,
   error,
   hint,
+  variant = 'dark',
   id,
   disabled,
   className,
@@ -28,7 +31,7 @@ export function SelectField({
   ...rest
 }: SelectFieldProps) {
   return (
-    <div className={cx('select-field', className)}>
+    <div className={cx('select-field', `select-field--${variant}`, className)}>
       <label htmlFor={id} className="select-field__label">
         {label}
       </label>

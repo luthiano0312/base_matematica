@@ -1,0 +1,225 @@
+/* =========================================================================
+   Cadastro de Materiais de Estudo (painel admin).
+   Prefixo `cm-` (cadastro de materiais). Segue o padrão visual do
+   cadastro de questões (cq-): card branco sobre área lavanda, botão
+   primário verde vibrante, erros em --color-error.
+   ========================================================================= */
+
+.cm-container {
+  max-width: 840px;
+  margin: 0 auto;
+}
+
+/* Breadcrumb interno (mesmas regras definidas no CSS do cadastro de
+   questões — repetidas aqui para a página ser autossuficiente). */
+.admin-breadcrumb {
+  font-size: 14px;
+  color: var(--admin-text-muted);
+  margin-bottom: 20px;
+}
+
+.admin-breadcrumb strong {
+  color: var(--admin-blue-escuro);
+  font-weight: 700;
+}
+
+.admin-breadcrumb .admin-breadcrumb-sep {
+  margin: 0 6px;
+  opacity: 0.6;
+}
+
+.cm-page-head {
+  position: relative;
+  margin-bottom: 28px;
+}
+
+.cm-decor {
+  position: absolute;
+  right: -8px;
+  top: -38px;
+  font-size: 130px;
+  font-weight: 800;
+  color: var(--color-blue-primary);
+  opacity: 0.1;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  font-family: 'STIX Two Text', Georgia, serif;
+}
+
+.cm-title {
+  color: var(--color-blue-dark);
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.32px;
+  margin: 0 0 8px;
+}
+
+.cm-subtitle {
+  color: var(--admin-text-secundario);
+  font-size: 16px;
+  max-width: 560px;
+  margin: 0;
+  line-height: 1.5;
+}
+
+.cm-req {
+  color: var(--color-magenta);
+  font-weight: 800;
+}
+
+.cm-opcional {
+  color: rgba(6, 29, 68, 0.55);
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.cm-hint {
+  font-size: 14px;
+  color: rgba(6, 29, 68, 0.55);
+  margin: 6px 0 0;
+  line-height: 1.45;
+}
+
+/* ---------- banner de sucesso ---------- */
+.cm-success-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  background: var(--color-green-vibrant);
+  color: var(--color-blue-dark);
+  border-radius: 16px;
+  padding: 16px 20px;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(38, 232, 116, 0.25);
+}
+
+.cm-success-action {
+  border: none;
+  background: rgba(6, 29, 68, 0.12);
+  color: var(--color-blue-dark);
+  font-weight: 800;
+  padding: 8px 14px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.cm-loading {
+  color: rgba(6, 29, 68, 0.55);
+  margin: 0;
+}
+
+/* ---------- card / campos ---------- */
+.cm-card {
+  background: var(--color-white);
+  border: 0.5px solid var(--admin-border);
+  border-radius: 32px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.cm-field {
+  display: flex;
+  flex-direction: column;
+}
+
+.cm-label {
+  font-weight: 700;
+  font-size: 18px;
+  margin-bottom: 6px;
+  color: var(--color-blue-dark);
+}
+
+.cm-error {
+  font-size: 13px;
+  color: var(--color-error);
+  font-weight: 700;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.cm-field input[type='text'] {
+  width: 100%;
+  margin-top: 6px;
+  border: 2.5px solid rgba(37, 139, 252, 0.25);
+  border-radius: 16px;
+  padding: 16px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--color-blue-dark);
+}
+
+.cm-field input[type='text']:focus {
+  outline: none;
+  border-color: var(--color-blue-primary);
+}
+
+.cm-field--error input[type='text'] {
+  border-color: var(--color-error);
+}
+
+.cm-field input[type='url'] {
+  width: 100%;
+  margin-top: 6px;
+  border: 2.5px solid rgba(37, 139, 252, 0.25);
+  border-radius: 16px;
+  padding: 16px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--color-blue-dark);
+}
+
+.cm-field input[type='url']:focus {
+  outline: none;
+  border-color: var(--color-blue-primary);
+}
+
+/* ---------- ações ---------- */
+.cm-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 6px;
+}
+
+.cm-btn-primary {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  background: var(--color-green-vibrant);
+  color: var(--color-blue-dark);
+  font-weight: 800;
+  font-size: 18px;
+  padding: 16px;
+  border-radius: 999px;
+  box-shadow: 0 6px 16px rgba(38, 232, 116, 0.4);
+}
+
+.cm-btn-primary:disabled {
+  cursor: wait;
+  opacity: 0.75;
+}
+
+/* ---------- responsivo (RNF01) ---------- */
+@media (max-width: 520px) {
+  .cm-card {
+    padding: 22px 18px;
+    border-radius: 24px;
+  }
+
+  .cm-title {
+    font-size: 26px;
+  }
+
+  .cm-decor {
+    font-size: 90px;
+    top: -24px;
+  }
+}

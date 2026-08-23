@@ -6,12 +6,13 @@ import { useToast } from '@/shared/components/Toast/Toast';
 import type { CanDeleteResponse } from '@/services/types';
 import './ConfirmDeleteModal.css';
 
-export type DeleteEntity = 'question' | 'content' | 'topic';
+export type DeleteEntity = 'question' | 'content' | 'topic' | 'material';
 
 const ENTITY_LABEL: Record<DeleteEntity, string> = {
   question: 'Questão',
   content: 'Conteúdo',
   topic: 'Tópico',
+  material: 'Material de estudo',
 };
 
 /** Concordância do toast de sucesso: "Questão excluída." vs "Conteúdo excluído." */
@@ -19,6 +20,7 @@ const ENTITY_PARTICIPLE: Record<DeleteEntity, string> = {
   question: 'excluída',
   content: 'excluído',
   topic: 'excluído',
+  material: 'excluído',
 };
 
 type CheckState =
@@ -31,8 +33,12 @@ type ConfirmDeleteModalProps = {
   entity: DeleteEntity;
   /** Nome (ou resumo) da entidade para o título do modal. */
   entityName: string;
-  /** Verificação síncrona de dependências (GET /admin/{entidade}/{id}/can-delete). */
-  check: () => Promise<CanDeleteResponse>;
+  /**
+   * Verificação síncrona de dependências (GET /admin/{entidade}/{id}/can-delete).
+   * Opcional: entidades sem dependentes possíveis (ex.: materiais de estudo,
+   * delete direto) vão direto ao estado "permitido", sem etapa de verificação.
+   */
+  check?: () => Promise<CanDeleteResponse>;
   /** Executa o DELETE de fato. */
   onDelete: () => Promise<unknown>;
   onClose: () => void;
@@ -70,8 +76,15 @@ export function ConfirmDeleteModal({
     if (!isOpen) return;
 
     let cancelled = false;
-    setCheckState({ status: 'checking' });
     setDeleteError(null);
+
+    // Sem verificação de dependências (check ausente): exclusão direta.
+    if (!callbacksRef.current.check) {
+      setCheckState({ status: 'allowed' });
+      return;
+    }
+
+    setCheckState({ status: 'checking' });
 
     callbacksRef.current
       .check()

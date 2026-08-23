@@ -43,6 +43,11 @@ export function StatementRenderer({ html, className }: StatementRendererProps) {
 
     container.innerHTML = clean;
 
+    // B4 — link externo sanitizado pode chegar sem `rel`; força pós-sanitização.
+    container.querySelectorAll<HTMLAnchorElement>('a[target="_blank"]').forEach((a) => {
+      a.setAttribute('rel', 'noopener noreferrer');
+    });
+
     container.querySelectorAll<HTMLElement>('span[data-latex]').forEach((span) => {
       const latex = span.getAttribute('data-latex') ?? '';
       try {

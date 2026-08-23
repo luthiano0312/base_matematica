@@ -82,6 +82,9 @@ export function Header() {
               <Link to="/questoes" onClick={closeMenu} className="highlight-link">
                 <BookOpen size={18} /> Experimente Exercícios
               </Link>
+              <Link to="/materiais-de-estudo" onClick={closeMenu}>
+                <BookOpen size={18} /> Materiais de estudo
+              </Link>
             </nav>
 
             <div className="mobile-menu-footer">

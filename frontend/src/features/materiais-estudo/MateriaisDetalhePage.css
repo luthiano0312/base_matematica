@@ -1,0 +1,127 @@
+/* =========================================================================
+   Detalhe do Material de Estudo — Spec_Materiais_de_Estudo#Tela 2.
+   Fundo lavanda (materiais-base.css), coluna de leitura ~640px, artigo em
+   card branco e vídeo aula 16:9. Prefixo `mat-`.
+   ========================================================================= */
+
+/* ─── Cabeçalho ─── */
+.mat-detalhe-tags {
+  margin-bottom: 0.6rem;
+}
+
+.mat-titulo {
+  font-family: var(--font-ui);
+  font-size: 1.375rem; /* 22px */
+  font-weight: 700;
+  color: var(--color-blue-dark);
+  letter-spacing: -0.3px;
+  line-height: 1.25;
+  margin: 0 0 1rem;
+}
+
+/* ─── Artigo — card branco com padding generoso ─── */
+.mat-artigo-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border-light);
+  border-radius: 16px;
+  padding: 1.75rem;
+}
+
+/* Imagens do Supabase (RN23) não vazem do card. */
+.mat-artigo-card .statement-renderer img {
+  max-width: 100%;
+}
+
+/* ─── Vídeo aula ─── */
+.mat-video-section {
+  margin-top: 1.5rem;
+}
+
+.mat-video-section h2 {
+  font-family: var(--font-ui);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-blue-dark);
+  margin: 0 0 0.75rem;
+}
+
+.mat-video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(6, 29, 68, 0.06);
+}
+
+.mat-video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.mat-video-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--color-blue-primary);
+}
+
+.mat-video-link:hover {
+  text-decoration: underline;
+}
+
+/* Material sem nenhum meio (defesa; o cadastro exige um dos dois). */
+.mat-vazio-artigo {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ─── Voltar / não encontrado ─── */
+.mat-voltar {
+  margin-top: 2rem;
+}
+
+.mat-nao-encontrado {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.mat-nao-encontrado .mat-titulo {
+  margin-bottom: 0;
+}
+
+.mat-nao-encontrado p {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ─── Responsivo ─── */
+@media (max-width: 768px) {
+  .mat-container--detalhe {
+    max-width: 100%;
+    padding: 1.25rem 16px 2.5rem;
+  }
+
+  .mat-titulo {
+    font-size: 1.19rem; /* ~19px */
+  }
+
+  .mat-artigo-card {
+    padding: 1.25rem;
+  }
+}

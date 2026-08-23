@@ -141,3 +141,32 @@ export type Dashboard = {
   accuracy_percentage: number | null;
   best_topic: { id: number; name: string; correct_count: number } | null;
 };
+
+/* ————— Materiais de estudo ————— */
+
+/** Corpo completo exigido por POST/PUT /admin/study-materials (update é full-replace). */
+export type StudyMaterialPayload = {
+  title: string;
+  /** Artigo em HTML rico; nullable porque o material pode ser só vídeo. */
+  content?: string | null;
+  video_url?: string | null;
+  content_id: number;
+  topic_id?: number | null;
+};
+
+/**
+ * Material de estudo (GET /api/study-materials). `content` chega como HTML
+ * — renderizar sempre via StatementRenderer (DOMPurify + KaTeX, RN21/RN22).
+ */
+export type StudyMaterial = {
+  id: number;
+  title: string;
+  content: string | null;
+  video_url: string | null;
+  content_id: number;
+  topic_id: number | null;
+  /** Texto puro extraído no backend (resumo na listagem admin). */
+  content_plain?: string | null;
+  created_at: string;
+  updated_at: string;
+};

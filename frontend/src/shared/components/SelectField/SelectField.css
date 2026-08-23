@@ -1,6 +1,7 @@
 /* Campo de seleção compartilhado — card escuro (Filtro de Questões).
    Dropdown com aparência customizada, seta via ícone ChevronDown,
-   estado desabilitado e texto de apoio (hint). */
+   estado desabilitado e texto de apoio (hint).
+   Variante `--light` para superfícies claras (mesmo padrão do TextField). */
 
 .select-field {
   display: flex;
@@ -90,4 +91,28 @@
   font-weight: 400;
   color: rgba(255, 255, 255, 0.5);
   line-height: 1.4;
+}
+
+/* ─── Variante light — superfícies claras (listagem de materiais, forms admin) ─── */
+.select-field--light .select-field__label {
+  color: var(--color-text-muted);
+}
+
+.select-field--light .select-field__select {
+  background-color: var(--color-white);
+  border-color: var(--color-border-light);
+  color: var(--color-blue-dark);
+}
+
+.select-field--light .select-field__select option {
+  background-color: var(--color-white);
+  color: var(--color-blue-dark);
+}
+
+.select-field--light .select-field__icon {
+  color: var(--color-blue-dark);
+}
+
+.select-field--light .select-field__hint {
+  color: var(--color-text-muted);
 }

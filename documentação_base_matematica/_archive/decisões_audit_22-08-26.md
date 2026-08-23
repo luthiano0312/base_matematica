@@ -14,13 +14,13 @@
 
 ## 🔒 Dentro do Escopo — Necessário
 
-| Item | Descrição | Esforço estimado | Justificativa |
-|---|---|---|---|
-| **A3** | Implementar o fluxo "esqueci minha senha" (backend já pronto; faltam as telas e plugar `authService.sendPasswordResetLink`/`resetPassword`, hoje não chamados) | Médio | O link "Esqueci minha senha" já é visível no Login; hoje leva a um placeholder em branco — alto risco de embaraço se clicado |
-| **P1 — Termos de Uso** | Trocar `href="#"` + `alert()` por texto placeholder decente (não precisa ser jurídico real nesta etapa) | Baixo (~20 min) | Custo mínimo, remove um ponto óbvio de "quebrado" |
-| **M9** | Sessão de questões não pode se perder silenciosamente com F5 ou botão voltar — hoje redireciona ao filtro sem aviso, perdendo o progresso | Baixo-médio | Quebra a demo na hora se a banca atualizar a página ou usar "voltar" no meio de uma sessão de questões |
-| **M12** | Botões mortos no Dashboard (ícone de perfil sem `onClick`; atalho "Materiais de estudo" com `onClick` vazio) | Baixo | Clicar e nada acontecer é o tipo de coisa perceptível e parece descuido |
-| **A6** | Não existe rota 404 — URL inválida cai em tela completamente em branco | Baixo | Parece "site fora do ar" para quem não é técnico |
+| Item                   | Descrição                                                                                                                                                      | Esforço estimado | Justificativa                                                                                                                |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------- |
+| **A3**                 | Implementar o fluxo "esqueci minha senha" (backend já pronto; faltam as telas e plugar `authService.sendPasswordResetLink`/`resetPassword`, hoje não chamados) | Médio            | O link "Esqueci minha senha" já é visível no Login; hoje leva a um placeholder em branco — alto risco de embaraço se clicado |
+| **P1 — Termos de Uso** | Trocar `href="#"` + `alert()` por texto placeholder decente (não precisa ser jurídico real nesta etapa)                                                        | Baixo (~20 min)  | Custo mínimo, remove um ponto óbvio de "quebrado"                                                                            |
+| **M9**                 | Sessão de questões não pode se perder silenciosamente com F5 ou botão voltar — hoje redireciona ao filtro sem aviso, perdendo o progresso                      | Baixo-médio      | Quebra a demo na hora se a banca atualizar a página ou usar "voltar" no meio de uma sessão de questões                       |
+| **M12**                | Botões mortos no Dashboard (ícone de perfil sem `onClick`; atalho "Materiais de estudo" com `onClick` vazio)                                                   | Baixo            | Clicar e nada acontecer é o tipo de coisa perceptível e parece descuido                                                      |
+| **A6**                 | Não existe rota 404 — URL inválida cai em tela completamente em branco                                                                                         | Baixo            | Parece "site fora do ar" para quem não é técnico                                                                             |
 
 ## 🎯 Dentro do Escopo — Faz-se-der-tempo (ordem de prioridade, sujeita a revisão)
 
