@@ -12,10 +12,10 @@ class AdminSeeder extends Seeder
 
     public function run(): void
     {
-        $password = env('ADMIN_INITIAL_PASSWORD', 'admin123');
+        $password = env('ADMIN_INITIAL_PASSWORD', 'adminbm123');
 
         Admin::firstOrCreate(
-            ['email' => 'admin@basematematica.com.br'],
+            ['email' => 'admin@bm.com.br'],
             [
                 'name' => 'Produtor de Conteúdo',
                 'password' => $password,
