@@ -17,6 +17,10 @@ type MathFormulaModalProps = {
  */
 export function MathFormulaModal({ initialLatex, onConfirm, onCancel }: MathFormulaModalProps) {
   const fieldRef = useRef<MathfieldElement>(null);
+  // onCancel chega como arrow inline do editor; ref evita reinscrever o
+  // listener de Esc a cada render de quem hospeda o modal.
+  const onCancelRef = useRef(onCancel);
+  onCancelRef.current = onCancel;
 
   useEffect(() => {
     const field = fieldRef.current;
@@ -36,11 +40,11 @@ export function MathFormulaModal({ initialLatex, onConfirm, onCancel }: MathForm
 
   useEffect(() => {
     const handleKeydown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') onCancel();
+      if (event.key === 'Escape') onCancelRef.current();
     };
     window.addEventListener('keydown', handleKeydown);
     return () => window.removeEventListener('keydown', handleKeydown);
-  }, [onCancel]);
+  }, []);
 
   const confirm = () => {
     onConfirm(fieldRef.current?.value ?? '');

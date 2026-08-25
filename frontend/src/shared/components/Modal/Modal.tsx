@@ -42,6 +42,10 @@ export function Modal({
   className,
 }: ModalProps) {
   const containerRef = useRef<HTMLDivElement>(null);
+  // Chamadores costumam passar arrow inline; guarda em ref para o efeito de
+  // foco não desmontar/remontar (e roubar o foco) a cada render do pai.
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
 
   useEffect(() => {
     if (!isOpen) return;
@@ -58,7 +62,7 @@ export function Modal({
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         event.stopPropagation();
-        onClose();
+        onCloseRef.current();
         return;
       }
 
@@ -89,7 +93,9 @@ export function Modal({
       document.body.style.overflow = '';
       previouslyFocused?.focus();
     };
-  }, [isOpen, onClose, initialFocusRef]);
+    // isOpen + initialFocusRef (ref estável): foco inicial e restauração rodam
+    // uma vez por abertura, não a cada render do chamador (onClose via ref).
+  }, [isOpen, initialFocusRef]);
 
   if (!isOpen) return null;
 
@@ -97,7 +103,7 @@ export function Modal({
     <div
       className="modal-overlay"
       onMouseDown={(event) => {
-        if (event.target === event.currentTarget) onClose();
+        if (event.target === event.currentTarget) onCloseRef.current();
       }}
     >
       <div

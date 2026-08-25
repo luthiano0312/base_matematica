@@ -1,4 +1,4 @@
-import { useEffect, useId, useRef, useState } from 'react';
+import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import { X } from 'lucide-react';
 import { Modal } from '@/shared/components/Modal/Modal';
@@ -56,6 +56,16 @@ export function ConteudoTopicoModal({ isOpen, mode, contents, onClose, onSaved }
   onCloseRef.current = onClose;
   const onSavedRef = useRef(onSaved);
   onSavedRef.current = onSaved;
+  const savingRef = useRef(saving);
+  savingRef.current = saving;
+
+  // Fechamento com identidade estável: cada tecla re-renderiza este componente
+  // e um onClose inline recriado resetaria o efeito de foco do Modal.
+  const handleClose = useCallback(() => {
+    if (!savingRef.current) onCloseRef.current();
+  }, []);
+
+  const nameInputRef = useRef<HTMLInputElement>(null);
 
   // Reseta o formulário com os dados do modo atual a cada abertura.
   useEffect(() => {
@@ -125,9 +135,8 @@ export function ConteudoTopicoModal({ isOpen, mode, contents, onClose, onSaved }
   return (
     <Modal
       isOpen={isOpen}
-      onClose={() => {
-        if (!saving) onClose();
-      }}
+      onClose={handleClose}
+      initialFocusRef={nameInputRef}
       labelledBy={titleId}
       label={title}
       width={480}
@@ -135,9 +144,7 @@ export function ConteudoTopicoModal({ isOpen, mode, contents, onClose, onSaved }
       <button
         type="button"
         className="modal-close-x"
-        onClick={() => {
-          if (!saving) onClose();
-        }}
+        onClick={handleClose}
         disabled={saving}
         aria-label="Fechar"
       >
@@ -155,6 +162,7 @@ export function ConteudoTopicoModal({ isOpen, mode, contents, onClose, onSaved }
           </label>
           <input
             id="ct-nome"
+            ref={nameInputRef}
             type="text"
             className={nameError ? 'ct-input ct-input--error' : 'ct-input'}
             placeholder={isTopic ? 'Ex.: Fórmula de Bhaskara' : 'Ex.: Equações do 2º grau'}
