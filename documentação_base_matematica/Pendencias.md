@@ -18,6 +18,9 @@ A correção de questões dissertativas é feita por autoavaliação do próprio
 ### Checklist de interesses sem limite pode esvaziar a priorização do RF12
 RN14 define que não há limite mínimo/máximo de conteúdos marcáveis como interesse. Se um aluno marcar muitos ou todos os conteúdos, o sorteio aleatório entre interesses (RF12) perde poder discriminativo — na prática, se aproxima do comportamento de "sem interesse marcado". **Decisão consciente:** aceito sem limite no MVP; sem ação necessária a menos que se observe esse padrão de uso na prática.
 
+### Exclusão de questão respondida quebra o vínculo com tópico no "melhor tópico" do Dashboard
+A partir de [[Analise_do_Sistema#^rn24|RN24]], excluir uma questão remove `question_topic` em cascata. Respostas anteriores a essa questão continuam contando em pontos/streak/contadores gerais, mas deixam de contar na agregação por tópico (`DashboardController::bestTopic()`), pois esse cálculo faz `JOIN` com `question_topic`. **Decisão consciente:** aceito no momento da implementação de RN24; se isso se tornar um problema real (ex. tópicos "perdendo" acertos após limpeza de conteúdo desatualizado), a mitigação seria congelar `topic_id`/`difficulty` em `answered_questions` no momento da resposta (colunas de snapshot), o que é uma mudança de escopo maior.
+
 ### Sintaxe de marcação matemática no `statement` — migração futura para Markdown
 A documentação definia o uso do KaTeX (ver [[Analise_do_Sistema#^rnf04|RNF04]] e [[Identidade_Visual#4.1 Uso Funcional — KaTeX]]) mas não definia a sintaxe de marcação usada dentro do campo `statement` (tabela `questions`, tipo `text`, ver [[Analise_do_Sistema#5.4 questions (questões)]]).
 

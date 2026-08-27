@@ -51,6 +51,7 @@ Plataforma web educacional voltada ao ensino de matemática para jovens do ensin
 | RN21   | **Formato de enunciados e textos ricos:** os campos `statement` e `text_resolution` (questions) e `content` (study_materials) são armazenados como **HTML**, produzido pelo editor de texto rico do painel admin (Tiptap — ver RF16). Fórmulas matemáticas são inseridas por um editor visual separado (MathLive — ver RF17) e embutidas no HTML em formato reconhecível para renderização via KaTeX; imagens são embutidas como tags `<img>` apontando para URLs do Supabase Storage (ver RN23). Decisão tomada em favor de HTML (não Markdown) por exigir menos dependências e nenhum parser customizado de ida e volta, já que o Tiptap serializa/desserializa HTML nativamente, inclusive para nodes customizados. | ^rn21 |
 | RN22   | **Sanitização obrigatória de HTML:** todo conteúdo HTML proveniente do painel admin (enunciados, resoluções, resumos) deve ser sanitizado (ex: DOMPurify) no client antes de ser renderizado para o aluno, restringindo a lista de tags e atributos permitidos, para prevenir XSS. Esse é o principal ponto de atenção introduzido pela decisão de armazenar HTML (ver RN21). | ^rn22 |
 | RN23   | **Upload de imagens via backend:** o upload de imagens no painel admin é sempre intermediado pelo backend (Laravel) — o arquivo nunca é enviado diretamente do browser para o Supabase Storage. O Laravel valida a autenticação do admin (RN20) e realiza o upload usando a service role key do Supabase (chave de servidor, nunca exposta ao client), retornando a URL pública para inserção no editor. | ^rn23 |
+| RN24   | **Exclusão de questão respondida:** excluir uma questão do painel admin é sempre permitido, mesmo havendo respostas de alunos registradas em `answered_questions`. A exclusão remove a questão e seus vínculos (`question_options`, `question_content`, `question_topic`, em cascata), mas preserva as linhas de `answered_questions` já existentes — pontuação, streak e contadores agregados do aluno não são afetados. A coluna `question_id` dessas linhas passa a ser nula (`ON DELETE SET NULL`). Efeito colateral aceito: a atribuição de "tópico com mais acertos" no Dashboard deixa de contar aquela resposta específica, pois depende do vínculo `question_topic`, que é removido em cascata. | ^rn24 |
 
 *RN16 é uma regra de consistência de dados que não é garantida automaticamente pelo banco — deve ser validada na camada de backend (Laravel) no momento do cadastro/edição da questão.*
 
@@ -210,7 +211,7 @@ Cada resposta do aluno gera uma nova linha — histórico completo de tentativas
 | --- | --- | --- |
 | id | PK | Identificador |
 | user_id | FK | Referência a users |
-| question_id | FK | Referência a questions |
+| question_id | FK (nullable) | Referência a questions. Fica nula se a questão original for excluída (ver RN24) — a resposta em si é preservada. |
 | is_correct (acertou) | boolean | Se essa tentativa foi correta |
 | points_earned (pontos ganhos) | integer | Pontos dessa tentativa específica (0, redenção ou cheio) |
 | answered_at (respondido em) | datetime | Data/hora da tentativa |
