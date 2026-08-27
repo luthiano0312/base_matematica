@@ -55,3 +55,9 @@
   font-size: 13px;
   color: var(--admin-danger);
 }
+
+.confirm-delete-info {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--admin-text-secundario);
+}

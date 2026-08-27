@@ -25,7 +25,7 @@ const ENTITY_PARTICIPLE: Record<DeleteEntity, string> = {
 
 type CheckState =
   | { status: 'checking' }
-  | { status: 'allowed' }
+  | { status: 'allowed'; reason?: string | null }
   | { status: 'blocked'; reason: string };
 
 type ConfirmDeleteModalProps = {
@@ -92,7 +92,7 @@ export function ConfirmDeleteModal({
         if (cancelled) return;
         setCheckState(
           result.can_delete
-            ? { status: 'allowed' }
+            ? { status: 'allowed', reason: result.reason }
             : { status: 'blocked', reason: result.reason ?? '' },
         );
       })
@@ -167,7 +167,12 @@ export function ConfirmDeleteModal({
           </div>
         )}
 
-        {checkState.status === 'allowed' && <p>Essa ação não pode ser desfeita.</p>}
+        {checkState.status === 'allowed' && (
+          <>
+            <p>Essa ação não pode ser desfeita.</p>
+            {checkState.reason && <p className="confirm-delete-info">{checkState.reason}</p>}
+          </>
+        )}
 
         {isBlocked && <p>{checkState.reason}</p>}
 
