@@ -13,9 +13,6 @@ use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
-    /** Mensagem exata da Spec_Modal_Confirmacao_Exclusao#3 (RN11). */
-    private const BLOCK_REASON = 'Esta questão já tem respostas de alunos registradas. Excluir apagaria parte do histórico de pontuação deles.';
-
     /**
      * GET /api/questions
      * Filtros opcionais: content_id, topic_id, type, difficulty, search, per_page.
@@ -125,9 +122,13 @@ class QuestionController extends Controller
     {
         $answersCount = $question->answers()->count();
 
+        // RN11 (revisada, ver RN24): a exclusão é sempre permitida; a reason
+        // é apenas informativa, para o modal avisar sem bloquear.
         return response()->json([
-            'can_delete' => $answersCount === 0,
-            'reason' => $answersCount > 0 ? self::BLOCK_REASON : null,
+            'can_delete' => true,
+            'reason' => $answersCount > 0
+                ? "Esta questão tem {$answersCount} resposta(s) de alunos registradas. O histórico de pontuação será mantido mesmo após a exclusão."
+                : null,
             'counts' => [
                 'answers' => $answersCount,
             ],
@@ -139,12 +140,9 @@ class QuestionController extends Controller
      */
     public function destroy(Question $question)
     {
-        // RN11 — answered_questions preserva o histórico de pontuação dos alunos;
-        // bloqueia exclusão em vez de apagar (o modal avisa antes; aqui é defesa).
-        if ($question->answers()->exists()) {
-            return response()->json(['message' => self::BLOCK_REASON], 409);
-        }
-
+        // RN11 (revisada): a exclusão da questão é sempre permitida. As respostas
+        // já registradas em answered_questions são preservadas (question_id vira
+        // null via nullOnDelete), mantendo pontuação, streak e contadores do aluno.
         // options/question_content/question_topic caem em cascata (FK cascadeOnDelete).
         $question->delete();
 

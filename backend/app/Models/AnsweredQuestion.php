@@ -29,6 +29,9 @@ class AnsweredQuestion extends Model
         return $this->belongsTo(User::class);
     }
 
+    // question_id pode ser null: ao excluir a questão original, a linha de
+    // answered_questions é preservada e apenas a referência vira null
+    // (ON DELETE SET NULL — ver RN24).
     public function question(): BelongsTo
     {
         return $this->belongsTo(Question::class);

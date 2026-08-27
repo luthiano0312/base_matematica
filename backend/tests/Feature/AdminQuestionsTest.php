@@ -7,6 +7,7 @@ use App\Models\AnsweredQuestion;
 use App\Models\Content;
 use App\Models\Question;
 use App\Models\Topic;
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Sanctum\Sanctum;
 use Tests\TestCase;
@@ -14,8 +15,6 @@ use Tests\TestCase;
 class AdminQuestionsTest extends TestCase
 {
     use RefreshDatabase;
-
-    private const BLOCK_REASON = 'Esta questão já tem respostas de alunos registradas. Excluir apagaria parte do histórico de pontuação deles.';
 
     private function admin(): void
     {
@@ -36,7 +35,7 @@ class AdminQuestionsTest extends TestCase
             ]);
     }
 
-    public function test_can_delete_bloqueado_com_respostas_de_alunos(): void
+    public function test_can_delete_permitido_mesmo_com_respostas_registradas(): void
     {
         $this->admin();
         $question = Question::factory()->create();
@@ -45,23 +44,54 @@ class AdminQuestionsTest extends TestCase
         $this->getJson("/api/admin/questions/{$question->id}/can-delete")
             ->assertOk()
             ->assertJson([
-                'can_delete' => false,
-                'reason' => self::BLOCK_REASON,
+                'can_delete' => true,
                 'counts' => ['answers' => 1],
-            ]);
+            ])
+            ->assertJsonPath('reason', fn ($reason) => $reason !== null);
     }
 
-    public function test_destroy_retorna_409_quando_ha_respostas(): void
+    public function test_destroy_remove_questao_mesmo_com_respostas_registradas(): void
     {
         $this->admin();
         $question = Question::factory()->create();
-        AnsweredQuestion::factory()->create(['question_id' => $question->id]);
+        $answer = AnsweredQuestion::factory()->create([
+            'question_id' => $question->id,
+            'points_earned' => 10,
+        ]);
 
         $this->deleteJson("/api/admin/questions/{$question->id}")
-            ->assertStatus(409)
-            ->assertJson(['message' => self::BLOCK_REASON]);
+            ->assertNoContent();
 
-        $this->assertDatabaseHas('questions', ['id' => $question->id]);
+        $this->assertDatabaseMissing('questions', ['id' => $question->id]);
+
+        // A resposta continua existindo, com question_id nulo e pontuação intacta.
+        $this->assertDatabaseHas('answered_questions', [
+            'id' => $answer->id,
+            'question_id' => null,
+            'points_earned' => 10,
+        ]);
+    }
+
+    public function test_pontuacao_do_aluno_e_preservada_apos_exclusao_da_questao(): void
+    {
+        $this->admin();
+        $user = User::factory()->create();
+        $question = Question::factory()->create();
+        AnsweredQuestion::factory()->create([
+            'user_id' => $user->id,
+            'question_id' => $question->id,
+            'points_earned' => 15,
+            'is_correct' => true,
+        ]);
+
+        $pontosAntes = $user->answers()->sum('points_earned');
+
+        $this->deleteJson("/api/admin/questions/{$question->id}")
+            ->assertNoContent();
+
+        $pontosDepois = $user->fresh()->answers()->sum('points_earned');
+
+        $this->assertSame($pontosAntes, $pontosDepois);
     }
 
     public function test_destroy_remove_quando_sem_respostas(): void
